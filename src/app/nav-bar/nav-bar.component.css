@@ -1,0 +1,29 @@
+.blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 1.85rem;
+}
+
+.logo {
+    max-height: 60px;
+}
+
+.navbar-middle-content {
+    font-size: large;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.cart-no {
+    position: absolute;
+    min-height: 25px;
+    min-width: 25px;
+    border-radius: 50%;
+    font-size: 1em;
+    background: orangered;
+    color: white;
+    text-align: center;
+    top: -12px;
+    right: -2px;
+}
