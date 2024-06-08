@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faBars, faCartShopping, faSearch, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav-bar',

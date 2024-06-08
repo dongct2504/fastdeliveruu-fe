@@ -1,0 +1,16 @@
+.scrollable-custom-list {
+    cursor: pointer;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    .scrollable-custom-list {
+        max-height: 280px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .scrollable-custom-list {
+        max-height: 620px;
+    }
+}

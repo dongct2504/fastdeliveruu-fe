@@ -1,0 +1,54 @@
+<div class="row">
+    <section class="col-lg-3">
+        <div class="mb-3">
+            <h4>Lọc theo</h4>
+            <select id="filter" class="form-select" (change)="onSortSelected($any($event.target).value)">
+                <option *ngFor="let sort of sortOptions" [value]="sort.value">{{sort.name}}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <h4>Thể loại</h4>
+            <ul class="list-group scrollable-custom-list">
+                <li class="list-group-item" *ngFor="let genre of genres"
+                    [class.active]="genre.genreId === menuItemParam.genreId" [value]="genre.genreId"
+                    (click)="onGenreSelected(genre.genreId)">
+                    {{genre.name | truncateWords:45}}
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <app-paging-header
+                [pageNumber]="menuItemParam.page"
+                [pageSize]="itemsPerPage"
+                [totalRecords]="totalRecords">
+            </app-paging-header>
+
+            <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="d-flex" role="search">
+                <input
+                    formControlName="searchTerm"
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Tìm kiếm..."
+                    aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">
+                    <fa-icon [icon]="faSearch"></fa-icon>
+                </button>
+            </form>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-3 g-4">
+            <div class="col" *ngFor="let item of menuItems">
+                <app-menu-item-card [menuItem]="item"></app-menu-item-card>
+            </div>
+        </div>
+
+        <app-paging-footer
+            [itemsPerPage]="itemsPerPage"
+            [totalRecords]="totalRecords"
+            (pagedChanged)="onPageChanged($event)">
+        </app-paging-footer>
+    </section>
+</div>

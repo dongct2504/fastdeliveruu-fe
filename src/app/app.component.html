@@ -1,11 +1,5 @@
 <app-nav-bar></app-nav-bar>
 
 <main class="container" style="margin-top: 140px;">
-    <h1>Welcome to {{title}}!</h1>
-
-    <ul>
-        <li class="list-unstyled" *ngFor="let menuItem of menuItems">
-            {{menuItem.name}}
-        </li>
-    </ul>
+    <app-menu-items></app-menu-items>
 </main>
