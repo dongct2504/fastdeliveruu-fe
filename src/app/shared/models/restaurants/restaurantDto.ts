@@ -2,7 +2,7 @@ export interface RestaurantDto {
     restaurantId: string;
     name: string;
     description: string;
-    imageUrl: string | null;
+    imageUrl: string;
     address: string;
     ward: string;
     district: string;

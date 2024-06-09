@@ -8,18 +8,20 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TruncateWordsPipe } from './pipes/truncate-words.pipe';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagingFooterComponent } from './components/paging-footer/paging-footer.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 @NgModule({
   declarations: [
     TruncateWordsPipe,
     PagingHeaderComponent,
-    PagingFooterComponent
+    PagingFooterComponent,
+    SearchFormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    PaginationModule
+    PaginationModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -28,7 +30,8 @@ import { PagingFooterComponent } from './components/paging-footer/paging-footer.
 
     TruncateWordsPipe,
     PagingHeaderComponent,
-    PagingFooterComponent
+    PagingFooterComponent,
+    SearchFormComponent
   ]
 })
 export class SharedModule { }

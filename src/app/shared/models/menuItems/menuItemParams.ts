@@ -5,5 +5,6 @@ export class MenuItemParams {
     restaurantId: string | null = '';
     sort: string = MenuItemSortConstants.latestUpdateDesc;
     search: string = '';
-    page: number = 1;
+    pageNumber: number = 1;
+    pageSize: number = 1;
 }

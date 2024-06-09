@@ -7,5 +7,5 @@ export interface MenuItemDto {
     discountPercent: number;
     discountAmount: number;
     discountPrice: number;
-    imageUrl: string | null;
+    imageUrl: string;
 }

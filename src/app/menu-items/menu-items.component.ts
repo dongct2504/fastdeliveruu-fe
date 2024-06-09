@@ -4,8 +4,8 @@ import { MenuItemDto } from '../shared/models/menuItems/menuItemDto';
 import { GenreDto } from '../shared/models/genres/genreDto';
 import { MenuItemParams } from '../shared/models/menuItems/menuItemParams';
 import { MenuItemSortConstants } from '../shared/common/menuItemSortConstants';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { PageSizeConstants } from '../shared/common/pageSizeConstants';
 
 @Component({
   selector: 'app-menu-items',
@@ -13,12 +13,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./menu-items.component.css']
 })
 export class MenuItemsComponent implements OnInit {
-  faSearch = faSearch;
-
   menuItems: MenuItemDto[] = [];
   genres: GenreDto[] = [];
 
-  menuItemParam = new MenuItemParams();
+  menuItemParams = new MenuItemParams();
   totalRecords = 0;
   itemsPerPage = 0;
 
@@ -31,8 +29,8 @@ export class MenuItemsComponent implements OnInit {
     { name: 'Tên (a-z)', value: MenuItemSortConstants.name }
   ];
 
-  constructor(private menuItemsService: MenuItemsService, private fb: FormBuilder) {
-    this.initSearchForm();
+  constructor(private menuItemsService: MenuItemsService) {
+    this.menuItemParams.pageSize = PageSizeConstants.pageSize9;
   }
 
   ngOnInit(): void {
@@ -41,9 +39,9 @@ export class MenuItemsComponent implements OnInit {
   }
 
   private getMenuItems() {
-    this.menuItemsService.getMenuItems(this.menuItemParam).subscribe(pagedList => {
+    this.menuItemsService.getMenuItems(this.menuItemParams).subscribe(pagedList => {
       this.menuItems = pagedList.items;
-      this.menuItemParam.page = pagedList.pageNumber;
+      this.menuItemParams.pageNumber = pagedList.pageNumber;
       this.itemsPerPage = pagedList.pageSize;
       this.totalRecords = pagedList.totalRecords;
     });
@@ -55,33 +53,27 @@ export class MenuItemsComponent implements OnInit {
     });
   }
 
-  private initSearchForm() {
-    this.searchForm = this.fb.group({
-      searchTerm: ['']
-    });
-  }
-
   onGenreSelected(genreId: string) {
-    this.menuItemParam.genreId = genreId;
-    this.menuItemParam.page = 1;
+    this.menuItemParams.genreId = genreId;
+    this.menuItemParams.pageNumber = 1;
     this.getMenuItems();
   }
 
   onSortSelected(sort: string) {
-    this.menuItemParam.sort = sort;
+    this.menuItemParams.sort = sort;
     this.getMenuItems();
   }
 
   onPageChanged(event: any) {
-    if (this.menuItemParam.page !== event) {
-      this.menuItemParam.page = event;
+    if (this.menuItemParams.pageNumber !== event) {
+      this.menuItemParams.pageNumber = event;
       this.getMenuItems();
     }
   }
 
-  onSearchSubmit() {
-    this.menuItemParam.search = this.searchForm.get('searchTerm')?.value;
-    this.menuItemParam.page = 1;
+  onSearchSubmit(event: any) {
+    this.menuItemParams.search = event;
+    this.menuItemParams.pageNumber = 1;
     this.getMenuItems();
   }
 }

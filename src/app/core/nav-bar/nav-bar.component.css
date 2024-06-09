@@ -11,8 +11,9 @@
     font-size: large;
 }
 
-.no-underline {
-    text-decoration: none;
+.nav-link.active {
+    color: orangered;
+    font-weight: bold;
 }
 
 .cart-no {

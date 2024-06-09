@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="#">
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
             <img src="/assets/images/logo.png" alt="logo" class="logo me-2">
             <span class="blog-header-logo">FastDeliveruu</span>
         </a>
@@ -13,12 +13,23 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <!-- Add a spacer div to push the search form to the center -->
             <div class="d-flex flex-grow-1">
-                <div class="d-flex mx-auto navbar-middle-content">
-                    <a class="p-2 text-dark no-underline" href="#">Món ăn</a>
-                    <a class="p-2 text-dark no-underline" href="#">Nhà hàng</a>
-                    <a class="p-2 text-dark no-underline" href="#">Tìm kiếm</a>
-                    <a class="p-2 text-dark no-underline" href="#">Liên hệ</a>
-                </div>
+                <ul class="d-flex mx-auto navbar-nav navbar-middle-content">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/menu-items" routerLinkActive="active">Món ăn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/restaurants" routerLinkActive="active">Nhà hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/contact" routerLinkActive="active">Liên hệ</a>
+                    </li>
+                </ul>
             </div>
 
             <!-- Buttons on the right -->

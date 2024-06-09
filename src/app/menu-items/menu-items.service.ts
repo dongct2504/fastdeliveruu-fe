@@ -5,12 +5,13 @@ import { environment } from 'src/environments/environment.development';
 import { GenreDto } from '../shared/models/genres/genreDto';
 import { MenuItemDto } from '../shared/models/menuItems/menuItemDto';
 import { MenuItemParams } from '../shared/models/menuItems/menuItemParams';
+import { MenuItemDetailDto } from '../shared/models/menuItems/menuItemDetailDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuItemsService {
-  apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,6 +25,10 @@ export class MenuItemsService {
     return this.httpClient.get<GenreDto[]>(`${this.apiUrl}/genres`);
   }
 
+  public getMenuItem(id: string) {
+    return this.httpClient.get<MenuItemDetailDto>(`${this.apiUrl}/menu-items/${id}`);
+  }
+
   private addMenuItemParams(menuItemParams?: MenuItemParams) {
     let params = new HttpParams();
 
@@ -32,11 +37,11 @@ export class MenuItemsService {
     }
 
     if (menuItemParams.genreId != null && menuItemParams.genreId !== '') {
-      params = params.append('genreId', menuItemParams.genreId.toString());
+      params = params.append('genreId', menuItemParams.genreId);
     }
 
     if (menuItemParams.restaurantId != null && menuItemParams.restaurantId !== '') {
-      params = params.append('restaurantId', menuItemParams.restaurantId.toString());
+      params = params.append('restaurantId', menuItemParams.restaurantId);
     }
 
     params = params.append('sort', menuItemParams.sort);
@@ -45,7 +50,9 @@ export class MenuItemsService {
       params = params.append('search', menuItemParams.search);
     }
 
-    params = params.append('page', menuItemParams.page.toString());
+    params = params.append('pageNumber', menuItemParams.pageNumber.toString());
+
+    params = params.append('pageSize', menuItemParams.pageSize.toString());
 
     return params;
   }
