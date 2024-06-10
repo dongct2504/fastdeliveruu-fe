@@ -10,7 +10,8 @@ import { PageSizeConstants } from '../shared/common/pageSizeConstants';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  menuItems: MenuItemDto[] = [];
+  menuItems?: MenuItemDto[];
+  popularMenuItem?: MenuItemDto[];
 
   menuItemParams = new MenuItemParams();
   totalRecords = 0;
@@ -30,7 +31,21 @@ export class HomeComponent implements OnInit {
       this.menuItemParams.pageNumber = pagedList.pageNumber;
       this.totalRecords = pagedList.totalRecords;
       this.itemsPerPage = pagedList.pageSize;
+
+      this.getPopularMenuItems(this.menuItems);
     });
+  }
+
+  private getPopularMenuItems(menuItems: MenuItemDto[]) {
+    this.popularMenuItem = [];
+    for (let i = 0; i < 4; i++) {
+      let randomNum = this.getRandomInteger(0, menuItems.length - 1);
+      this.popularMenuItem.push(menuItems[randomNum]);
+    }
+  }
+
+  private getRandomInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   onPageChanged(event: any) {

@@ -1,28 +1,30 @@
-<div class="row">
-    <div class="col-md-5">
-        <img class="img-fluid rounded" src="{{menuItem.imageUrl}}" alt="{{menuItem.name}}">
-    </div>
+<ng-container *ngIf="menuItem">
+    <div class="row">
+        <div class="col-md-5">
+            <img class="img-fluid rounded" src="{{menuItem.imageUrl}}" alt="{{menuItem.name}}">
+        </div>
 
-    <div class="col-md-7">
-        <h3>{{menuItem.name}}</h3>
+        <div class="col-md-7">
+            <h3>{{menuItem.name}}</h3>
 
-        <h2 class="mb-5">
-            <strong class="me-2">{{menuItem.discountPrice | currency:'VND'}}</strong>
-            <small class="text-muted">giảm {{menuItem.discountAmount | currency:'VND'}}</small>
-        </h2>
+            <h2 class="mb-5">
+                <strong class="me-2">{{menuItem.discountPrice | currency:'VND'}}</strong>
+                <small class="text-muted">giảm {{menuItem.discountAmount | currency:'VND'}}</small>
+            </h2>
 
-        <div class="d-flex justify-content-start align-items-center">
-            <fa-icon class="text-warning minus-button-custom me-2" [icon]="faMinusCircle"></fa-icon>
-            <span class="quantity">2</span>
-            <fa-icon class="text-warning plus-button-custom mx-2" [icon]="faPlusCircle"></fa-icon>
-            <button class="btn btn-lg btn-outline-success ms-4">Thêm vào giỏ</button>
+            <div class="d-flex justify-content-start align-items-center">
+                <fa-icon class="text-warning minus-button-custom me-2" [icon]="faMinusCircle"></fa-icon>
+                <span class="quantity">2</span>
+                <fa-icon class="text-warning plus-button-custom mx-2" [icon]="faPlusCircle"></fa-icon>
+                <button class="btn btn-lg btn-outline-success ms-4">Thêm vào giỏ</button>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 ms-3">
+                <h4>Mô tả</h4>
+                <p>{{menuItem.description}}</p>
+            </div>
         </div>
     </div>
-
-    <div class="row mt-5">
-        <div class="col-12 ms-3">
-            <h4>Mô tả</h4>
-            <p>{{menuItem.description}}</p>
-        </div>
-    </div>
-</div>
+</ng-container>

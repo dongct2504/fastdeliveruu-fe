@@ -10,7 +10,7 @@ import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./menu-item-details.component.css']
 })
 export class MenuItemDetailsComponent implements OnInit {
-  menuItem = {} as MenuItemDetailDto;
+  menuItem?: MenuItemDetailDto;
 
   faMinusCircle = faMinusCircle;
   faPlusCircle = faPlusCircle;

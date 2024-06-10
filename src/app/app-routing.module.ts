@@ -6,10 +6,18 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { InternalServerErrorComponent } from './core/internal-server-error/internal-server-error.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'test-errors', component: TestErrorsComponent },
-  { path: 'not-found', component: NotFoundComponent },
-  { path: 'internal-server-error', component: InternalServerErrorComponent },
+  {
+    path: '', component: HomeComponent
+  },
+  {
+    path: 'test-errors', component: TestErrorsComponent,
+  },
+  {
+    path: 'not-found', component: NotFoundComponent
+  },
+  {
+    path: 'internal-server-error', component: InternalServerErrorComponent
+  },
   {
     path: 'menu-items',
     loadChildren: () => import('./menu-items/menu-items.module').then(mod => mod.MenuItemsModule)
@@ -19,10 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./restaurants/restaurants.module').then(mod => mod.RestaurantsModule)
   },
   {
-    path: 'contact', 
+    path: 'contact',
     loadChildren: () => import('./contact/contact.module').then(mod => mod.ContactModule)
-   },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  },
+  { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];
 
 @NgModule({

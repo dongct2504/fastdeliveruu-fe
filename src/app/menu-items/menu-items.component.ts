@@ -13,8 +13,8 @@ import { PageSizeConstants } from '../shared/common/pageSizeConstants';
   styleUrls: ['./menu-items.component.css']
 })
 export class MenuItemsComponent implements OnInit {
-  menuItems: MenuItemDto[] = [];
-  genres: GenreDto[] = [];
+  menuItems?: MenuItemDto[];
+  genres?: GenreDto[];
 
   menuItemParams = new MenuItemParams();
   totalRecords = 0;

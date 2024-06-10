@@ -14,3 +14,9 @@
         max-height: 620px;
     }
 }
+
+.list-group-item.active {
+    background-color: orangered;
+    border-color: orangered;
+    color: white;
+}
