@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+    <div class="col-lg-4 col-md-8">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <h1 class="h3 mb-4 fw-normal text-center">Đăng ký</h1>
+
+            <div class="d-flex justify-content-left mb-3" *ngIf="validationErrors.length > 0">
+                <ul class="text-danger">
+                    <ng-container *ngFor="let error of validationErrors">
+                        <li>{{error}}</li>
+                    </ng-container>
+                </ul>
+            </div>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['userName']"
+                [label]="'Tên đăng nhập*'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['phoneNumber']"
+                [type]="'tel'"
+                [label]="'Số điện thoại*'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['email']"
+                [type]="'email'"
+                [label]="'Email*'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['password']"
+                [type]="'password'"
+                [label]="'Mật khẩu*'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['address']"
+                [label]="'Địa chỉ đường'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['ward']"
+                [label]="'Phường'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['district']"
+                [label]="'Quận'">
+            </app-text-input>
+
+            <app-text-input
+                [formControl]="$any(registerForm).controls['city']"
+                [label]="'Thành phố'">
+            </app-text-input>
+
+            <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" [disabled]="registerForm.invalid">
+                Đăng ký
+            </button>
+
+            <div class="text-center">
+                <p>Đã có tài khoản? <a routerLink="/authen/login">Đăng nhập</a></p>
+            </div>
+        </form>
+    </div>
+</div>

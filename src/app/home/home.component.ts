@@ -3,6 +3,11 @@ import { MenuItemsService } from 'src/app/menu-items/menu-items.service';
 import { MenuItemDto } from 'src/app/shared/models/menuItems/menuItemDto';
 import { MenuItemParams } from 'src/app/shared/models/menuItems/menuItemParams';
 import { PageSizeConstants } from '../shared/common/pageSizeConstants';
+import { CustomerCartService } from '../customer-cart/customer-cart.service';
+import { SetCartItemRequest } from '../shared/models/shoppingCarts/setCartItemRequest';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticateService } from '../authenticate/authenticate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +22,12 @@ export class HomeComponent implements OnInit {
   totalRecords = 0;
   itemsPerPage = 0;
 
-  constructor(private menuItemsService: MenuItemsService) {
+  constructor(
+    private menuItemsService: MenuItemsService,
+    private customerCartService: CustomerCartService,
+    private authenticateService: AuthenticateService,
+    private router: Router,
+    private toastr: ToastrService) {
     this.menuItemParams.pageSize = PageSizeConstants.pageSize12;
   }
 
@@ -59,5 +69,22 @@ export class HomeComponent implements OnInit {
     this.menuItemParams.search = event;
     this.menuItemParams.pageNumber = 1;
     this.getMenuItems();
+  }
+
+  onAddItemToCart(menuItemId: string) {
+    if (!this.authenticateService.isLoggedIn()) {
+      this.toastr.warning('Bạn cần đăng nhập để có thể thêm vào giỏ hàng!');
+      this.router.navigate(['/authen/login']);
+      return;
+    }
+
+    const setCartItemRequest: SetCartItemRequest = {
+      menuItemId: menuItemId,
+      quantity: 1
+    };
+
+    this.customerCartService.setCartItem(setCartItemRequest).subscribe(() => {
+      this.toastr.success('Đã thêm vào giỏ hàng!');
+    });
   }
 }

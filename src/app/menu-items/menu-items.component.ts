@@ -6,6 +6,11 @@ import { MenuItemParams } from '../shared/models/menuItems/menuItemParams';
 import { MenuItemSortConstants } from '../shared/common/menuItemSortConstants';
 import { FormGroup } from '@angular/forms';
 import { PageSizeConstants } from '../shared/common/pageSizeConstants';
+import { CustomerCartService } from '../customer-cart/customer-cart.service';
+import { SetCartItemRequest } from '../shared/models/shoppingCarts/setCartItemRequest';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticateService } from '../authenticate/authenticate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-items',
@@ -29,7 +34,12 @@ export class MenuItemsComponent implements OnInit {
     { name: 'Tên (a-z)', value: MenuItemSortConstants.name }
   ];
 
-  constructor(private menuItemsService: MenuItemsService) {
+  constructor(
+    private menuItemsService: MenuItemsService,
+    private customerCartService: CustomerCartService,
+    private authenticateService: AuthenticateService,
+    private router: Router,
+    private toastr: ToastrService) {
     this.menuItemParams.pageSize = PageSizeConstants.pageSize9;
   }
 
@@ -75,5 +85,22 @@ export class MenuItemsComponent implements OnInit {
     this.menuItemParams.search = event;
     this.menuItemParams.pageNumber = 1;
     this.getMenuItems();
+  }
+
+  onAddItemToCart(menuItemId: string) {
+    if (!this.authenticateService.isLoggedIn()) {
+      this.toastr.warning('Bạn cần đăng nhập để có thể thêm vào giỏ hàng!');
+      this.router.navigate(['/authen/login'], { queryParams: { returnUrl: '/menu-items' } });
+      return;
+    }
+
+    const setCartItemRequest: SetCartItemRequest = {
+      menuItemId: menuItemId,
+      quantity: 1
+    };
+
+    this.customerCartService.setCartItem(setCartItemRequest).subscribe(() => {
+      this.toastr.success('Đã thêm vào giỏ hàng!');
+    });
   }
 }

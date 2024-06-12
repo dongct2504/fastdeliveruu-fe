@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { MenuItemDto } from 'src/app/shared/models/menuItems/menuItemDto';
 
@@ -10,9 +10,15 @@ import { MenuItemDto } from 'src/app/shared/models/menuItems/menuItemDto';
 export class MenuItemCardComponent {
   @Input() menuItem = {} as MenuItemDto;
 
+  @Output() addtoCart = new EventEmitter();
+
   faCartShopping = faCartShopping;
 
   constructor() {
 
+  }
+
+  onAddToCart() {
+    this.addtoCart.emit(this.menuItem.menuItemId);
   }
 }

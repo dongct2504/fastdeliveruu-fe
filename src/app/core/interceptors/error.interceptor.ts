@@ -33,10 +33,10 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               break;
             case 401:
-              this.toastr.error(err.error.detail, err.error.title);
+              this.router.navigate(['/authen/login']);
               break;
             case 403:
-              this.toastr.error(err.error.detail, err.error.title);
+              this.toastr.error('You do not have permission.', 'Forbidden');
               break;
             case 404:
               this.router.navigate(['/not-found']);

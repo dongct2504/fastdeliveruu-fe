@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { faBars, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { faBars, faCartShopping, faHistory, faSearch, faSignOut, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { AuthenticateService } from 'src/app/authenticate/authenticate.service';
+import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
+import { LocalUserDto } from 'src/app/shared/models/authenticate/localUserDto';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,11 +15,31 @@ import { faBars, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-ic
 export class NavBarComponent implements OnInit {
   faSearch = faSearch;
   faCartShopping = faCartShopping;
-  faBars = faBars
+  faBars = faBars;
+  faUserCircle = faUserCircle;
+  faHistory = faHistory;
+  faSignOut = faSignOut;
+  faUser = faUser;
 
-  constructor() {
+  totalQuantity$?: Observable<number>
+  currentUser$?: Observable<LocalUserDto | null>
+
+  constructor(
+    public customerCartService: CustomerCartService,
+    private authenticateService: AuthenticateService,
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
+    this.totalQuantity$ = this.customerCartService.totalQuantity$;
+    this.currentUser$ = this.authenticateService.currentUser$;
+  }
+
+  logout() {
+    this.authenticateService.logout();
+    this.customerCartService.removeTotalQuantity();
+    this.toastr.success('Đăng xuất thành công!');
+    this.router.navigate(['/']);
   }
 }

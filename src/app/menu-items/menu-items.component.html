@@ -32,7 +32,10 @@
 
             <div class="row row-cols-2 row-cols-md-3 g-4">
                 <div class="col" *ngFor="let item of menuItems">
-                    <app-menu-item-card [menuItem]="item"></app-menu-item-card>
+                    <app-menu-item-card
+                        [menuItem]="item"
+                        (addtoCart)="onAddItemToCart($event)">
+                    </app-menu-item-card>
                 </div>
             </div>
 

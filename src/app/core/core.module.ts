@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TestErrorsComponent } from './test-errors/test-errors.component';
@@ -28,10 +29,12 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BsDropdownModule
   ],
   exports: [
     NgxSpinnerModule,
+    BsDropdownModule,
 
     NavBarComponent,
     SectionHeaderComponent

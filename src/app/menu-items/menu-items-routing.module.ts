@@ -4,11 +4,7 @@ import { MenuItemsComponent } from './menu-items.component';
 import { MenuItemDetailsComponent } from './menu-item-details/menu-item-details.component';
 
 const routes: Routes = [
-  { path: '', component: MenuItemsComponent },
-  {
-    path: ':id', component: MenuItemDetailsComponent,
-    data: { breadcrumbs: 'Chi tiết món ăn' }
-  }
+  { path: '', component: MenuItemsComponent }, { path: ':id', component: MenuItemDetailsComponent }
 ];
 
 @NgModule({
