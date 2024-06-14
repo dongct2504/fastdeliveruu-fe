@@ -13,10 +13,16 @@
             </h2>
 
             <div class="d-flex justify-content-start align-items-center">
-                <fa-icon class="text-warning minus-button-custom me-2" [icon]="faMinusCircle"></fa-icon>
-                <span class="quantity">2</span>
-                <fa-icon class="text-warning plus-button-custom mx-2" [icon]="faPlusCircle"></fa-icon>
-                <button class="btn btn-lg btn-outline-success ms-4">Thêm vào giỏ</button>
+                <a (click)="decrementQuantity()" style="cursor: pointer;">
+                    <fa-icon class="text-warning minus-button-custom me-2" [icon]="faMinusCircle"></fa-icon>
+                </a>
+                <span class="quantity">{{quantity}}</span>
+                <a (click)="incrementQuantity()" style="cursor: pointer;">
+                    <fa-icon class="text-warning plus-button-custom mx-2" [icon]="faPlusCircle"></fa-icon>
+                </a>
+                <button class="btn btn-lg btn-outline-warning ms-4" (click)="addToCart()">
+                    Thêm vào giỏ
+                </button>
             </div>
         </div>
 

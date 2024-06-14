@@ -3,10 +3,7 @@
         <h2 class="mb-4">Các món đang hot</h2>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
             <div class="col" *ngFor="let item of popularMenuItem">
-                <app-menu-item-card
-                    [menuItem]="item"
-                    (addtoCart)="onAddItemToCart($event)">
-                </app-menu-item-card>
+                <app-menu-item-card [menuItem]="item"></app-menu-item-card>
             </div>
         </div>
     </div>
@@ -25,10 +22,7 @@
 
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
         <div class="col" *ngFor="let item of menuItems">
-            <app-menu-item-card
-                [menuItem]="item"
-                (addtoCart)="onAddItemToCart($event)">
-            </app-menu-item-card>
+            <app-menu-item-card [menuItem]="item"></app-menu-item-card>
         </div>
     </div>
 

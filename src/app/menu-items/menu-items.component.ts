@@ -99,7 +99,7 @@ export class MenuItemsComponent implements OnInit {
       quantity: 1
     };
 
-    this.customerCartService.setCartItem(setCartItemRequest).subscribe(() => {
+    this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {
       this.toastr.success('Đã thêm vào giỏ hàng!');
     });
   }

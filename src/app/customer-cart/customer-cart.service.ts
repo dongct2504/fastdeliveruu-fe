@@ -21,15 +21,15 @@ export class CustomerCartService {
     return this.httpClient.get<ShoppingCartDto[]>(`${this.apiUrl}/carts`);
   }
 
-  public setCartItem(setCartItemRequest: SetCartItemRequest) {
-    return this.httpClient.post(`${this.apiUrl}/carts`, setCartItemRequest).pipe(
-      map(() => this.loadTotalQuantity())
+  public updateCartItem(updateCartItemRequest: SetCartItemRequest) {
+    return this.httpClient.post<number>(`${this.apiUrl}/carts`, updateCartItemRequest).pipe(
+      map(totalQuantity => this.setTotalQuantity(totalQuantity))
     );
   }
 
   public deleteCartItem(menuItemId: string) {
-    return this.httpClient.delete(`${this.apiUrl}/carts/${menuItemId}`).pipe(
-      map(() => this.loadTotalQuantity())
+    return this.httpClient.delete<number>(`${this.apiUrl}/carts/${menuItemId}`).pipe(
+      map(totalQuantity => this.setTotalQuantity(totalQuantity))
     );
   }
 
@@ -44,7 +44,7 @@ export class CustomerCartService {
     this.getCustomerCart().subscribe(customerCart => {
       const totalQuantity = customerCart.reduce((sum, item) => sum + item.quantity, 0);
       this.setTotalQuantity(totalQuantity);
-    })
+    });
   }
 
   public removeTotalQuantity() {
