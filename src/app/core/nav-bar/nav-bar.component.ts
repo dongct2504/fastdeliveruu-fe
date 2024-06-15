@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthenticateService } from 'src/app/authenticate/authenticate.service';
 import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
-import { LocalUserDto } from 'src/app/shared/models/authenticate/localUserDto';
+import { AppUserDto } from 'src/app/shared/models/authenticate/appUserDto';
 
 @Component({
   selector: 'app-nav-bar',
@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
   faUser = faUser;
 
   totalQuantity$?: Observable<number>
-  currentUser$?: Observable<LocalUserDto | null>
+  currentUser$?: Observable<AppUserDto | null>
 
   constructor(
     public customerCartService: CustomerCartService,

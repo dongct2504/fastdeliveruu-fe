@@ -1,6 +1,6 @@
-import { LocalUserDto } from "./localUserDto";
+import { AppUserDto } from "./appUserDto";
 
 export interface AuthenticationResponse {
-    localUserDto: LocalUserDto;
+    appUserDto: AppUserDto;
     token: string;
 }

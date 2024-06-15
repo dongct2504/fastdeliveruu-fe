@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { LocalUserDto } from '../shared/models/authenticate/localUserDto';
+import { AppUserDto } from '../shared/models/authenticate/appUserDto';
 import { LoginRequest } from '../shared/models/authenticate/loginRequest';
 import { HttpClient } from '@angular/common/http';
 import { RegisterRequest } from '../shared/models/authenticate/registerRequest';
@@ -13,7 +13,7 @@ import { AuthenticationResponse } from '../shared/models/authenticate/authentica
 export class AuthenticateService {
   private apiUrl = environment.apiUrl;
 
-  private currentUserSource = new BehaviorSubject<LocalUserDto | null>(null);
+  private currentUserSource = new BehaviorSubject<AppUserDto | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private httpClient: HttpClient) {
@@ -24,7 +24,7 @@ export class AuthenticateService {
       map(authenResponse => {
         if (authenResponse) {
           localStorage.setItem('fastdeliveruu-authen', JSON.stringify(authenResponse));
-          this.currentUserSource.next(authenResponse.localUserDto);
+          this.currentUserSource.next(authenResponse.appUserDto);
         }
       })
     );
@@ -43,7 +43,7 @@ export class AuthenticateService {
     const authenJson = localStorage.getItem('fastdeliveruu-authen');
     if (authenJson) {
       const authen: AuthenticationResponse = JSON.parse(authenJson);
-      this.currentUserSource.next(authen.localUserDto);
+      this.currentUserSource.next(authen.appUserDto);
     }
   }
 
