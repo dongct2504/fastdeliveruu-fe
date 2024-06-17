@@ -12,8 +12,6 @@ import { faMinusCircle, faPlusCircle, faTrash } from '@fortawesome/free-solid-sv
 export class CustomerCartComponent implements OnInit {
   customerCart?: ShoppingCartDto[];
 
-  totalPrice = 0;
-
   faMinusCircle = faMinusCircle;
   faPlusCircle = faPlusCircle;
   faTrash = faTrash;
@@ -28,7 +26,6 @@ export class CustomerCartComponent implements OnInit {
   getCustomerCart() {
     this.customerCartService.getCustomerCart().subscribe(customerCart => {
       this.customerCart = customerCart;
-      this.calculateTotalPrice();
     });
   }
 
@@ -42,7 +39,6 @@ export class CustomerCartComponent implements OnInit {
       };
       this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {
         this.customerCart![cartItemIndex].quantity++;
-        this.calculateTotalPrice();
       });
     }
   }
@@ -54,7 +50,6 @@ export class CustomerCartComponent implements OnInit {
       if (this.customerCart[cartItemIndex].quantity <= 1) {
         this.customerCartService.deleteCartItem(menuItemId).subscribe(() => {
           this.customerCart = this.customerCart!.filter(item => item.menuItemId !== menuItemId);
-          this.calculateTotalPrice();
         });
       } else {
         const setCartItemRequest: SetCartItemRequest = {
@@ -63,7 +58,6 @@ export class CustomerCartComponent implements OnInit {
         };
         this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {
           this.customerCart![cartItemIndex].quantity--;
-          this.calculateTotalPrice();
         });
       }
     }
@@ -73,15 +67,7 @@ export class CustomerCartComponent implements OnInit {
     this.customerCartService.deleteCartItem(menuItemId).subscribe(() => {
       if (this.customerCart) {
         this.customerCart = this.customerCart.filter(item => item.menuItemId !== menuItemId);
-        this.calculateTotalPrice();
       }
     });
-  }
-
-  private calculateTotalPrice() {
-    if (this.customerCart) {
-      this.totalPrice = this.customerCart.reduce((sum, item) =>
-        (item.menuItemDto.discountPrice * item.quantity) + sum, 0);
-    }
   }
 }

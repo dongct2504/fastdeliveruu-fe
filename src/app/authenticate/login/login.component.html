@@ -12,12 +12,12 @@
             </div>
 
             <app-text-input
-                [formControl]="$any(loginForm).controls['userName']"
+                formControlName="userName"
                 [label]="'Tên đăng nhập*'">
             </app-text-input>
 
             <app-text-input
-                [formControl]="$any(loginForm).controls['password']"
+                formControlName="password"
                 [label]="'Mật khẩu*'"
                 [type]="'password'">
             </app-text-input>

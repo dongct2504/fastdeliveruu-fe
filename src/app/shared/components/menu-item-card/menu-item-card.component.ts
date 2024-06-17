@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { MenuItemDto } from '../../models/menuItems/menuItemDto';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { ToastrService } from 'ngx-toastr';
-import { AuthenticateService } from 'src/app/authenticate/authenticate.service';
 import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
-import { MenuItemDto } from 'src/app/shared/models/menuItems/menuItemDto';
-import { SetCartItemRequest } from 'src/app/shared/models/shoppingCarts/setCartItemRequest';
+import { AuthenticateService } from 'src/app/authenticate/authenticate.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { SetCartItemRequest } from '../../models/shoppingCarts/setCartItemRequest';
 
 @Component({
   selector: 'app-menu-item-card',

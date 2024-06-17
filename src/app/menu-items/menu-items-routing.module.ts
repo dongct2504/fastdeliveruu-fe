@@ -4,7 +4,8 @@ import { MenuItemsComponent } from './menu-items.component';
 import { MenuItemDetailsComponent } from './menu-item-details/menu-item-details.component';
 
 const routes: Routes = [
-  { path: '', component: MenuItemsComponent }, { path: ':id', component: MenuItemDetailsComponent }
+  { path: '', component: MenuItemsComponent },
+  { path: ':id', component: MenuItemDetailsComponent }
 ];
 
 @NgModule({

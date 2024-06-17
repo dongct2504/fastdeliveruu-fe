@@ -1,0 +1,62 @@
+<div class="mt-4" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4>Thông tin người nhận</h4>
+        <button class="btn btn-outline-success mb-3"
+            (click)="saveUserAddress()"
+            [disabled]="!checkoutForm.get('infoForm')?.valid || !checkoutForm.get('infoForm')?.dirty">
+            Lưu thông tin này là mặc định
+        </button>
+    </div>
+
+    <div class="row" formGroupName="infoForm">
+        <div class="col-sm-6">
+            <app-text-input
+                [label]="'Họ'"
+                formControlName="lastName">
+            </app-text-input>
+        </div>
+        <div class="col-sm-6">
+            <app-text-input
+                [label]="'Tên'"
+                formControlName="firstName">
+            </app-text-input>
+        </div>
+        <div class="col-sm-6">
+            <app-text-input
+                [label]="'Số điện thoại'"
+                formControlName="phoneNumber">
+            </app-text-input>
+        </div>
+        <div class="col-sm-6">
+            <app-text-input
+                formControlName="address"
+                [label]="'Địa chỉ đường'">
+            </app-text-input>
+        </div>
+        <div class="col-sm-4">
+            <app-text-input
+                formControlName="ward"
+                [label]="'Phường'">
+            </app-text-input>
+        </div>
+        <div class="col-sm-4">
+            <app-text-input
+                formControlName="district"
+                [label]="'Quận'">
+            </app-text-input>
+        </div>
+        <div class="col-sm-4">
+            <app-text-input
+                formControlName="city"
+                [label]="'Thành phố'">
+            </app-text-input>
+        </div>
+    </div>
+</div>
+
+<app-checkout-navigate
+    [checkoutForm]="checkoutForm"
+    [formName]="'infoForm'"
+    [leftText]="'Quay lại giỏ hàng'"
+    [rightText]="'Tới giao hàng'">
+</app-checkout-navigate>

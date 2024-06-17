@@ -3,13 +3,11 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 
 import { HomeComponent } from './home.component';
-import { MenuItemCardComponent } from './menu-item-card/menu-item-card.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    MenuItemCardComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,

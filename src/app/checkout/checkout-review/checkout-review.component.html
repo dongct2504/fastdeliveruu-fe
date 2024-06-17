@@ -1,0 +1,66 @@
+<div class="table-responsive mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3">Món hàng</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Giá</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Số lượng</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Tổng</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of customerCart">
+                <th scope="row">
+                    <div class="p-2">
+                        <img src="{{item.menuItemDto.imageUrl}}"
+                            alt="{{item.menuItemDto.name}}"
+                            class="img-fluid" style="max-height: 50px;" />
+                        <div class="ms-3 d-inline-block align-middle">
+                            <h5 class="mb-0">
+                                <a routerLink="/menu-items/{{item.menuItemDto.menuItemId}}"
+                                    class="text-warning no-underline">
+                                    {{item.menuItemDto.name}}
+                                </a>
+                            </h5>
+                            <span class="text-muted font-weight-normal d-block">
+                                Đã giảm:
+                                <i>{{item.menuItemDto.discountAmount | currency:'VND'}}</i>
+                            </span>
+                        </div>
+                    </div>
+                </th>
+                <td class="align-middle">
+                    <strong>{{item.menuItemDto.discountPrice | currency:'VND'}}</strong>
+                </td>
+                <td class="align-middle">
+                    <span class="quantity">{{item.quantity}}</span>
+                </td>
+                <td class="align-middle">
+                    <strong>
+                        {{item.menuItemDto.discountPrice * item.quantity | currency:'VND'}}
+                    </strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex justify-content-between flex-row mt-3 mb-5">
+    <button class="btn btn-outline-primary" cdkStepperPrevious>
+        <fa-icon [icon]="faAngleLeft"></fa-icon> Trở về thanh toán
+    </button>
+
+    <button 
+        class="btn btn-primary" 
+        (click)="submitOrder()">
+        Gửi đơn hàng <fa-icon [icon]="faAngleRight"></fa-icon>
+    </button>
+</div>

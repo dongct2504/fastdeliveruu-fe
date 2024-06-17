@@ -1,0 +1,21 @@
+<div class="text-center bg-light px-4 py-3 text-uppercase">
+    <strong>Tổng kết</strong>
+</div>
+
+<div class="p-4" *ngIf="(totalPrice$ | async) as totalPrice">
+    <p class="mb-4"><i>Chi phí giao hàng sẽ tính sau ở phần thanh toán.</i></p>
+    <ul class="list-unstyled mb-4">
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Tổng phụ</strong>
+            <strong style="font-size: large;">{{totalPrice.subtotal | currency:'VND'}}</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Tiền ship</strong>
+            <strong style="font-size: large;">{{totalPrice.shipping | currency:'VND'}}</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Tổng chi phí</strong>
+            <strong style="font-size: large;">{{totalPrice.total | currency:'VND'}}</strong>
+        </li>
+    </ul>
+</div>

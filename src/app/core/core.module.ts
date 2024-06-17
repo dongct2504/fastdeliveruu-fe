@@ -12,6 +12,7 @@ import { TestErrorsComponent } from './test-errors/test-errors.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { InternalServerErrorComponent } from './internal-server-error/internal-server-error.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
     TestErrorsComponent,
     NotFoundComponent,
     InternalServerErrorComponent,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
     BsDropdownModule,
 
     NavBarComponent,
+    FooterComponent,
     SectionHeaderComponent
   ]
 })

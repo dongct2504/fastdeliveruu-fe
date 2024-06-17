@@ -8,7 +8,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent {
-  @Output() searchValue = new EventEmitter();
+  @Output() searchValue = new EventEmitter<string>();
 
   faSearch = faSearch;
 
