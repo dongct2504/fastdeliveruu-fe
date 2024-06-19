@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     this.authenticateService.register(this.registerForm.value).subscribe(res => {
       console.log(res.token);
       this.toastr.success('Đăng ký thành công, vui lòng xác nhận email trước khi đăng nhập!');
-      this.router.navigate(['/authen/login']);
+      this.router.navigate(['/authen/confirm-email']);
     }, err => {
       this.validationErrors = err;
     });

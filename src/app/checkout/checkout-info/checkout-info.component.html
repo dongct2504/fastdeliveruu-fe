@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between align-items-center mb-2">
         <h4>Thông tin người nhận</h4>
         <button class="btn btn-outline-success mb-3"
-            (click)="saveUserAddress()"
+            (click)="saveUserInformation()"
             [disabled]="!checkoutForm.get('infoForm')?.valid || !checkoutForm.get('infoForm')?.dirty">
             Lưu thông tin này là mặc định
         </button>

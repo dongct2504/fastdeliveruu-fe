@@ -22,7 +22,6 @@ export class CustomerCartService {
   private shipping = 0;
 
   constructor(private httpClient: HttpClient) {
-    this.calculateTotals();
   }
 
   public getCustomerCart() {
@@ -79,7 +78,7 @@ export class CustomerCartService {
   }
 
   // Total price handle methods
-  private calculateTotals() {
+  public calculateTotals() {
     this.getCustomerCart().subscribe(customerCart => {
       const subtotal = customerCart.reduce((sum, item) => sum + item.menuItemDto.discountPrice * item.quantity, 0);
       const shipping = this.shipping;

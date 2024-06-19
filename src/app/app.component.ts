@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from './authenticate/authenticate.service';
 import { CustomerCartService } from './customer-cart/customer-cart.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authenService.loadCurrentUser();
 
-    this.authenService.currentUser$.subscribe(authen => {
-      if (authen) {
+    this.authenService.currentUser$.pipe(take(1)).subscribe(currentUser => {
+      if (currentUser) {
         this.customerCartService.loadTotalQuantity();
+        this.customerCartService.calculateTotals();
       }
     })
   }
