@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { OrderDto } from '../shared/models/orders/orderDto';
 import { PagedList } from '../shared/models/PagedList';
+import { OrderHeaderDetailDto } from '../shared/models/orders/orderHeaderDto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class OrdersService {
     params = params.append('pageSize', pageSize.toString());
 
     return this.httpClient.get<PagedList<OrderDto>>(`${this.apiUrl}/orders`, { params });
+  }
+
+  public getOrder(id: string) {
+    return this.httpClient.get<OrderHeaderDetailDto>(`${this.apiUrl}/orders/${id}`);
   }
 }

@@ -27,14 +27,14 @@
                             <h5 class="mb-0">
                                 <a routerLink="/orders/{{item.orderId}}"
                                     class="no-underline">
-                                    # {{i + 1}}
+                                    # Đơn hàng {{i + 1}}
                                 </a>
                             </h5>
                         </div>
                     </div>
                 </th>
                 <td class="align-middle">
-                    <strong>{{item.orderDate | date:'dd/MM/YYYY'}}</strong>
+                    <strong>{{item.orderDate | date:'dd/MM/YYYY, h:mm a'}}</strong>
                 </td>
                 <td class="align-middle">
                     <strong *ngIf="item.paymentMethod === 'cash'">Tiền mặt</strong>

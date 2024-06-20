@@ -1,0 +1,84 @@
+<div class="row" *ngIf="orderHeader">
+    <div class="col-lg-8">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class="p-2 px-3">Món hàng</div>
+                        </th>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class="py-2">Giá</div>
+                        </th>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class="py-2">Số lượng</div>
+                        </th>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class="py-2">Tổng</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of orderHeader.orderDetailDtos; let i = index">
+                        <th scope="row">
+                            <div class="p-2">
+                                <div class="align-middle">
+                                    <h5 class="mb-0">
+                                        <img src="{{item.menuItemDto.imageUrl}}"
+                                            alt="{{item.menuItemDto.name}}"
+                                            class="img-fluid" style="max-height: 50px;" />
+                                        <a routerLink="/menu-items/{{item.menuItemId}}"
+                                            class="text-warning no-underline">
+                                            {{item.menuItemDto.name}}
+                                        </a>
+                                    </h5>
+                                    <span class="text-muted font-weight-normal d-block">
+                                        Đã giảm:
+                                        <i>{{item.menuItemDto.discountAmount | currency:'VND'}}</i>
+                                    </span>
+                                </div>
+                            </div>
+                        </th>
+                        <td class="align-middle">
+                            <strong>{{item.menuItemDto.discountPrice | currency:'VND'}}</strong>
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex align-items-center">
+                                <span class="quantity">{{item.quantity}}</span>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <strong>
+                                {{item.menuItemDto.discountPrice * item.quantity | currency:'VND'}}
+                            </strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="text-center bg-light px-4 py-3 text-uppercase">
+            <strong>Tổng kết</strong>
+        </div>
+
+        <div class="p-4">
+            <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                    <strong class="text-muted">Tổng phụ</strong>
+                    <strong style="font-size: large;">{{subtotal | currency:'VND'}}</strong>
+                </li>
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                    <strong class="text-muted">Tiền ship</strong>
+                    <strong style="font-size: large;">
+                        {{orderHeader.deliveryMethodDto.price | currency:'VND'}}
+                    </strong>
+                </li>
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                    <strong class="text-muted">Tổng chi phí</strong>
+                    <strong style="font-size: large;">{{orderHeader.totalAmount | currency:'VND'}}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
