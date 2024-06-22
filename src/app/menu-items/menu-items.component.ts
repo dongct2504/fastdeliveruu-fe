@@ -4,13 +4,12 @@ import { MenuItemDto } from '../shared/models/menuItems/menuItemDto';
 import { GenreDto } from '../shared/models/genres/genreDto';
 import { MenuItemParams } from '../shared/models/menuItems/menuItemParams';
 import { MenuItemSortConstants } from '../shared/common/menuItemSortConstants';
-import { FormGroup } from '@angular/forms';
 import { PageSizeConstants } from '../shared/common/pageSizeConstants';
 import { CustomerCartService } from '../customer-cart/customer-cart.service';
 import { SetCartItemRequest } from '../shared/models/shoppingCarts/setCartItemRequest';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticateService } from '../authenticate/authenticate.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-items',
@@ -23,9 +22,6 @@ export class MenuItemsComponent implements OnInit {
 
   menuItemParams = new MenuItemParams();
   totalRecords = 0;
-  itemsPerPage = 0;
-
-  searchForm = {} as FormGroup;
 
   sortOptions = [
     { name: 'Mới cập nhật', value: MenuItemSortConstants.latestUpdateDesc },
@@ -38,21 +34,27 @@ export class MenuItemsComponent implements OnInit {
     private menuItemsService: MenuItemsService,
     private customerCartService: CustomerCartService,
     private authenticateService: AuthenticateService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService) {
     this.menuItemParams.pageSize = PageSizeConstants.pageSize9;
   }
 
   ngOnInit(): void {
-    this.getMenuItems();
-    this.getGenres();
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params) {
+        this.menuItemParams.restaurantId = params['restaurantId'] || '';
+      }
+
+      this.getMenuItems();
+      this.getGenres();
+    });
   }
 
   private getMenuItems() {
     this.menuItemsService.getMenuItems(this.menuItemParams).subscribe(pagedList => {
       this.menuItems = pagedList.items;
       this.menuItemParams.pageNumber = pagedList.pageNumber;
-      this.itemsPerPage = pagedList.pageSize;
       this.totalRecords = pagedList.totalRecords;
     });
   }

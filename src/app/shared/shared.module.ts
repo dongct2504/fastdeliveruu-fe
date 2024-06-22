@@ -15,6 +15,7 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
 import { StepperComponent } from './components/stepper/stepper.component';
 import { RouterModule } from '@angular/router';
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
+import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MenuItemCardComponent } from './components/menu-item-card/menu-item-car
     TextInputComponent,
     OrderTotalsComponent,
     StepperComponent,
-    MenuItemCardComponent
+    MenuItemCardComponent,
+    RestaurantCardComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { MenuItemCardComponent } from './components/menu-item-card/menu-item-car
     TextInputComponent,
     OrderTotalsComponent,
     StepperComponent,
-    MenuItemCardComponent
+    MenuItemCardComponent,
+    RestaurantCardComponent
   ]
 })
 export class SharedModule { }

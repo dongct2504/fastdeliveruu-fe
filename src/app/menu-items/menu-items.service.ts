@@ -33,7 +33,7 @@ export class MenuItemsService {
     let params = new HttpParams();
 
     if (!menuItemParams) {
-      return new HttpParams();
+      return params;
     }
 
     if (menuItemParams.genreId != null && menuItemParams.genreId !== '') {

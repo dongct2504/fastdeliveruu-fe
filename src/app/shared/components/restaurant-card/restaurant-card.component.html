@@ -1,0 +1,27 @@
+<div class="card h-100 shadow-sm">
+    <a routerLink="/restaurants/{{restaurant.restaurantId}}" class="card-img-wrapper">
+        <img src="{{restaurant.imageUrl}}"
+            alt="{{restaurant.name}}"
+            class="img-fluid rounded">
+    </a>
+
+    <div class="card-body d-flex flex-column">
+        <a class="no-underline" routerLink="/restaurants/{{restaurant.restaurantId}}">
+            <h5>{{restaurant.name | truncateWords:14}}</h5>
+        </a>
+
+        <p class="card-text">
+            {{restaurant.description | truncateWords:48}}
+        </p>
+
+        <div class="d-flex align-items-center">
+            <button
+              type="button"
+              class="btn btn-outline-primary me-2 flex-grow-1"
+              routerLink="/restaurants/{{restaurant.restaurantId}}">
+              Xem
+            </button>
+          </div>
+    </div>
+</div>
+

@@ -1,3 +1,11 @@
+<div class="d-flex align-items-center mb-3">
+    <app-paging-header
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [totalRecords]="totalRecords">
+    </app-paging-header>
+</div>
+
 <div class="table-responsive mt-4" *ngIf="orders">
     <table class="table">
         <thead>
@@ -49,10 +57,10 @@
             </tr>
         </tbody>
     </table>
-
-    <app-paging-footer
-        [itemsPerPage]="pageSize"
-        [totalRecords]="totalRecords"
-        (pagedChanged)="onPageChanged($event)">
-    </app-paging-footer>
 </div>
+
+<app-paging-footer
+    [itemsPerPage]="pageSize"
+    [totalRecords]="totalRecords"
+    (pagedChanged)="onPageChanged($event)">
+</app-paging-footer>

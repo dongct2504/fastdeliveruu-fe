@@ -1,0 +1,27 @@
+<div class="row" *ngIf="restaurant">
+    <div class="col-md-5">
+        <img class="img-fluid rounded" src="{{restaurant.imageUrl}}" alt="{{restaurant.name}}">
+    </div>
+
+    <div class="col-md-7">
+        <div class="mb-3">
+            <h3>{{restaurant.name}}</h3>
+        </div>
+        <div class="mb-3">
+            <p>{{restaurant.description}}</p>
+        </div>
+        <div class="mb-3">
+            <h4>Địa chỉ</h4>
+            <p>{{restaurant.address}}, {{restaurant.ward}}, {{restaurant.district}}, {{restaurant.city}}</p>
+        </div>
+
+        <div>
+            <a 
+                class="btn btn-outline-primary"
+                [routerLink]="['/menu-items']"
+                [queryParams]="{ restaurantId: restaurant.restaurantId }">
+                Xem các món ăn của nhà hàng này
+            </a>
+        </div>
+    </div>
+</div>
