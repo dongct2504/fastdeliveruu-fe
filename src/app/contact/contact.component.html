@@ -1,1 +1,35 @@
-<p>contact works!</p>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2 class="text-center mb-4">Contact Us</h2>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <app-text-input
+                formControlName="lastName"
+                [label]="'Họ'">
+            </app-text-input>
+
+            <app-text-input
+                formControlName="firstName"
+                [label]="'Tên'">
+            </app-text-input>
+
+            <app-text-input
+                formControlName="email"
+                [type]="'email'"
+                [label]="'Email'">
+            </app-text-input>
+
+            <app-text-input
+                formControlName="subject"
+                [label]="'Subject'">
+            </app-text-input>
+
+            <app-text-input
+                formControlName="message"
+                [label]="'Message'">
+            </app-text-input>
+
+            <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
+        </form>
+    </div>
+</div>

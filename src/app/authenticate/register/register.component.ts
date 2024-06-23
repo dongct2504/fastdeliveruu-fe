@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
         Validators.required
       ]],
       email: ['', [
-        Validators.required
+        Validators.required, Validators.email
       ]],
       password: ['', [
         Validators.required

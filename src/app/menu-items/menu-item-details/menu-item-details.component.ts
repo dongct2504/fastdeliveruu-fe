@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItemsService } from '../menu-items.service';
 import { MenuItemDetailDto } from 'src/app/shared/models/menuItems/menuItemDetailDto';
 import { ActivatedRoute, Router } from '@angular/router';
