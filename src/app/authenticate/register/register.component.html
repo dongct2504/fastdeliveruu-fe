@@ -39,20 +39,35 @@
                 [label]="'Địa chỉ đường'">
             </app-text-input>
 
-            <app-text-input
-                formControlName="ward"
-                [label]="'Phường'">
-            </app-text-input>
+            <div class="form-floating mb-3">
+                <select formControlName="cityId" class="form-select" id="city">
+                    <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+                </select>
+                <label for="city">Thành phố</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+                    Vui lòng chọn thành phố.
+                </div>
+            </div>
 
-            <app-text-input
-                formControlName="district"
-                [label]="'Quận'">
-            </app-text-input>
+            <div class="form-floating mb-3">
+                <select formControlName="districtId" class="form-select" id="district" [disabled]="districts.length === 0">
+                    <option *ngFor="let district of districts" [value]="district.id">{{ district.name }}</option>
+                </select>
+                <label for="district">Quận</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('district')?.invalid && registerForm.get('district')?.touched">
+                    Vui lòng chọn quận.
+                </div>
+            </div>
 
-            <app-text-input
-                formControlName="city"
-                [label]="'Thành phố'">
-            </app-text-input>
+            <div class="form-floating mb-3">
+                <select formControlName="wardId" class="form-select" id="ward" [disabled]="wards.length === 0">
+                    <option *ngFor="let ward of wards" [value]="ward.id">{{ ward.name }}</option>
+                </select>
+                <label for="ward">Phường</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('ward')?.invalid && registerForm.get('ward')?.touched">
+                    Vui lòng chọn phường.
+                </div>
+            </div>
 
             <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" [disabled]="registerForm.invalid">
                 Đăng ký

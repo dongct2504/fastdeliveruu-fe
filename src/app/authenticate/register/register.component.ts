@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { AuthenticateService } from '../authenticate.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AddressService } from 'src/app/shared/services/address.service';
+import { CityDto } from 'src/app/shared/models/addresses/cityDto';
+import { DistrictDto } from 'src/app/shared/models/addresses/districtDto';
+import { WardDto } from 'src/app/shared/models/addresses/wardDto';
 
 @Component({
   selector: 'app-register',
@@ -14,15 +18,65 @@ export class RegisterComponent implements OnInit {
 
   validationErrors: ValidationErrors[] = [];
 
+  cities: CityDto[] = [];
+  districts: DistrictDto[] = [];
+  wards: WardDto[] = [];
+
   constructor(
     private fb: FormBuilder,
     private authenticateService: AuthenticateService,
+    private addressService: AddressService,
     private toastr: ToastrService,
     private router: Router) {
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.initAddresses();
+
+    this.registerForm.get('cityId')?.valueChanges.subscribe(cityId => {
+      this.onCityChange(cityId);
+    });
+
+    this.registerForm.get('districtId')?.valueChanges.subscribe(districtId => {
+      this.onDistrictChange(districtId);
+    });
+  }
+
+  private onCityChange(cityId: number) {
+    if (cityId) {
+      this.addressService.getDistrictsByCity(cityId).subscribe(districtList => {
+        this.districts = districtList.items;
+        // Clear the wards and reset the form controls for district and ward
+        this.wards = [];
+        this.registerForm.get('districtId')?.reset();
+        this.registerForm.get('wardId')?.reset();
+      });
+    } else {
+      this.districts = [];
+      this.wards = [];
+      this.registerForm.get('districtId')?.reset();
+      this.registerForm.get('wardId')?.reset();
+    }
+  }
+
+  private onDistrictChange(districtId: number) {
+    if (districtId) {
+      this.addressService.getWardsByDistrict(districtId).subscribe(wardList => {
+        this.wards = wardList.items;
+        // Reset the ward selection
+        this.registerForm.get('wardId')?.reset();
+      });
+    } else {
+      this.wards = [];
+      this.registerForm.get('wardId')?.reset();
+    }
+  }
+
+  private initAddresses() {
+    this.addressService.getAllCities().subscribe(pagedList => {
+      this.cities = pagedList.items;
+    });
   }
 
   private initForm() {
@@ -40,9 +94,9 @@ export class RegisterComponent implements OnInit {
         Validators.required
       ]],
       address: [''],
-      ward: [''],
-      district: [''],
-      city: ['']
+      wardId: [''],
+      districtId: [''],
+      cityId: ['']
     });
   }
 
