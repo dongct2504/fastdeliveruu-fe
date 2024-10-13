@@ -8,7 +8,7 @@
                     class="form-check-input" 
                     type="radio" 
                     formControlName="paymentMethod" 
-                    value="cash"
+                    [value]="paymentMethodsEnum.Cash" 
                     id="paymentMethodCash" />
                 <label class="form-check-label" for="paymentMethodCash">
                     <strong>Tiền mặt</strong>
@@ -22,7 +22,7 @@
                     class="form-check-input" 
                     type="radio" 
                     formControlName="paymentMethod" 
-                    value="vnpay"
+                    [value]="paymentMethodsEnum.Vnpay" 
                     id="paymentMethodVnpay" />
                 <label class="form-check-label" for="paymentMethodVnpay">
                     <strong>VNPAY</strong>

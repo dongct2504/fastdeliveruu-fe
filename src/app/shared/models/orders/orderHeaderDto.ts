@@ -2,7 +2,7 @@ import { DeliveryMethodDto } from "./deliveryMethodDto";
 import { OrderDetailDto } from "./orderDetailDto";
 
 export interface OrderHeaderDetailDto {
-    orderId: string;
+    id: string;
     firstName: string;
     lastName: string;
     orderDate: string;

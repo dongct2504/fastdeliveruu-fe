@@ -1,12 +1,12 @@
 <div class="card h-100 shadow-sm">
-    <a routerLink="/restaurants/{{restaurant.restaurantId}}" class="card-img-wrapper">
+    <a routerLink="/restaurants/{{restaurant.id}}" class="card-img-wrapper">
         <img src="{{restaurant.imageUrl}}"
             alt="{{restaurant.name}}"
             class="img-fluid rounded">
     </a>
 
     <div class="card-body d-flex flex-column">
-        <a class="no-underline" routerLink="/restaurants/{{restaurant.restaurantId}}">
+        <a class="no-underline" routerLink="/restaurants/{{restaurant.id}}">
             <h5>{{restaurant.name | truncateWords:14}}</h5>
         </a>
 
@@ -18,7 +18,7 @@
             <button
               type="button"
               class="btn btn-outline-primary me-2 flex-grow-1"
-              routerLink="/restaurants/{{restaurant.restaurantId}}">
+              routerLink="/restaurants/{{restaurant.id}}">
               Xem
             </button>
           </div>

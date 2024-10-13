@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
 import { CreateOrderRequest } from 'src/app/shared/models/orders/createOrderRequest';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { PaymentMethodsEnum } from 'src/app/shared/enums/payment-methods.enum';
 
 @Component({
   selector: 'app-checkout-review',
@@ -61,10 +62,10 @@ export class CheckoutReviewComponent implements OnInit {
       };
 
       switch (createOrderRequest.paymentMethod) {
-        case 'cash':
+        case PaymentMethodsEnum.Cash:
           this.submitCashOrder(createOrderRequest);
           break;
-        case 'vnpay':
+        case PaymentMethodsEnum.Vnpay:
           this.submitVnpayOrder(createOrderRequest);
           break;
       }

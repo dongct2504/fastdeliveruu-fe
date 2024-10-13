@@ -28,12 +28,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of orders; let i = index">
+            <tr *ngFor="let order of orders; let i = index">
                 <th scope="row">
                     <div class="p-2">
                         <div class="ms-3 d-inline-block align-middle">
                             <h5 class="mb-0">
-                                <a routerLink="/orders/{{item.orderId}}"
+                                <a routerLink="/orders/{{order.id}}"
                                     class="no-underline">
                                     # Đơn hàng {{i + 1}}
                                 </a>
@@ -42,17 +42,17 @@
                     </div>
                 </th>
                 <td class="align-middle">
-                    <strong>{{item.orderDate | date:'dd/MM/YYYY, h:mm a'}}</strong>
+                    <strong>{{order.orderDate | date:'dd/MM/YYYY, h:mm a'}}</strong>
                 </td>
                 <td class="align-middle">
-                    <strong *ngIf="item.paymentMethod === 'cash'">Tiền mặt</strong>
-                    <strong *ngIf="item.paymentMethod !== 'cash'">{{item.paymentMethod}}</strong>
+                    <strong *ngIf="order.paymentMethod === 'cash'">Tiền mặt</strong>
+                    <strong *ngIf="order.paymentMethod !== 'cash'">{{order.paymentMethod}}</strong>
                 </td>
                 <td class="align-middle">
-                    <strong>{{item.totalAmount | currency:'VND'}}</strong>
+                    <strong>{{order.totalAmount | currency:'VND'}}</strong>
                 </td>
                 <td class="align-middle">
-                    <strong>{{item.orderStatus}}</strong>
+                    <strong>{{order.orderStatus}}</strong>
                 </td>
             </tr>
         </tbody>

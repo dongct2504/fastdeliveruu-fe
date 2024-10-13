@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,13 +10,11 @@ export class CheckoutComponent {
   checkoutForm = {} as FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private usersService: UsersService) {
+    private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.initCheckoutForm();
-    this.getInfoFormValues();
   }
 
   private initCheckoutForm() {
@@ -27,9 +24,9 @@ export class CheckoutComponent {
         lastName: ['', [Validators.required]],
         phoneNumber: ['', [Validators.required]],
         address: ['', [Validators.required]],
-        ward: ['', [Validators.required]],
-        district: ['', [Validators.required]],
-        city: ['', [Validators.required]]
+        wardId: ['', [Validators.required]],
+        districtId: ['', [Validators.required]],
+        cityId: ['', [Validators.required]]
       }),
       deliveryForm: this.fb.group({
         deliveryMethodId: ['', [Validators.required]]
@@ -38,11 +35,5 @@ export class CheckoutComponent {
         paymentMethod: ['', [Validators.required]]
       })
     })
-  }
-
-  private getInfoFormValues() {
-    this.usersService.getCurrentUser().subscribe(userDetail => {
-      this.checkoutForm.get('infoForm')?.patchValue(userDetail);
-    });
   }
 }

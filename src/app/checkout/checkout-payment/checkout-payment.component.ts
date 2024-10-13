@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { PaymentMethodsEnum } from 'src/app/shared/enums/payment-methods.enum';
 
 @Component({
   selector: 'app-checkout-payment',
@@ -8,6 +9,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class CheckoutPaymentComponent {
   @Input() checkoutForm?: FormGroup;
+
+  paymentMethodsEnum = PaymentMethodsEnum;
 
   constructor() {
   }

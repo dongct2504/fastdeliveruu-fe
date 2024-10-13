@@ -6,7 +6,7 @@ export interface AppUserDto {
     email: string;
     imageUrl: string | null;
     address: string | null;
-    ward: string | null;
-    district: string | null;
-    city: string | null;
+    cityId?: number;
+    districtId?: number;
+    wardId?: number;
 }

@@ -36,14 +36,14 @@ export class UsersService {
     if (updateUserRequest.address) {
       formData.append('address', updateUserRequest.address);
     }
-    if (updateUserRequest.ward) {
-      formData.append('ward', updateUserRequest.ward);
+    if (updateUserRequest.wardId) {
+      formData.append('wardId', updateUserRequest.wardId);
     }
-    if (updateUserRequest.district) {
-      formData.append('district', updateUserRequest.district);
+    if (updateUserRequest.districtId) {
+      formData.append('districtId', updateUserRequest.districtId);
     }
-    if (updateUserRequest.city) {
-      formData.append('city', updateUserRequest.city);
+    if (updateUserRequest.cityId) {
+      formData.append('cityId', updateUserRequest.cityId);
     }
     if (updateUserRequest.role) {
       formData.append('role', updateUserRequest.role);

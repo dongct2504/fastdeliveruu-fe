@@ -1,11 +1,13 @@
+import { PaymentMethodsEnum } from "../../enums/payment-methods.enum";
+
 export interface CreateOrderRequest {
-    deliveryMethodId: string;
+    deliveryMethodId: number;
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    paymentMethod: string;
+    paymentMethod: PaymentMethodsEnum;
     address: string;
-    ward: string;
-    district: string;
-    city: string;
+    wardId: number;
+    districtId: number;
+    cityId: number;
 }

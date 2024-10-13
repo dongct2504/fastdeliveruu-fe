@@ -2,7 +2,7 @@ import { GenreDto } from "../genres/genreDto";
 import { RestaurantDto } from "../restaurants/restaurantDto";
 
 export interface MenuItemDetailDto {
-    menuItemId: string;
+    id: string;
     name: string;
     description: string;
     inventory: number;

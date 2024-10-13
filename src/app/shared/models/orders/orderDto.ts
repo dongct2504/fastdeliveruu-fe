@@ -1,5 +1,5 @@
 export interface OrderDto {
-    orderId: string;
+    id: string;
     firstName: string;
     lastName: string;
     orderDate: string | null;

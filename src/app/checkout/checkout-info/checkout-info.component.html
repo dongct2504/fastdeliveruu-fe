@@ -27,29 +27,40 @@
                 formControlName="phoneNumber">
             </app-text-input>
         </div>
+
         <div class="col-sm-6">
             <app-text-input
                 formControlName="address"
                 [label]="'Địa chỉ đường'">
             </app-text-input>
         </div>
+
         <div class="col-sm-4">
-            <app-text-input
-                formControlName="ward"
-                [label]="'Phường'">
-            </app-text-input>
+            <select 
+                class="form-control" formControlName="cityId" 
+                (change)="onCityChange($event)"
+            >
+                <option value="" disabled selected>Chọn thành phố</option>
+                <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+            </select>
         </div>
+        
         <div class="col-sm-4">
-            <app-text-input
-                formControlName="district"
-                [label]="'Quận'">
-            </app-text-input>
+            <select 
+                class="form-control" 
+                formControlName="districtId" 
+                (change)="onDistrictChange($event)"
+            >
+                <option value="" disabled selected>Chọn quận</option>
+                <option *ngFor="let district of districts" [value]="district.id">{{ district.name }}</option>
+            </select>
         </div>
+        
         <div class="col-sm-4">
-            <app-text-input
-                formControlName="city"
-                [label]="'Thành phố'">
-            </app-text-input>
+            <select class="form-control" formControlName="wardId">
+                <option value="" disabled selected>Chọn phường</option>
+                <option *ngFor="let ward of wards" [value]="ward.id">{{ ward.name }}</option>
+            </select>
         </div>
     </div>
 </div>

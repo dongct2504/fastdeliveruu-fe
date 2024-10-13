@@ -33,7 +33,7 @@ export class MenuItemDetailsComponent implements OnInit {
   addToCart() {
     if (this.menuItem) {
       const setCartItemRequest: SetCartItemRequest = {
-        menuItemId: this.menuItem.menuItemId,
+        menuItemId: this.menuItem.id,
         quantity: this.quantity
       };
       this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {

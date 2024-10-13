@@ -11,8 +11,8 @@
                 <h4>Thể loại</h4>
                 <ul class="list-group scrollable-custom-list">
                     <li class="list-group-item" *ngFor="let genre of genres"
-                        [class.active]="genre.genreId === menuItemParams.genreId" [value]="genre.genreId"
-                        (click)="onGenreSelected(genre.genreId)">
+                        [class.active]="genre.id === menuItemParams.genreId" [value]="genre.id"
+                        (click)="onGenreSelected(genre.id)">
                         {{genre.name | truncateWords:45}}
                     </li>
                 </ul>

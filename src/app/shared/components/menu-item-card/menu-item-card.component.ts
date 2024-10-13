@@ -32,7 +32,7 @@ export class MenuItemCardComponent {
     }
 
     const setCartItemRequest: SetCartItemRequest = {
-      menuItemId: this.menuItem.menuItemId,
+      menuItemId: this.menuItem.id,
       quantity: 1
     };
 

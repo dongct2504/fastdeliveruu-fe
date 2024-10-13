@@ -9,9 +9,9 @@
                     type="radio" 
                     formControlName="deliveryMethodId"
                     (click)="setShippingPrice(method)"
-                    [value]="method.deliveryMethodId" 
-                    [id]="method.deliveryMethodId" />
-                <label class="form-check-label" [for]="method.deliveryMethodId">
+                    [value]="method.id" 
+                    [id]="method.id" />
+                <label class="form-check-label" [for]="method.id">
                     <strong>{{method.shortName}} - {{method.price | currency:'VND'}}</strong>
                     <p class="mb-3 label-description">{{method.description}}</p>
                 </label>

@@ -15,15 +15,15 @@ export class CheckoutService {
   }
 
   public getDeliveryMethods() {
-    return this.httpClient.get<DeliveryMethodDto[]>(`${this.apiUrl}/orders/delivery-methods`);
+    return this.httpClient.get<DeliveryMethodDto[]>(`${this.apiUrl}/delivery-methods`);
   }
 
   public createCheckoutCashOrder(createOrderRequest: CreateOrderRequest) {
-    return this.httpClient.post<PaymentResponse>(`${this.apiUrl}/orders/checkout-cash`, createOrderRequest);
+    return this.httpClient.post<PaymentResponse>(`${this.apiUrl}/checkouts/checkout-cash`, createOrderRequest);
   }
 
   public createCheckoutVnpayOrder(createOrderRequest: CreateOrderRequest) {
-    return this.httpClient.post(`${this.apiUrl}/orders/checkout-vnpay`, createOrderRequest, {
+    return this.httpClient.post(`${this.apiUrl}/checkouts/checkout-vnpay`, createOrderRequest, {
       responseType: 'text'
     });
   }

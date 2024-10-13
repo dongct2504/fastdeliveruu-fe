@@ -4,8 +4,8 @@ export interface RegisterRequest {
     email: string;
     password: string;
     address: string | null;
-    ward: string | null;
-    district: string | null;
-    city: string | null;
+    wardId: string | null;
+    districtId: string | null;
+    cityId: string | null;
     role: string | null;
 }

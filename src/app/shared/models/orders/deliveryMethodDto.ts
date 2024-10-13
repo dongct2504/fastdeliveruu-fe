@@ -1,5 +1,5 @@
 export interface DeliveryMethodDto {
-    deliveryMethodId: string;
+    id: string;
     shortName: string;
     deliveryTime: string | null;
     description: string;

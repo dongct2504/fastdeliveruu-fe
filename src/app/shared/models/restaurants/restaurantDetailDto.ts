@@ -1,5 +1,5 @@
 export interface RestaurantDetailDto {
-    restaurantId: string;
+    id: string;
     name: string;
     description: string;
     phoneNumber: string;
