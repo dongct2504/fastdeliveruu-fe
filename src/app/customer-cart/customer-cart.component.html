@@ -32,25 +32,32 @@
                                 <tr *ngFor="let cartItem of customerCart">
                                     <th scope="row">
                                         <div class="p-2">
-                                            <img src="{{cartItem.menuItemDto.imageUrl}}"
+                                            <img src="{{cartItem.menuVariantDto 
+                                                ? cartItem.menuVariantDto.imageUrl 
+                                                : cartItem.menuItemDto.imageUrl}}"
                                                 alt="{{cartItem.menuItemDto.name}}"
                                                 class="img-fluid" style="max-height: 50px;" />
                                             <div class="ms-3 d-inline-block align-middle">
                                                 <h5 class="mb-0">
                                                     <a routerLink="/menu-items/{{cartItem.menuItemDto.id}}"
                                                         class="text-warning no-underline">
-                                                        {{cartItem.menuItemDto.name}}
+                                                        <div *ngIf="cartItem.menuVariantDto">
+                                                            {{cartItem.menuItemDto.name}} ({{cartItem.menuVariantDto.varietyName}})
+                                                        </div>
+                                                        <div *ngIf="!cartItem.menuVariantDto">
+                                                            {{cartItem.menuItemDto.name}} (mặc định)
+                                                        </div>
                                                     </a>
                                                 </h5>
                                                 <span class="text-muted font-weight-normal d-block">
                                                     Đã giảm:
-                                                    <i>{{cartItem.menuItemDto.discountAmount | currency:'VND'}}</i>
+                                                    <i>{{cartItem.menuVariantDto ? cartItem.menuVariantDto.discountAmount : cartItem.menuItemDto.discountAmount | currency:'VND'}}</i>
                                                 </span>
                                             </div>
                                         </div>
                                     </th>
                                     <td class="align-middle">
-                                        <strong>{{cartItem.menuItemDto.discountPrice | currency:'VND'}}</strong>
+                                        <strong>{{cartItem.menuVariantDto ? cartItem.menuVariantDto.discountPrice : cartItem.menuItemDto.discountPrice | currency:'VND'}}</strong>
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
@@ -75,7 +82,7 @@
                                     </td>
                                     <td class="align-middle">
                                         <strong>
-                                            {{cartItem.menuItemDto.discountPrice * cartItem.quantity | currency:'VND'}}
+                                            {{(cartItem.menuVariantDto ? cartItem.menuVariantDto.discountPrice : cartItem.menuItemDto.discountPrice) * cartItem.quantity | currency:'VND'}}
                                         </strong>
                                     </td>
                                     <td class="align-middle">
