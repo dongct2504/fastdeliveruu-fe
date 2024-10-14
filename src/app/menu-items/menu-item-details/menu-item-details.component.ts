@@ -6,7 +6,7 @@ import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
 import { SetCartItemRequest } from 'src/app/shared/models/shoppingCarts/setCartItemRequest';
 import { ToastrService } from 'ngx-toastr';
-import { MenuVariantDtos } from 'src/app/shared/models/menuItems/menuVariantDto';
+import { MenuVariantDto } from 'src/app/shared/models/menuItems/menuVariantDto';
 
 @Component({
   selector: 'app-menu-item-details',
@@ -15,7 +15,7 @@ import { MenuVariantDtos } from 'src/app/shared/models/menuItems/menuVariantDto'
 })
 export class MenuItemDetailsComponent implements OnInit {
   menuItem?: MenuItemDetailDto;
-  selectedVariant?: MenuVariantDtos | null = null;
+  selectedVariant?: MenuVariantDto | null = null;
   quantity = 1;
 
   faMinusCircle = faMinusCircle;
@@ -56,7 +56,7 @@ export class MenuItemDetailsComponent implements OnInit {
     }
   }
 
-  selectVariant(variant: MenuVariantDtos) {
+  selectVariant(variant: MenuVariantDto) {
     if (this.selectedVariant?.id === variant.id) {
       this.selectedVariant = null;
     } else {

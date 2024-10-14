@@ -51,13 +51,18 @@
                                                 </h5>
                                                 <span class="text-muted font-weight-normal d-block">
                                                     Đã giảm:
-                                                    <i>{{cartItem.menuVariantDto ? cartItem.menuVariantDto.discountAmount : cartItem.menuItemDto.discountAmount | currency:'VND'}}</i>
+                                                    <i>{{(cartItem.menuVariantDto 
+                                                        ? cartItem.menuVariantDto.discountAmount 
+                                                        : cartItem.menuItemDto.discountAmount) | currency:'VND'}}
+                                                    </i>
                                                 </span>
                                             </div>
                                         </div>
                                     </th>
                                     <td class="align-middle">
-                                        <strong>{{cartItem.menuVariantDto ? cartItem.menuVariantDto.discountPrice : cartItem.menuItemDto.discountPrice | currency:'VND'}}</strong>
+                                        <strong>{{(cartItem.menuVariantDto 
+                                            ? cartItem.menuVariantDto.discountPrice 
+                                            : cartItem.menuItemDto.discountPrice) | currency:'VND'}}</strong>
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">

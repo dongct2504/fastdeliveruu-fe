@@ -1,5 +1,5 @@
 import { MenuItemDto } from "../menuItems/menuItemDto";
-import { MenuVariantDtos } from "../menuItems/menuVariantDto";
+import { MenuVariantDto } from "../menuItems/menuVariantDto";
 
 export interface ShoppingCartDto {
     id: string
@@ -8,5 +8,5 @@ export interface ShoppingCartDto {
     menuVariantId?: string | null;
     quantity: number;
     menuItemDto: MenuItemDto;
-    menuVariantDto?: MenuVariantDtos | null;
+    menuVariantDto?: MenuVariantDto | null;
 }

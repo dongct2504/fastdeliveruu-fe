@@ -80,9 +80,13 @@ export class CustomerCartService {
   // Total price handle methods
   public calculateTotals() {
     this.getCustomerCart().subscribe(customerCart => {
-      const subtotal = customerCart.reduce((sum, item) => sum + item.menuItemDto.discountPrice * item.quantity, 0);
+      const subtotal = customerCart.reduce((sum, item) =>
+        sum + (item.menuVariantDto
+          ? item.menuVariantDto.discountPrice
+          : item.menuItemDto.discountPrice) * item.quantity, 0);
       const shipping = this.shipping;
       const total = subtotal + shipping;
+
       this.totalPriceSource.next({ subtotal, shipping, total });
     });
   }

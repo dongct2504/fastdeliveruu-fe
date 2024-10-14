@@ -24,23 +24,34 @@
                             <div class="p-2">
                                 <div class="align-middle">
                                     <h5 class="mb-0">
-                                        <img src="{{item.menuItemDto.imageUrl}}"
+                                        <img src="{{item.menuVariantDto 
+                                            ? item.menuVariantDto.imageUrl 
+                                            : item.menuItemDto.imageUrl}}"
                                             alt="{{item.menuItemDto.name}}"
                                             class="img-fluid" style="max-height: 50px;" />
                                         <a routerLink="/menu-items/{{item.menuItemId}}"
                                             class="text-warning no-underline">
-                                            {{item.menuItemDto.name}}
+                                            <div *ngIf="item.menuVariantDto">
+                                                {{item.menuItemDto.name}} ({{item.menuVariantDto.varietyName}})
+                                            </div>
+                                            <div *ngIf="!item.menuVariantDto">
+                                                {{item.menuItemDto.name}} (mặc định)
+                                            </div>
                                         </a>
                                     </h5>
                                     <span class="text-muted font-weight-normal d-block">
                                         Đã giảm:
-                                        <i>{{item.menuItemDto.discountAmount | currency:'VND'}}</i>
+                                        <i>{{(item.menuVariantDto 
+                                                ? item.menuVariantDto.discountAmount
+                                                : item.menuItemDto.discountAmount) | currency:'VND'}}</i>
                                     </span>
                                 </div>
                             </div>
                         </th>
                         <td class="align-middle">
-                            <strong>{{item.menuItemDto.discountPrice | currency:'VND'}}</strong>
+                            <strong>{{(item.menuVariantDto 
+                                ? item.menuVariantDto.discountPrice
+                                : item.menuItemDto.discountPrice) | currency:'VND'}}</strong>
                         </td>
                         <td class="align-middle">
                             <div class="d-flex align-items-center">
@@ -49,7 +60,9 @@
                         </td>
                         <td class="align-middle">
                             <strong>
-                                {{item.menuItemDto.discountPrice * item.quantity | currency:'VND'}}
+                                {{(item.menuVariantDto
+                                    ? item.menuVariantDto.discountPrice
+                                    : item.menuItemDto.discountPrice) * item.quantity | currency:'VND'}}
                             </strong>
                         </td>
                     </tr>

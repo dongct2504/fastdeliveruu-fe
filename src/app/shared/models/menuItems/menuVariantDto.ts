@@ -1,4 +1,4 @@
-export interface MenuVariantDtos {
+export interface MenuVariantDto {
     id: string;
     menuItemId: string,
     varietyName: string;
