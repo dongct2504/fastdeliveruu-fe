@@ -93,10 +93,18 @@ export class RegisterComponent implements OnInit {
       password: ['', [
         Validators.required
       ]],
-      address: [''],
-      wardId: [''],
-      districtId: [''],
-      cityId: ['']
+      address: ['', [
+        Validators.required
+      ]],
+      wardId: ['', [
+        Validators.required
+      ]],
+      districtId: ['', [
+        Validators.required
+      ]],
+      cityId: ['', [
+        Validators.required
+      ]]
     });
   }
 
