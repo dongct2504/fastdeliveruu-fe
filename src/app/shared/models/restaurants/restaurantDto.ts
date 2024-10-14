@@ -4,7 +4,7 @@ export interface RestaurantDto {
     description: string;
     imageUrl: string;
     address: string;
-    ward: string;
-    district: string;
-    city: string;
+    cityId: number;
+    districtId: number;
+    wardId: number;
 }

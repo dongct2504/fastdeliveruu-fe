@@ -19,11 +19,23 @@ export class AddressService {
     return this.httpClient.get<PagedList<CityDto>>(`${this.apiUrl}/cities?pageSize=200`);
   }
 
+  public getCityById(cityId: number) {
+    return this.httpClient.get<CityDto>(`${this.apiUrl}/cities/${cityId}`);
+  }
+
   public getDistrictsByCity(cityId: number) {
     return this.httpClient.get<PagedList<DistrictDto>>(`${this.apiUrl}/districts/get-by-city?cityId=${cityId}&pageSize=200`);
   }
 
+  public getDistrictById(districtId: number) {
+    return this.httpClient.get<DistrictDto>(`${this.apiUrl}/districts/${districtId}`)
+  }
+
   public getWardsByDistrict(districtId: number) {
     return this.httpClient.get<PagedList<WardDto>>(`${this.apiUrl}/wards/get-by-district?districtId=${districtId}&pageSize=200`);
+  }
+
+  public getWardById(wardId: number) {
+    return this.httpClient.get<WardDto>(`${this.apiUrl}/wards/${wardId}`)
   }
 }

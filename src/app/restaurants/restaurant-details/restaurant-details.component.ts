@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantDetailDto } from 'src/app/shared/models/restaurants/restaurantDetailDto';
 import { RestaurantService } from '../restaurant.service';
 import { ActivatedRoute } from '@angular/router';
+import { AddressService } from 'src/app/shared/services/address.service';
 
 @Component({
   selector: 'app-restaurant-details',
@@ -11,13 +12,43 @@ import { ActivatedRoute } from '@angular/router';
 export class RestaurantDetailsComponent implements OnInit {
   restaurant?: RestaurantDetailDto;
 
-  constructor(private restaurantService: RestaurantService, private activatedRoute: ActivatedRoute) {
+  ward?: string;
+  district?: string;
+  city?: string;
+
+  constructor(
+    private restaurantService: RestaurantService,
+    private addressService: AddressService,
+    private activatedRoute: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
     const id: string = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.restaurantService.getRestaurant(id).subscribe(restaurant => {
       this.restaurant = restaurant;
+
+      this.getCityById(restaurant.cityId);
+      this.getDistrictById(restaurant.districtId);
+      this.getWardById(restaurant.wardId);
+    });
+  }
+
+  private getCityById(cityId: number) {
+    this.addressService.getCityById(cityId).subscribe(city => {
+      this.city = city.name;
+    });
+  }
+
+  private getDistrictById(districtId: number) {
+    this.addressService.getDistrictById(districtId).subscribe(district => {
+      this.district = district.name;
+    });
+  }
+
+  private getWardById(wardId: number) {
+    this.addressService.getWardById(wardId).subscribe(ward => {
+      this.ward = ward.name;
     });
   }
 }
