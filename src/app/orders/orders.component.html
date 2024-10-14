@@ -35,7 +35,7 @@
                             <h5 class="mb-0">
                                 <a routerLink="/orders/{{order.id}}"
                                     class="no-underline">
-                                    # Đơn hàng {{i + 1}}
+                                    # {{order.id}}
                                 </a>
                             </h5>
                         </div>
@@ -45,14 +45,17 @@
                     <strong>{{order.orderDate | date:'dd/MM/YYYY, h:mm a'}}</strong>
                 </td>
                 <td class="align-middle">
-                    <strong *ngIf="order.paymentMethod === 'cash'">Tiền mặt</strong>
-                    <strong *ngIf="order.paymentMethod !== 'cash'">{{order.paymentMethod}}</strong>
+                    <strong *ngIf="order.paymentMethod === paymentMethod.Cash">Tiền mặt</strong>
+                    <strong *ngIf="order.paymentMethod === paymentMethod.Vnpay">VNPAY</strong>
+                    <strong *ngIf="order.paymentMethod === paymentMethod.Paypal">PayPal</strong>
                 </td>
                 <td class="align-middle">
                     <strong>{{order.totalAmount | currency:'VND'}}</strong>
                 </td>
                 <td class="align-middle">
-                    <strong>{{order.orderStatus}}</strong>
+                    <strong *ngIf="order.orderStatus === orderStatus.Pending">Chưa thanh toán</strong>
+                    <strong *ngIf="order.orderStatus === orderStatus.Success">Đã thanh toán</strong>
+                    <strong *ngIf="order.orderStatus === orderStatus.Cancelled">Đã hủy</strong>
                 </td>
             </tr>
         </tbody>

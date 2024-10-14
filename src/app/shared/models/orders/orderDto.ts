@@ -1,3 +1,6 @@
+import { OrderStatusEnum } from "../../enums/order-status.enum";
+import { PaymentMethodsEnum } from "../../enums/payment-methods.enum";
+
 export interface OrderDto {
     id: string;
     firstName: string;
@@ -7,9 +10,8 @@ export interface OrderDto {
     totalAmount: number;
     deliveryMethodShortName: string;
     shippingPrice: string;
-    orderStatus: string | null;
-    paymentStatus: string | null;
-    paymentMethod: string | null;
+    orderStatus: OrderStatusEnum | null;
+    paymentMethod: PaymentMethodsEnum | null;
     transactionId: string | null;
     address: string;
     ward: string;

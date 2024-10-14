@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PageSizeConstants } from '../shared/common/pageSizeConstants';
 import { OrdersService } from './orders.service';
 import { OrderDto } from '../shared/models/orders/orderDto';
+import { PaymentMethodsEnum } from '../shared/enums/payment-methods.enum';
+import { OrderStatusEnum } from '../shared/enums/order-status.enum';
 
 @Component({
   selector: 'app-orders',
@@ -10,6 +12,8 @@ import { OrderDto } from '../shared/models/orders/orderDto';
 })
 export class OrdersComponent implements OnInit {
   orders?: OrderDto[];
+  paymentMethod = PaymentMethodsEnum;
+  orderStatus = OrderStatusEnum;
 
   pageNumber = 1;
   pageSize = PageSizeConstants.pageSize12;
