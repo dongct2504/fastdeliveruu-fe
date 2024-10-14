@@ -29,13 +29,16 @@ export class CustomerCartComponent implements OnInit {
     });
   }
 
-  incrementCartItem(menuItemId: string) {
+  incrementCartItem(cartItem: ShoppingCartDto) {
     if (this.customerCart) {
-      const cartItemIndex = this.customerCart.findIndex(c => c.menuItemId === menuItemId);
+      const cartItemIndex = this.customerCart
+        .findIndex(c => c.menuItemId === cartItem.menuItemId &&
+          (cartItem.menuVariantId === null || c.menuVariantId === cartItem.menuVariantId));
 
       const setCartItemRequest: SetCartItemRequest = {
-        menuItemId: menuItemId,
-        quantity: 1
+        quantity: 1,
+        menuItemId: cartItem.menuItemId,
+        menuVariantId: cartItem.menuVariantId
       };
       this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {
         this.customerCart![cartItemIndex].quantity++;
@@ -43,18 +46,21 @@ export class CustomerCartComponent implements OnInit {
     }
   }
 
-  decrementCartItem(menuItemId: string) {
+  decrementCartItem(cartItem: ShoppingCartDto) {
     if (this.customerCart) {
-      const cartItemIndex = this.customerCart.findIndex(c => c.menuItemId === menuItemId);
+      const cartItemIndex = this.customerCart
+        .findIndex(c => c.menuItemId === cartItem.menuItemId &&
+          (cartItem.menuVariantId === null || c.menuVariantId === cartItem.menuVariantId));
 
       if (this.customerCart[cartItemIndex].quantity <= 1) {
-        this.customerCartService.deleteCartItem(menuItemId).subscribe(() => {
-          this.customerCart = this.customerCart!.filter(item => item.menuItemId !== menuItemId);
+        this.customerCartService.deleteCartItem(cartItem.id).subscribe(() => {
+          this.customerCart = this.customerCart!.filter(item => item.id !== cartItem.id);
         });
       } else {
         const setCartItemRequest: SetCartItemRequest = {
-          menuItemId: menuItemId,
-          quantity: -1
+          quantity: -1,
+          menuItemId: cartItem.menuItemId,
+          menuVariantId: cartItem.menuVariantId
         };
         this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {
           this.customerCart![cartItemIndex].quantity--;
@@ -63,10 +69,10 @@ export class CustomerCartComponent implements OnInit {
     }
   }
 
-  deleteCartItem(menuItemId: string) {
-    this.customerCartService.deleteCartItem(menuItemId).subscribe(() => {
+  deleteCartItem(id: string) {
+    this.customerCartService.deleteCartItem(id).subscribe(() => {
       if (this.customerCart) {
-        this.customerCart = this.customerCart.filter(item => item.menuItemId !== menuItemId);
+        this.customerCart = this.customerCart.filter(item => item.id !== id);
       }
     });
   }

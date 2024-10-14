@@ -33,7 +33,7 @@ export class MenuItemCardComponent {
 
     const setCartItemRequest: SetCartItemRequest = {
       menuItemId: this.menuItem.id,
-      quantity: 1
+      quantity: 1,
     };
 
     this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {

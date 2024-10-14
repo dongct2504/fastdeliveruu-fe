@@ -34,7 +34,7 @@ export class MenuItemDetailsComponent implements OnInit {
     if (this.menuItem) {
       const setCartItemRequest: SetCartItemRequest = {
         menuItemId: this.menuItem.id,
-        quantity: this.quantity
+        quantity: this.quantity,
       };
       this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {
         this.toastr.success('Đã thêm vào giỏ hàng!');

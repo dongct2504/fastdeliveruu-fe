@@ -98,7 +98,7 @@ export class MenuItemsComponent implements OnInit {
 
     const setCartItemRequest: SetCartItemRequest = {
       menuItemId: menuItemId,
-      quantity: 1
+      quantity: 1,
     };
 
     this.customerCartService.updateCartItem(setCartItemRequest).subscribe(() => {

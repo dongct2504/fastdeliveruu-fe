@@ -29,32 +29,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of customerCart">
+                                <tr *ngFor="let cartItem of customerCart">
                                     <th scope="row">
                                         <div class="p-2">
-                                            <img src="{{item.menuItemDto.imageUrl}}"
-                                                alt="{{item.menuItemDto.name}}"
+                                            <img src="{{cartItem.menuItemDto.imageUrl}}"
+                                                alt="{{cartItem.menuItemDto.name}}"
                                                 class="img-fluid" style="max-height: 50px;" />
                                             <div class="ms-3 d-inline-block align-middle">
                                                 <h5 class="mb-0">
-                                                    <a routerLink="/menu-items/{{item.menuItemDto.id}}"
+                                                    <a routerLink="/menu-items/{{cartItem.menuItemDto.id}}"
                                                         class="text-warning no-underline">
-                                                        {{item.menuItemDto.name}}
+                                                        {{cartItem.menuItemDto.name}}
                                                     </a>
                                                 </h5>
                                                 <span class="text-muted font-weight-normal d-block">
                                                     Đã giảm:
-                                                    <i>{{item.menuItemDto.discountAmount | currency:'VND'}}</i>
+                                                    <i>{{cartItem.menuItemDto.discountAmount | currency:'VND'}}</i>
                                                 </span>
                                             </div>
                                         </div>
                                     </th>
                                     <td class="align-middle">
-                                        <strong>{{item.menuItemDto.discountPrice | currency:'VND'}}</strong>
+                                        <strong>{{cartItem.menuItemDto.discountPrice | currency:'VND'}}</strong>
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
-                                            <a (click)="decrementCartItem(item.menuItemId)"
+                                            <a (click)="decrementCartItem(cartItem)"
                                                 style="cursor: pointer;">
                                                 <fa-icon 
                                                     class="text-warning minus-button-custom me-2"
@@ -62,8 +62,8 @@
                                                     [icon]="faMinusCircle">
                                                 </fa-icon>
                                             </a>
-                                            <span class="quantity">{{item.quantity}}</span>
-                                            <a (click)="incrementCartItem(item.menuItemId)"
+                                            <span class="quantity">{{cartItem.quantity}}</span>
+                                            <a (click)="incrementCartItem(cartItem)"
                                                 style="cursor: pointer;">
                                                 <fa-icon
                                                     class="text-warning plus-button-custom mx-2"
@@ -75,12 +75,12 @@
                                     </td>
                                     <td class="align-middle">
                                         <strong>
-                                            {{item.menuItemDto.discountPrice * item.quantity | currency:'VND'}}
+                                            {{cartItem.menuItemDto.discountPrice * cartItem.quantity | currency:'VND'}}
                                         </strong>
                                     </td>
                                     <td class="align-middle">
                                         <a class="text-danger"
-                                            (click)="deleteCartItem(item.menuItemId)"
+                                            (click)="deleteCartItem(cartItem.id)"
                                             style="cursor: pointer;">
                                             <fa-icon
                                                 [icon]="faTrash"
