@@ -1,3 +1,5 @@
+import { RestaurantHourDto } from "./restaurantHourDto";
+
 export interface RestaurantDetailDto {
     id: string;
     name: string;
@@ -9,4 +11,5 @@ export interface RestaurantDetailDto {
     districtId: number;
     wardId: number;
     // menuItemDtos: MenuItemDto[];
+    restaurantHourDtos: RestaurantHourDto[];
 }

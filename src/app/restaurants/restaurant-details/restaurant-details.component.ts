@@ -3,6 +3,7 @@ import { RestaurantDetailDto } from 'src/app/shared/models/restaurants/restauran
 import { RestaurantService } from '../restaurant.service';
 import { ActivatedRoute } from '@angular/router';
 import { AddressService } from 'src/app/shared/services/address.service';
+import { RestaurantHourDto } from 'src/app/shared/models/restaurants/restaurantHourDto';
 
 @Component({
   selector: 'app-restaurant-details',
@@ -11,6 +12,7 @@ import { AddressService } from 'src/app/shared/services/address.service';
 })
 export class RestaurantDetailsComponent implements OnInit {
   restaurant?: RestaurantDetailDto;
+  operatingHours: RestaurantHourDto[] = [];
 
   ward?: string;
   district?: string;
@@ -27,6 +29,7 @@ export class RestaurantDetailsComponent implements OnInit {
     const id: string = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.restaurantService.getRestaurant(id).subscribe(restaurant => {
       this.restaurant = restaurant;
+      this.operatingHours = restaurant.restaurantHourDtos;
 
       this.getCityById(restaurant.cityId);
       this.getDistrictById(restaurant.districtId);
