@@ -64,16 +64,16 @@ export class CustomerCartService {
   }
 
   public removeTotalQuantity() {
-    localStorage.removeItem('totalQuantity');
+    localStorage.removeItem('cart-totalQuantity');
     this.totalQuantitySource.next(0);
   }
 
   private getTotalQuantity() {
-    return JSON.parse(localStorage.getItem('totalQuantity') || '0');
+    return JSON.parse(localStorage.getItem('cart-totalQuantity') || '0');
   }
 
   private setTotalQuantity(quantity: number) {
-    localStorage.setItem('totalQuantity', JSON.stringify(quantity));
+    localStorage.setItem('cart-totalQuantity', JSON.stringify(quantity));
     this.totalQuantitySource.next(quantity);
   }
 

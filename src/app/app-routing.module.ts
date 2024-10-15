@@ -38,6 +38,11 @@ const routes: Routes = [
     loadChildren: () => import('./customer-cart/customer-cart.module').then(mod => mod.CustomerCartModule)
   },
   {
+    path: 'wishlists',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./wishlists/wishlists.module').then(mod => mod.WishlistsModule)
+  },
+  {
     path: 'checkout',
     canActivate: [AuthGuard],
     loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule)

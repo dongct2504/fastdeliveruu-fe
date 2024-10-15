@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from './authenticate/authenticate.service';
 import { CustomerCartService } from './customer-cart/customer-cart.service';
 import { take } from 'rxjs';
+import { WishlistsService } from './wishlists/wishlists.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,10 @@ import { take } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'FastDeliveruu';
 
-  constructor(private authenService: AuthenticateService, private customerCartService: CustomerCartService) {
+  constructor(
+    private authenService: AuthenticateService,
+    private wishListsService: WishlistsService,
+    private customerCartService: CustomerCartService) {
   }
 
   ngOnInit(): void {
@@ -21,6 +25,8 @@ export class AppComponent implements OnInit {
       if (currentUser) {
         this.customerCartService.loadTotalQuantity();
         this.customerCartService.calculateTotals();
+
+        this.wishListsService.loadTotalQuantity();
       }
     })
   }

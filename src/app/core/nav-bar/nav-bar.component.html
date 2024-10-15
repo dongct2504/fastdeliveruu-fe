@@ -34,9 +34,15 @@
 
             <!-- Buttons on the right -->
             <div class="d-flex ms-auto">
+                <a class="btn text-dark position-relative" routerLink="/wishlists">
+                    <fa-icon [icon]="faHeart" [size]="'2x'"></fa-icon>
+                    <div class="cart-no" *ngIf="(wishListTotalQuantity$ | async) as totalQuantity">
+                        {{totalQuantity}}
+                    </div>
+                </a>
                 <a class="btn me-4 text-dark position-relative" routerLink="/carts">
                     <fa-icon [icon]="faCartShopping" [size]="'2x'"></fa-icon>
-                    <div class="cart-no" *ngIf="(totalQuantity$ | async) as totalQuantity">
+                    <div class="cart-no" *ngIf="(cartTotalQuantity$ | async) as totalQuantity">
                         {{totalQuantity}}
                     </div>
                 </a>
