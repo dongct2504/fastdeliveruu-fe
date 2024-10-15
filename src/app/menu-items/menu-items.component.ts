@@ -36,7 +36,8 @@ export class MenuItemsComponent implements OnInit {
     private authenticateService: AuthenticateService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService
+  ) {
     this.menuItemParams.pageSize = PageSizeConstants.pageSize9;
   }
 

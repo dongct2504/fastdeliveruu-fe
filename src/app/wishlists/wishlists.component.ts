@@ -3,6 +3,7 @@ import { WishListDto } from '../shared/models/wishLists/wishListDto';
 import { WishlistsService } from './wishlists.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { WishListParams } from '../shared/models/wishLists/wishListParams';
+import { PageSizeConstants } from '../shared/common/pageSizeConstants';
 
 @Component({
   selector: 'app-wishlists',
@@ -18,6 +19,7 @@ export class WishlistsComponent implements OnInit {
   totalRecords = 0;
 
   constructor(private wishListsService: WishlistsService) {
+    this.wishListParams.pageSize = PageSizeConstants.pageSize24;
   }
 
   ngOnInit(): void {
@@ -25,9 +27,10 @@ export class WishlistsComponent implements OnInit {
   }
 
   getWishLists() {
-    this.wishListsService.getWishLists().subscribe(wishLists => {
-      this.wishLists = wishLists.items;
-      this.totalRecords = wishLists.totalRecords;
+    this.wishListsService.getWishLists().subscribe(pagedList => {
+      this.wishLists = pagedList.items;
+      this.wishListParams.pageNumber = pagedList.pageNumber;
+      this.totalRecords = pagedList.totalRecords;
     });
   }
 
