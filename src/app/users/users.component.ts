@@ -79,7 +79,15 @@ export class UsersComponent implements OnInit {
 
   initiatePhoneNumberConfirmation() {
     const phoneNumber = this.userProfile.phoneNumber;
-    this.sendOtp(phoneNumber);
+
+    const confirmMessage = `Bạn có chắc chắn muốn gửi mã OTP đến số điện thoại ${phoneNumber}? (Nhập 'yes' để xác nhận)`;
+    const userResponse = prompt(confirmMessage);
+
+    if (userResponse && userResponse.toLowerCase() === 'yes') {
+      this.sendOtp(phoneNumber);
+    } else {
+      this.toastr.info('Gửi mã OTP đã bị hủy.');
+    }
   }
 
   confirmPhoneNumber() {
