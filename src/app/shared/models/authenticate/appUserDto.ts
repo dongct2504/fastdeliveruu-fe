@@ -9,4 +9,6 @@ export interface AppUserDto {
     cityId?: number;
     districtId?: number;
     wardId?: number;
+    latitude?: number;
+    longitude?: number;
 }

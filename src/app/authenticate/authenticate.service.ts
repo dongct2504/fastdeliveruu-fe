@@ -50,4 +50,12 @@ export class AuthenticateService {
   public isLoggedIn() {
     return this.currentUserSource.value !== null;
   }
+
+  public sendConfirmPhoneNumber(phoneNumber: string) {
+    return this.httpClient.get(`${this.apiUrl}/user-auth/send-confirm-phone-number?phoneNumber=${phoneNumber}`);
+  }
+
+  public confirmPhoneNumber(otpCode: string) {
+    return this.httpClient.get(`${this.apiUrl}/user-auth/confirm-phone-number?otpCode=${otpCode}`);
+  }
 }

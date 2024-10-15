@@ -22,7 +22,7 @@ export class CheckoutComponent {
       infoForm: this.fb.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
-        phoneNumber: ['', [Validators.required]],
+        phoneNumber: [{ value: '', disabled: true }, [Validators.required]],
         address: ['', [Validators.required]],
         wardId: ['', [Validators.required]],
         districtId: ['', [Validators.required]],

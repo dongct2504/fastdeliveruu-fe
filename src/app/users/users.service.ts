@@ -22,6 +22,10 @@ export class UsersService {
     return this.httpClient.put(`${this.apiUrl}/users/${id}`, formData);
   }
 
+  public updatePhoneNumber(phoneNumber: string) {
+    return this.httpClient.put(`${this.apiUrl}/users/update-phone-number/${phoneNumber}`, {});
+  }
+
   private buildFormUpdateUser(updateUserRequest: UpdateUserRequest) {
     const formData = new FormData();
 

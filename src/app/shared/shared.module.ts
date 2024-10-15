@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'
+import { ModalModule } from 'ngx-bootstrap/modal'
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -35,7 +36,8 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
     FontAwesomeModule,
     PaginationModule,
     CdkStepperModule,
-    RouterModule
+    RouterModule,
+    ModalModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -43,6 +45,7 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
     PaginationModule,
     CdkStepperModule,
     RouterModule,
+    ModalModule,
 
     TruncateWordsPipe,
     PagingHeaderComponent,
