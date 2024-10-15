@@ -5,6 +5,9 @@ export interface PaymentResponse {
     transactionId: string
     paymentMethod: string
     orderDescription: string
+
     vnpayResponseCode: string
-    token: string
+    vnpayToken: string
+
+    vnpayReturnUrl: string
 }

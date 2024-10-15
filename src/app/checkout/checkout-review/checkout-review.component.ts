@@ -85,10 +85,10 @@ export class CheckoutReviewComponent implements OnInit {
   }
 
   private submitVnpayOrder(createOrderRequest: CreateOrderRequest) {
-    this.checkoutService.createCheckoutVnpayOrder(createOrderRequest).subscribe(vnpayUrl => {
-      if (vnpayUrl) {
+    this.checkoutService.createCheckoutVnpayOrder(createOrderRequest).subscribe(paymentResponse => {
+      if (paymentResponse.isSuccess) {
         this.customerCartService.removeTotalQuantity();
-        window.location.href = vnpayUrl;
+        window.location.href = paymentResponse.vnpayReturnUrl;
       }
     });
   }

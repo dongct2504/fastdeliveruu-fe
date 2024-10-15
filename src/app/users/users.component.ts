@@ -73,9 +73,6 @@ export class UsersComponent implements OnInit {
       response => {
         this.toastr.info('Đã gửi mã OTP đến điện thoại!');
         this.confirmPhoneNumber();
-      },
-      error => {
-        this.toastr.error('Không thể gửi mã OTP. Vui lòng thử lại.');
       }
     );
   }

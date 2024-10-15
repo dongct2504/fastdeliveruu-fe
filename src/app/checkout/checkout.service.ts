@@ -23,8 +23,6 @@ export class CheckoutService {
   }
 
   public createCheckoutVnpayOrder(createOrderRequest: CreateOrderRequest) {
-    return this.httpClient.post(`${this.apiUrl}/checkouts/checkout-vnpay`, createOrderRequest, {
-      responseType: 'text'
-    });
+    return this.httpClient.post<PaymentResponse>(`${this.apiUrl}/checkouts/checkout-vnpay`, createOrderRequest);
   }
 }
