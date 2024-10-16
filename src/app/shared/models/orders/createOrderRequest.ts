@@ -10,4 +10,8 @@ export interface CreateOrderRequest {
     wardId: number;
     districtId: number;
     cityId: number;
+
+    amount: string;
+    currency: string;
+    reference: string;
 }

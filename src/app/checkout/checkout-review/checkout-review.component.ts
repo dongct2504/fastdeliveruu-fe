@@ -65,9 +65,13 @@ export class CheckoutReviewComponent implements OnInit {
         case PaymentMethodsEnum.Cash:
           this.submitCashOrder(createOrderRequest);
           break;
+
         case PaymentMethodsEnum.Vnpay:
           this.submitVnpayOrder(createOrderRequest);
           break;
+
+        case PaymentMethodsEnum.Paypal:
+          this.submitPaypalOrder(createOrderRequest);
       }
     }
   }
@@ -89,6 +93,14 @@ export class CheckoutReviewComponent implements OnInit {
       if (paymentResponse.isSuccess) {
         this.customerCartService.removeTotalQuantity();
         window.location.href = paymentResponse.vnpayReturnUrl;
+      }
+    });
+  }
+
+  private submitPaypalOrder(createOrderRequest: CreateOrderRequest) {
+    this.checkoutService.createPaypalOrder(createOrderRequest).subscribe(orderResponse => {
+      if (orderResponse) {
+        window.location.href = orderResponse.approvalLink;
       }
     });
   }

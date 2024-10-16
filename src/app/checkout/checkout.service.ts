@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { DeliveryMethodDto } from '../shared/models/orders/deliveryMethodDto';
 import { CreateOrderRequest } from '../shared/models/orders/createOrderRequest';
 import { PaymentResponse } from '../shared/models/orders/paymentResponse';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,13 @@ export class CheckoutService {
 
   public createCheckoutVnpayOrder(createOrderRequest: CreateOrderRequest) {
     return this.httpClient.post<PaymentResponse>(`${this.apiUrl}/checkouts/checkout-vnpay`, createOrderRequest);
+  }
+
+  public createPaypalOrder(createOrderRequest: CreateOrderRequest): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/checkouts/create-paypal-order`, createOrderRequest);
+  }
+  
+  public capturePaypalOrder(orderId: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/checkouts/capture-paypal-order/${orderId}`, {});
   }
 }
