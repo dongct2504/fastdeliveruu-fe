@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { MenuItemsComponent } from './menu-items.component';
-import { MenuItemDetailsComponent } from './menu-item-details/menu-item-details.component';
 import { MenuItemsRoutingModule } from './menu-items-routing.module';
+import { MenuItemsComponent } from './pages/menu-items.component';
+import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 
 @NgModule({
   declarations: [

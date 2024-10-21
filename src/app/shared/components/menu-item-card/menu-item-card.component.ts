@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { MenuItemDto } from '../../models/menuItems/menuItemDto';
 import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
-import { AuthenticateService } from 'src/app/authenticate/authenticate.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SetCartItemRequest } from '../../models/shoppingCarts/setCartItemRequest';
-import { WishlistsService } from 'src/app/wishlists/wishlists.service';
 import { SetWishListItemRequest } from '../../models/wishLists/setWishListItemRequest';
+import { AuthenticateService } from 'src/app/authenticate/services/authenticate.service';
+import { WishlistsService } from 'src/app/wishlists/services/wishlists.service';
 
 @Component({
   selector: 'app-menu-item-card',

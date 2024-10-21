@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { faBars, faCartShopping, faHeart, faHistory, faSearch, faSignOut, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { AuthenticateService } from 'src/app/authenticate/authenticate.service';
+import { AuthenticateService } from 'src/app/authenticate/services/authenticate.service';
 import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
 import { AppUserDto } from 'src/app/shared/models/authenticate/appUserDto';
-import { WishlistsService } from 'src/app/wishlists/wishlists.service';
+import { WishlistsService } from 'src/app/wishlists/services/wishlists.service';
 
 @Component({
   selector: 'app-nav-bar',

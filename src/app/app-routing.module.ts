@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { InternalServerErrorComponent } from './core/internal-server-error/internal-server-error.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
-  },
-  {
     path: 'not-found', component: NotFoundComponent
   },
   {
     path: 'internal-server-error', component: InternalServerErrorComponent
+  },
+
+  // customer routing
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then(mod => mod.HomeModule)
   },
   {
     path: 'authen',
@@ -52,10 +54,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule)
   },
-  {
-    path: 'contact',
-    loadChildren: () => import('./contact/contact.module').then(mod => mod.ContactModule)
-  },
+
+  // admin routing
+
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];
 

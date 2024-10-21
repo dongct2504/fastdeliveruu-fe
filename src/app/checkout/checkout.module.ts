@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckoutComponent } from './checkout.component';
 import { CheckoutRoutingModule } from './checkout-routing.module';
+import { CheckoutDeliveryComponent } from './pages/checkout-delivery/checkout-delivery.component';
+import { CheckoutReviewComponent } from './pages/checkout-review/checkout-review.component';
+import { CheckoutPaymentComponent } from './pages/checkout-payment/checkout-payment.component';
+import { CheckoutSuccessComponent } from './pages/checkout-success/checkout-success.component';
+import { CheckoutNavigateComponent } from './pages/checkout-navigate/checkout-navigate.component';
+import { CheckoutFailedComponent } from './pages/checkout-failed/checkout-failed.component';
+import { CheckoutInfoComponent } from './pages/checkout-info/checkout-info.component';
+import { CheckoutComponent } from './pages/checkout.component';
 import { SharedModule } from '../shared/shared.module';
-import { CheckoutDeliveryComponent } from './checkout-delivery/checkout-delivery.component';
-import { CheckoutReviewComponent } from './checkout-review/checkout-review.component';
-import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
-import { CheckoutSuccessComponent } from './checkout-success/checkout-success.component';
-import { CheckoutNavigateComponent } from './checkout-navigate/checkout-navigate.component';
-import { CheckoutInfoComponent } from './checkout-info/checkout-info.component';
-import { CheckoutFailedComponent } from './checkout-failed/checkout-failed.component';
 
 @NgModule({
   declarations: [

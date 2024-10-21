@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from './authenticate/authenticate.service';
 import { CustomerCartService } from './customer-cart/customer-cart.service';
 import { take } from 'rxjs';
-import { WishlistsService } from './wishlists/wishlists.service';
+import { AuthenticateService } from './authenticate/services/authenticate.service';
+import { WishlistsService } from './wishlists/services/wishlists.service';
 
 @Component({
   selector: 'app-root',
