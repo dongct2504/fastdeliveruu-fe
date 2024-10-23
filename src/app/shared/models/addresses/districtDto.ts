@@ -1,4 +1,4 @@
 export interface DistrictDto {
-    id: string,
+    id: number,
     name: string
 }

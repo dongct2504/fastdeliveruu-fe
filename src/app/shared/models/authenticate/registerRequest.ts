@@ -3,7 +3,8 @@ export interface RegisterRequest {
     phoneNumber: string;
     email: string;
     password: string;
-    address: string | null;
+    houseNumber: string | null;
+    streetName: string | null;
     wardId: string | null;
     districtId: string | null;
     cityId: string | null;

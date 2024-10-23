@@ -1,4 +1,4 @@
 export interface WardDto {
-    id: string,
+    id: number,
     name: string
 }

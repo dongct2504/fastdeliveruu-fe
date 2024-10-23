@@ -23,7 +23,8 @@ export class CheckoutComponent {
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         phoneNumber: [{ value: '', disabled: true }, [Validators.required]],
-        address: ['', [Validators.required]],
+        houseNumber: ['', [Validators.required]],
+        streetName: ['', [Validators.required]],
         wardId: ['', [Validators.required]],
         districtId: ['', [Validators.required]],
         cityId: ['', [Validators.required]]

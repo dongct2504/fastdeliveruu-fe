@@ -14,10 +14,13 @@ export interface OrderHeaderDetailDto {
     paymentStatus: string | null;
     paymentMethod: string | null;
     transactionId: string | null;
-    address: string;
-    ward: string;
-    district: string;
-    city: string;
+    houseNumber: string;
+    streetName: string;
+    cityId: number;
+    districtId: number;
+    wardId: number;
+    latitude: number;
+    longitude: number;
     deliveryMethodDto: DeliveryMethodDto;
     orderDetailDtos: OrderDetailDto[];
 }

@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.initAddresses();
+    this.initCities();
 
     this.registerForm.get('cityId')?.valueChanges.subscribe(cityId => {
       this.onCityChange(cityId);
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  private initAddresses() {
+  private initCities() {
     this.addressService.getAllCities().subscribe(pagedList => {
       this.cities = pagedList.items;
     });
@@ -93,7 +93,10 @@ export class RegisterComponent implements OnInit {
       password: ['', [
         Validators.required
       ]],
-      address: ['', [
+      houseNumber: ['', [
+        Validators.required
+      ]],
+      streetName: ['', [
         Validators.required
       ]],
       wardId: ['', [

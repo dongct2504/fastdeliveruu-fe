@@ -6,7 +6,8 @@ export interface CreateOrderRequest {
     lastName: string;
     // phoneNumber: string;
     paymentMethod: PaymentMethodsEnum;
-    address: string;
+    houseNumber: string;
+    streetName: string;
     wardId: number;
     districtId: number;
     cityId: number;

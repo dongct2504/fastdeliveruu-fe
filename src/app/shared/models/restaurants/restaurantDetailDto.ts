@@ -6,10 +6,13 @@ export interface RestaurantDetailDto {
     description: string;
     phoneNumber: string;
     imageUrl: string;
-    address: string;
+    houseNumber: string;
+    streetName: string;
     cityId: number;
     districtId: number;
     wardId: number;
+    latitude: number;
+    longitude: number;
     // menuItemDtos: MenuItemDto[];
     restaurantHourDtos: RestaurantHourDto[];
 }

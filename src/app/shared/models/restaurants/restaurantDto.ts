@@ -3,8 +3,11 @@ export interface RestaurantDto {
     name: string;
     description: string;
     imageUrl: string;
-    address: string;
+    houseNumber: string;
+    streetName: string;
     cityId: number;
     districtId: number;
     wardId: number;
+    latitude: number;
+    longitude: number;
 }

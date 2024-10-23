@@ -38,11 +38,11 @@
                     </div>
                 </div>
 
-                <div *ngIf="userProfile.address || userProfile.cityId || userProfile.districtId || userProfile.wardId"
+                <div *ngIf="userProfile.houseNumber || userProfile.streetName || userProfile.cityId || userProfile.districtId || userProfile.wardId"
                     class="mb-4">
                     <h4 class="mb-3">Địa chỉ</h4>
-                    <p *ngIf="userProfile.address || city || district || ward">
-                        <strong>Đường:</strong> {{userProfile.address}} <br />
+                    <p *ngIf="userProfile.houseNumber || userProfile.streetName || city || district || ward">
+                        <strong>Đường:</strong> {{userProfile.houseNumber}} {{userProfile.streetName}} <br />
                         <strong>Phường:</strong> {{ward?.name || 'N/A'}} <br />
                         <strong>Quận:</strong> {{district?.name || 'N/A'}} <br />
                         <strong>Thành phố:</strong> {{city?.name || 'N/A'}}

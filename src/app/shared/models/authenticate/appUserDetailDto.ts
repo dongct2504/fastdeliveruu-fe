@@ -9,11 +9,12 @@ export interface AppUserDetailDto {
     dateOfBirth: string | null;
     role: string;
     imageUrl: string | null;
-    address: string | null;
-    cityId?: number;
-    districtId?: number;
-    wardId?: number;
-    latitude?: number;
-    longitude?: number;
+    houseNumber: string;
+    streetName: string;
+    cityId: number;
+    districtId: number;
+    wardId: number;
+    latitude: number;
+    longitude: number;
     // orderDtos: OrderDto[];
 }
