@@ -13,35 +13,60 @@
 
             <app-text-input
                 formControlName="userName"
-                [label]="'Tên đăng nhập*'">
+                [label]="'Tên đăng nhập*'"
+                [placeholder]="'Tên đăng nhập'">
             </app-text-input>
 
             <app-text-input
                 formControlName="phoneNumber"
                 [type]="'tel'"
-                [label]="'Số điện thoại*'">
+                [label]="'Số điện thoại*'"
+                [placeholder]="'Số điện thoại'">
             </app-text-input>
 
             <app-text-input
                 formControlName="email"
                 [type]="'email'"
-                [label]="'Email*'">
+                [label]="'Email*'"
+                [placeholder]="'Email'">
             </app-text-input>
 
             <app-text-input
                 formControlName="password"
                 [type]="'password'"
-                [label]="'Mật khẩu*'">
+                [label]="'Mật khẩu*'"
+                [placeholder]="'Mật khẩu'">
             </app-text-input>
+            <div class="form-floating mb-3">
+                <input 
+                    formControlName="confirmPassword"
+                    type="password"
+                    class="form-control" 
+                    id="confirmPassword" 
+                    placeholder="Nhập lại mật khẩu*"
+                    [class.is-invalid]="
+                        (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) ||
+                        (registerForm.errors?.['passwordsMismatch'] && registerForm.touched)" 
+                    />
+                <label for="confirmPassword">Nhập lại mật khẩu*</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
+                    Vui lòng nhập lại mật khẩu
+                </div>
+                <div class="invalid-feedback" *ngIf="registerForm.errors?.['passwordsMismatch'] && registerForm.touched">
+                    Mật khẩu không trùng khớp.
+                </div>
+            </div>
 
             <app-text-input
                 formControlName="houseNumber"
-                [label]="'Số nhà'">
+                [label]="'Số nhà'"
+                [placeholder]="'Số nhà'">
             </app-text-input>
 
             <app-text-input
                 formControlName="streetName"
-                [label]="'Đường'">
+                [label]="'Đường'"
+                [placeholder]="'Đường'">
             </app-text-input>
 
             <div class="form-floating mb-3">

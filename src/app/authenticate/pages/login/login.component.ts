@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.loginForm.invalid) return;
+
     this.authenticateService.login(this.loginForm.value).subscribe(() => {
       this.toastr.success('Đăng nhập thành công!');
       this.customerCartService.loadTotalQuantity();

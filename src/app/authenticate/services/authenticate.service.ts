@@ -6,6 +6,8 @@ import { AppUserDto } from 'src/app/shared/models/authenticate/appUserDto';
 import { LoginRequest } from 'src/app/shared/models/authenticate/loginRequest';
 import { AuthenticationResponse } from 'src/app/shared/models/authenticate/authenticationResponse';
 import { RegisterRequest } from 'src/app/shared/models/authenticate/registerRequest';
+import { ResetPasswordRequest } from 'src/app/shared/models/authenticate/resetPasswordRequest';
+import { ChangePasswordRequest } from 'src/app/shared/models/authenticate/changePasswordRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +59,17 @@ export class AuthenticateService {
 
   public confirmPhoneNumber(otpCode: string) {
     return this.httpClient.get(`${this.apiUrl}/user-auth/confirm-phone-number?otpCode=${otpCode}`);
+  }
+
+  public forgotPassword(email: string) {
+    return this.httpClient.get(`${this.apiUrl}/user-auth/forgot-password?email=${email}`);
+  }
+
+  public resetPassword(payload: ResetPasswordRequest) {
+    return this.httpClient.post(`${this.apiUrl}/user-auth/reset-password`, payload);
+  }
+
+  public changePassword(payload: ChangePasswordRequest) {
+    return this.httpClient.post(`${this.apiUrl}/user-auth/change-password`, payload);
   }
 }

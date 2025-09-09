@@ -30,7 +30,7 @@ const routes: Routes = [
     loadChildren: () => import('./restaurants/restaurants.module').then(mod => mod.RestaurantsModule)
   },
   {
-    path: 'profile',
+    path: 'users',
     canActivate: [AuthGuard],
     loadChildren: () => import('./users/users.module').then(mod => mod.UsersModule)
   },

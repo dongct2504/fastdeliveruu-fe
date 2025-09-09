@@ -79,6 +79,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  private passwordsMatchValidator(group: FormGroup) {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
+  }
+
   private initForm() {
     this.registerForm = this.fb.group({
       userName: ['', [
@@ -91,6 +97,9 @@ export class RegisterComponent implements OnInit {
         Validators.required, Validators.email
       ]],
       password: ['', [
+        Validators.required, Validators.minLength(3)
+      ]],
+      confirmPassword: ['', [
         Validators.required
       ]],
       houseNumber: ['', [
@@ -108,6 +117,8 @@ export class RegisterComponent implements OnInit {
       cityId: ['', [
         Validators.required
       ]]
+    }, {
+      validators: this.passwordsMatchValidator
     });
   }
 
