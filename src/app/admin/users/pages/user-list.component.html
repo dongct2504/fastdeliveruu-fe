@@ -1,0 +1,53 @@
+<div class="container mt-3">
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Danh sách người dùng</h3>
+        <button class="btn btn-success" routerLink="/authen/register">
+            <i class="fa fa-plus"></i> Thêm người dùng
+        </button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tên đăng nhập</th>
+                <th>Email</th>
+                <th>Quyền</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+                <!-- <th>Phân quyền</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{ user.userName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles.join(', ') }}</td>
+                <td>
+                    <span [ngClass]="user.isLocked ? 'text-danger' : 'text-success'">
+                        {{ user.isLocked ? 'Đã khóa' : 'Hoạt động' }}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-sm" [ngClass]="user.isLocked ? 'btn-success' : 'btn-warning'"
+                        (click)="toggleLock(user)">
+                        <i class="fa" [ngClass]="user.isLocked ? 'fa-unlock' : 'fa-lock'">
+                        </i>
+                        {{ user.isLocked ? 'Mở khóa' : 'Khóa' }}
+                    </button>
+                </td>
+                <!-- <td>
+                    <select class="form-select" multiple [(ngModel)]="user.roles"
+                            (change)="updateRoles(user)">
+                        <option *ngFor="let role of roles" [value]="role.value">
+                        {{ role.label }}
+                        </option>
+                    </select>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+
+    <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
+        (pagedChanged)="onPageChanged($event)">
+    </app-paging-footer>
+</div>
