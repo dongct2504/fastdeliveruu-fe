@@ -8,6 +8,7 @@ import { AuthenticationResponse } from 'src/app/shared/models/authenticate/authe
 import { RegisterRequest } from 'src/app/shared/models/authenticate/registerRequest';
 import { ResetPasswordRequest } from 'src/app/shared/models/authenticate/resetPasswordRequest';
 import { ChangePasswordRequest } from 'src/app/shared/models/authenticate/changePasswordRequest';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,34 @@ export class AuthenticateService {
       const authen: AuthenticationResponse = JSON.parse(authenJson);
       this.currentUserSource.next(authen.appUserDto);
     }
+  }
+
+  public isInRole(role: string) {
+    const roles = this.getRolesFromToken();
+    return roles.includes(role);
+  }
+
+  private getRolesFromToken(): string[] {
+    const authenJson = localStorage.getItem('fastdeliveruu-authen');
+    if (authenJson) {
+      const authen: AuthenticationResponse = JSON.parse(authenJson);
+      const token = authen.token;
+      if (!token) return [];
+
+      try {
+        const decoded: any = jwtDecode(token);
+        const roleClaim = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+        return Array.isArray(roleClaim)
+          ? roleClaim
+          : roleClaim
+            ? [roleClaim]
+            : [];
+      } catch {
+        return [];
+      }
+    }
+    return [];
   }
 
   public isLoggedIn() {
