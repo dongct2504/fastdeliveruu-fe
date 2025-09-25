@@ -22,6 +22,14 @@ const routes: Routes = [
     loadChildren: () => import('./authenticate/authenticate.module').then(mod => mod.AuthenticateModule)
   },
   {
+    path: 'shipper-auth',
+    loadChildren: () => import('./shipper-auth/shipper-authenticate.module').then(mod => mod.ShipperAuthenticateModule)
+  },
+  {
+    path: 'shipper',
+    loadChildren: () => import('./shippers/shippers.module').then(m => m.ShippersModule)
+  },
+  {
     path: 'menu-items',
     loadChildren: () => import('./menu-items/menu-items.module').then(mod => mod.MenuItemsModule)
   },
@@ -56,10 +64,6 @@ const routes: Routes = [
   },
 
   // admin routing
-  {
-    path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule)
-  },
 
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];
