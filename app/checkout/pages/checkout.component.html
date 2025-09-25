@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-lg-8">
+        <app-stepper [linearModeSelected]="true" #appStepper>
+            <cdk-step [label]="'Thông tin'" [completed]="checkoutForm.get('infoForm')?.valid">
+                <app-checkout-info [checkoutForm]="checkoutForm"></app-checkout-info>
+            </cdk-step>
+            <cdk-step [label]="'Giao hàng'" [completed]="checkoutForm.get('deliveryForm')?.valid">
+                <app-checkout-delivery [checkoutForm]="checkoutForm"></app-checkout-delivery>
+            </cdk-step>
+            <cdk-step [label]="'Thanh toán'" [completed]="checkoutForm.get('paymentForm')?.valid">
+                <app-checkout-payment [checkoutForm]="checkoutForm"></app-checkout-payment>
+            </cdk-step>
+            <cdk-step [label]="'Xác nhận'">
+                <app-checkout-review [checkoutForm]="checkoutForm"></app-checkout-review>
+            </cdk-step>
+        </app-stepper>
+    </div>
+    <div class="col-lg-4">
+        <app-order-totals></app-order-totals>
+    </div>
+</div>

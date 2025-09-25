@@ -1,0 +1,95 @@
+<div *ngIf="wishLists">
+    <div *ngIf="wishLists.length === 0">
+        <p>Hiện không có món hàng yêu thích nào</p>
+    </div>
+
+    <div *ngIf="wishLists.length > 0">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <app-paging-header
+                [pageNumber]="wishListParams.pageNumber"
+                [pageSize]="wishListParams.pageSize"
+                [totalRecords]="totalRecords">
+            </app-paging-header>
+
+            <app-search-form (searchValue)="onSearchSubmit($event)"></app-search-form>
+        </div>
+
+        <div class="pb-5">
+            <div class="row">
+                <div class="col-12 py-5 mb-1">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="p-2 px-3">Món hàng</div>
+                                    </th>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="py-2">Giá</div>
+                                    </th>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="py-2">Xóa</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let wishList of wishLists">
+                                    <th scope="row">
+                                        <div class="p-2">
+                                            <img src="{{wishList.menuVariantDto 
+                                                ? wishList.menuVariantDto.imageUrl 
+                                                : wishList.menuItemDto.imageUrl}}"
+                                                alt="{{wishList.menuItemDto.name}}"
+                                                class="img-fluid" style="max-height: 50px;" />
+                                            <div class="ms-3 d-inline-block align-middle">
+                                                <h5 class="mb-0">
+                                                    <a routerLink="/menu-items/{{wishList.menuItemDto.id}}"
+                                                        class="text-warning no-underline">
+                                                        <div *ngIf="wishList.menuVariantDto">
+                                                            {{wishList.menuItemDto.name}} ({{wishList.menuVariantDto.varietyName}})
+                                                        </div>
+                                                        <div *ngIf="!wishList.menuVariantDto">
+                                                            {{wishList.menuItemDto.name}}
+                                                        </div>
+                                                    </a>
+                                                </h5>
+                                                <span class="text-muted font-weight-normal d-block">
+                                                    Đã giảm:
+                                                    <i>{{(wishList.menuVariantDto 
+                                                        ? wishList.menuVariantDto.discountAmount 
+                                                        : wishList.menuItemDto.discountAmount) | currency:'VND'}}
+                                                    </i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="align-middle">
+                                        <strong>{{(wishList.menuVariantDto 
+                                            ? wishList.menuVariantDto.discountPrice 
+                                            : wishList.menuItemDto.discountPrice) | currency:'VND'}}</strong>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a class="text-danger"
+                                            (click)="deleteCartItem(wishList.id)"
+                                            style="cursor: pointer;">
+                                            <fa-icon
+                                                [icon]="faTrash"
+                                                [size]="'2xl'">
+                                            </fa-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <app-paging-footer
+            [itemsPerPage]="wishListParams.pageSize"
+            [totalRecords]="totalRecords"
+            (pagedChanged)="onPageChanged($event)">
+        </app-paging-footer>
+    </div>
+</div>

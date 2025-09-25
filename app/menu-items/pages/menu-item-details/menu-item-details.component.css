@@ -1,0 +1,14 @@
+.minus-button-custom {
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.plus-button-custom {
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.quantity {
+    font-weight: bold;
+    font-size: 1.5em;
+}

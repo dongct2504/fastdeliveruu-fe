@@ -1,0 +1,23 @@
+<ng-container *ngIf="restaurants">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <app-paging-header
+            [pageNumber]="restaurantParams.pageNumber"
+            [pageSize]="restaurantParams.pageSize"
+            [totalRecords]="totalRecords">
+        </app-paging-header>
+
+        <app-search-form (searchValue)="onSearchSubmit($event)"></app-search-form>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let item of restaurants">
+            <app-restaurant-card [restaurant]="item"></app-restaurant-card>
+        </div>
+    </div>
+
+    <app-paging-footer
+        [itemsPerPage]="restaurantParams.pageSize"
+        [totalRecords]="totalRecords"
+        (pagedChanged)="onPageChanged($event)">
+    </app-paging-footer>
+</ng-container>

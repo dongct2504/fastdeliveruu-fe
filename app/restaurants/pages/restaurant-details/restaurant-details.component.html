@@ -1,0 +1,31 @@
+<div class="container my-4" *ngIf="restaurant">
+    <div class="row">
+        <div class="col-md-5">
+            <img class="img-fluid rounded" [src]="restaurant.imageUrl" alt="{{ restaurant.name }}">
+        </div>
+        <div class="col-md-7">
+            <div class="mb-3">
+                <h3>{{ restaurant.name }}</h3>
+                <p class="text-muted">{{ restaurant.description }}</p>
+            </div>
+            <div class="mb-3">
+                <h4>Địa chỉ</h4>
+                <p>{{ restaurant.houseNumber }} {{ restaurant.streetName }}, {{ ward }}, {{ district }}, {{ city }}</p>
+            </div>
+            <div class="mb-3">
+                <h4>Giờ mở cửa</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let hour of operatingHours">
+                        {{ hour.weekenDay }}: {{ hour.startTime | date:'hh:mm a' }} - {{ hour.endTime | date:'hh:mm a' }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <a class="btn btn-outline-primary" [routerLink]="['/menu-items']"
+                    [queryParams]="{ restaurantId: restaurant.id }">
+                    Xem các món ăn của nhà hàng này
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

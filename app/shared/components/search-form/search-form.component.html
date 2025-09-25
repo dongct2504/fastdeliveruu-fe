@@ -1,0 +1,11 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit()" class="d-flex" role="search">
+    <input
+        formControlName="searchTerm"
+        class="form-control me-2"
+        type="search"
+        placeholder="Tìm kiếm..."
+        aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">
+        <fa-icon [icon]="faSearch"></fa-icon>
+    </button>
+</form>

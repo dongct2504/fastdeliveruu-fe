@@ -1,0 +1,69 @@
+<div class="d-flex align-items-center mb-3">
+    <app-paging-header
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [totalRecords]="totalRecords">
+    </app-paging-header>
+</div>
+
+<div class="table-responsive mt-4" *ngIf="orders">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="p-2 px-3">Đơn hàng</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Ngày</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Thanh toán</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Tổng</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Trạng thái</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders; let i = index">
+                <th scope="row">
+                    <div class="p-2">
+                        <div class="ms-3 d-inline-block align-middle">
+                            <h5 class="mb-0">
+                                <a routerLink="/orders/{{order.id}}"
+                                    class="no-underline">
+                                    # {{order.id}}
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </th>
+                <td class="align-middle">
+                    <strong>{{order.orderDate | date:'dd/MM/YYYY, h:mm a'}}</strong>
+                </td>
+                <td class="align-middle">
+                    <strong *ngIf="order.paymentMethod === paymentMethod.Cash">Tiền mặt</strong>
+                    <strong *ngIf="order.paymentMethod === paymentMethod.Vnpay">VNPAY</strong>
+                    <strong *ngIf="order.paymentMethod === paymentMethod.Paypal">PayPal</strong>
+                </td>
+                <td class="align-middle">
+                    <strong>{{order.totalAmount | currency:'VND'}}</strong>
+                </td>
+                <td class="align-middle">
+                    <strong *ngIf="order.orderStatus === orderStatus.Pending">Chưa thanh toán</strong>
+                    <strong *ngIf="order.orderStatus === orderStatus.Success">Đã thanh toán</strong>
+                    <strong *ngIf="order.orderStatus === orderStatus.Cancelled">Đã hủy</strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-paging-footer
+    [itemsPerPage]="pageSize"
+    [totalRecords]="totalRecords"
+    (pagedChanged)="onPageChanged($event)">
+</app-paging-footer>

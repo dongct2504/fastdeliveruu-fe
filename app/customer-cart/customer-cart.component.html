@@ -1,0 +1,122 @@
+<div *ngIf="customerCart">
+    <div *ngIf="customerCart.length === 0">
+        <p>Giỏ hàng của bạn đang trống</p>
+    </div>
+
+    <div *ngIf="customerCart.length > 0">
+        <div class="pb-5">
+            <div class="row">
+                <div class="col-12 py-5 mb-1">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="p-2 px-3">Món hàng</div>
+                                    </th>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="py-2">Giá</div>
+                                    </th>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="py-2">Số lượng</div>
+                                    </th>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="py-2">Tổng</div>
+                                    </th>
+                                    <th class="border-0 bg-light" scope="col">
+                                        <div class="py-2">Xóa</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cartItem of customerCart">
+                                    <th scope="row">
+                                        <div class="p-2">
+                                            <img src="{{cartItem.menuVariantDto 
+                                                ? cartItem.menuVariantDto.imageUrl 
+                                                : cartItem.menuItemDto.imageUrl}}"
+                                                alt="{{cartItem.menuItemDto.name}}"
+                                                class="img-fluid" style="max-height: 50px;" />
+                                            <div class="ms-3 d-inline-block align-middle">
+                                                <h5 class="mb-0">
+                                                    <a routerLink="/menu-items/{{cartItem.menuItemDto.id}}"
+                                                        class="text-warning no-underline">
+                                                        <div *ngIf="cartItem.menuVariantDto">
+                                                            {{cartItem.menuItemDto.name}} ({{cartItem.menuVariantDto.varietyName}})
+                                                        </div>
+                                                        <div *ngIf="!cartItem.menuVariantDto">
+                                                            {{cartItem.menuItemDto.name}}
+                                                        </div>
+                                                    </a>
+                                                </h5>
+                                                <span class="text-muted font-weight-normal d-block">
+                                                    Đã giảm:
+                                                    <i>{{(cartItem.menuVariantDto 
+                                                        ? cartItem.menuVariantDto.discountAmount 
+                                                        : cartItem.menuItemDto.discountAmount) | currency:'VND'}}
+                                                    </i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="align-middle">
+                                        <strong>{{(cartItem.menuVariantDto 
+                                            ? cartItem.menuVariantDto.discountPrice 
+                                            : cartItem.menuItemDto.discountPrice) | currency:'VND'}}</strong>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center">
+                                            <a (click)="decrementCartItem(cartItem)"
+                                                style="cursor: pointer;">
+                                                <fa-icon 
+                                                    class="text-warning minus-button-custom me-2"
+                                                    [size]="'2xl'"
+                                                    [icon]="faMinusCircle">
+                                                </fa-icon>
+                                            </a>
+                                            <span class="quantity">{{cartItem.quantity}}</span>
+                                            <a (click)="incrementCartItem(cartItem)"
+                                                style="cursor: pointer;">
+                                                <fa-icon
+                                                    class="text-warning plus-button-custom mx-2"
+                                                    [size]="'2xl'"
+                                                    [icon]="faPlusCircle">
+                                                </fa-icon>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <strong>
+                                            {{(cartItem.menuVariantDto ? cartItem.menuVariantDto.discountPrice : cartItem.menuItemDto.discountPrice) * cartItem.quantity | currency:'VND'}}
+                                        </strong>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a class="text-danger"
+                                            (click)="deleteCartItem(cartItem.id)"
+                                            style="cursor: pointer;">
+                                            <fa-icon
+                                                [icon]="faTrash"
+                                                [size]="'2xl'">
+                                            </fa-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 offset-md-7">
+                    <app-order-totals></app-order-totals>
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-outline-primary" routerLink="/checkout">
+                            Thanh toán
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

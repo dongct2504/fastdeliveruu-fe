@@ -1,0 +1,34 @@
+<ng-container *ngIf="menuItems && popularMenuItem">
+    <div class="mb-5">
+        <h2 class="mb-4">Các món đang hot</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col" *ngFor="let item of popularMenuItem">
+                <app-menu-item-card [menuItem]="item"></app-menu-item-card>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mb-4">Tất cả món ăn</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <app-paging-header
+            [pageNumber]="menuItemParams.pageNumber"
+            [pageSize]="itemsPerPage"
+            [totalRecords]="totalRecords">
+        </app-paging-header>
+
+        <app-search-form (searchValue)="onSearchSubmit($event)"></app-search-form>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let item of menuItems">
+            <app-menu-item-card [menuItem]="item"></app-menu-item-card>
+        </div>
+    </div>
+
+    <app-paging-footer
+        [itemsPerPage]="itemsPerPage"
+        [totalRecords]="totalRecords"
+        (pagedChanged)="onPageChanged($event)">
+    </app-paging-footer>
+</ng-container>

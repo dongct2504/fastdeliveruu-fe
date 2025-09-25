@@ -1,0 +1,15 @@
+<header>
+    <span *ngIf="totalRecords > 0">
+        Hiển thị
+        <strong>
+            {{(pageNumber - 1) * pageSize + 1}} -
+            {{pageNumber * pageSize > totalRecords
+                ? totalRecords
+                : pageNumber * pageSize
+            }}
+        </strong> trong <strong>{{totalRecords}}</strong> sản phẩm
+    </span>
+    <span *ngIf="totalRecords === 0">
+        Hiển thị <strong>0 - 0</strong> trong <strong>0</strong> sản phẩm
+    </span>
+</header>

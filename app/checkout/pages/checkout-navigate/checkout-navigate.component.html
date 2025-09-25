@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between flex-row mt-3 mb-5" *ngIf="formName !== 'review'">
+    <button *ngIf="formName === 'addressForm'" class="btn btn-outline-primary" routerLink="/carts">
+        <fa-icon [icon]="faAngleLeft"></fa-icon> {{leftText}}
+    </button>
+
+    <button *ngIf="formName !== 'addressForm'" class="btn btn-outline-primary" cdkStepperPrevious>
+        <fa-icon [icon]="faAngleLeft"></fa-icon> {{leftText}}
+    </button>
+
+    <button 
+        [disabled]="checkoutForm?.get(formName)?.invalid" 
+        class="btn btn-primary" 
+        cdkStepperNext>
+        {{rightText}} <fa-icon [icon]="faAngleRight"></fa-icon>
+    </button>
+</div>

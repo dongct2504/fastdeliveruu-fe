@@ -1,0 +1,17 @@
+<section class="py-5" *ngIf="paymentResponse">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 alert alert-success">
+            <h1 class="display-4 mb-3 alert-heading text-center">Giao dịch thành công!</h1>
+            <p class="lead text-center">Cảm ơn bạn vì đã đặt hàng.</p>
+
+            <h5>Chi tiết</h5>
+            <p>ID: <strong>{{paymentResponse.orderId}}</strong></p>
+            <p>Phương thức thanh toán: <strong>{{paymentResponse.paymentMethod}}</strong></p>
+            <p>Tổng: <strong>{{paymentResponse.totalAmount | currency:'VND'}}</strong></p>
+
+            <div class="text-center">
+                <a routerLink="/" class="btn btn-primary mt-3">Về trang chủ</a>
+            </div>
+        </div>
+    </div>
+</section>

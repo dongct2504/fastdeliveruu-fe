@@ -1,0 +1,63 @@
+<ng-container *ngIf="menuItem">
+    <div class="row">
+        <div class="col-md-5">
+            <div *ngIf="!selectedVariant">
+                <img class="img-fluid rounded" src="{{menuItem.imageUrl}}" alt="{{menuItem.name}}">
+            </div>
+            <div *ngIf="selectedVariant">
+                <img class="img-fluid rounded" src="{{selectedVariant.imageUrl}}" alt="{{selectedVariant.varietyName}}">
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h3>{{menuItem.name}}</h3>
+
+            <h2 class="mb-5">
+                <div *ngIf="!selectedVariant">
+                    <strong class="me-2">{{menuItem.discountPrice | currency:'VND'}}</strong>
+                    <small class="text-muted">giảm {{menuItem.discountAmount | currency:'VND'}}</small>
+                </div> 
+                <div *ngIf="selectedVariant">
+                    <strong class="me-2">{{selectedVariant.discountPrice | currency:'VND'}}</strong>
+                    <small class="text-muted">giảm {{selectedVariant.discountAmount | currency:'VND'}}</small>
+                </div>
+            </h2>
+
+            <div *ngIf="menuItem.menuVariantDtos.length > 0" class="mb-3">
+                <h5>Chọn Loại:</h5>
+                <div class="d-flex flex-wrap">
+                    <button *ngFor="let variant of menuItem.menuVariantDtos"
+                            [ngClass]="{'btn-outline-danger': selectedVariant?.id === variant.id, 'btn-outline-secondary': selectedVariant?.id !== variant.id}"
+                            class="btn m-1"
+                            (click)="selectVariant(variant)">
+                        <img src="{{variant.imageUrl}}" alt="{{variant.varietyName}}" class="img-thumbnail" style="width: 50px; height: 50px;">
+                        {{ variant.varietyName }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start align-items-center">
+                <a (click)="decrementQuantity()" style="cursor: pointer;">
+                    <fa-icon class="text-warning minus-button-custom me-2" [icon]="faMinusCircle"></fa-icon>
+                </a>
+                <span class="quantity">{{quantity}}</span>
+                <a (click)="incrementQuantity()" style="cursor: pointer;">
+                    <fa-icon class="text-warning plus-button-custom mx-2" [icon]="faPlusCircle"></fa-icon>
+                </a>
+                <button class="btn btn-lg btn-outline-warning ms-4" (click)="addToCart()">
+                    Thêm vào giỏ
+                </button>
+                <button class="btn btn-lg btn-outline-info ms-4" (click)="addToWishList()">
+                    Thêm vào yêu thích
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 ms-3">
+                <h4>Mô tả</h4>
+                <p>{{menuItem.description}}</p>
+            </div>
+        </div>
+    </div>
+</ng-container>
