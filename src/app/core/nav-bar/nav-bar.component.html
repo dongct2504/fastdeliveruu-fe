@@ -34,33 +34,28 @@
 
             <!-- Buttons on the right -->
             <div class="d-flex ms-auto">
-                <!-- Show wishlist and cart ONLY when a regular user is logged in -->
-                <ng-container *ngIf="(currentUser$ | async) as currentUser">
-                    <a class="btn text-dark position-relative" routerLink="/wishlists">
-                        <fa-icon [icon]="faHeart" [size]="'2x'"></fa-icon>
-                        <div class="cart-no" *ngIf="(wishListTotalQuantity$ | async) as totalQuantity">
-                            {{totalQuantity}}
-                        </div>
-                    </a>
-                    <a class="btn me-4 text-dark position-relative" routerLink="/carts">
-                        <fa-icon [icon]="faCartShopping" [size]="'2x'"></fa-icon>
-                        <div class="cart-no" *ngIf="(cartTotalQuantity$ | async) as totalQuantity">
-                            {{totalQuantity}}
-                        </div>
-                    </a>
-                </ng-container>
+                <a class="btn text-dark position-relative" routerLink="/wishlists">
+                    <fa-icon [icon]="faHeart" [size]="'2x'"></fa-icon>
+                    <div class="cart-no" *ngIf="(wishListTotalQuantity$ | async) as totalQuantity">
+                        {{totalQuantity}}
+                    </div>
+                </a>
+                <a class="btn me-4 text-dark position-relative" routerLink="/carts">
+                    <fa-icon [icon]="faCartShopping" [size]="'2x'"></fa-icon>
+                    <div class="cart-no" *ngIf="(cartTotalQuantity$ | async) as totalQuantity">
+                        {{totalQuantity}}
+                    </div>
+                </a>
 
-                <!-- If neither user nor shipper logged in -->
-                <ng-container *ngIf="(currentUser$ | async) === null && (currentShipper$ | async) === null">
-                    <button class="btn btn-dark me-2" routerLink="/shipper-auth/register">Shipper</button>
+                <ng-container *ngIf="(currentUser$ | async) === null">
                     <button class="btn btn-warning me-2" routerLink="/authen/register">Đăng ký</button>
                     <button class="btn btn-dark me-2" routerLink="/authen/login">Đăng nhập</button>
                 </ng-container>
 
-                <!-- User dropdown -->
                 <ng-container *ngIf="(currentUser$ | async) as currentUser">
                     <div class="dropdown ms-3 me-5 d-flex align-items-center" dropdown>
-                        <a class="dropdown-toggle no-underline text-dark me-2" style="cursor: pointer;" dropdownToggle>
+                        <a class="dropdown-toggle no-underline text-dark me-2"
+                            style="cursor: pointer;" dropdownToggle>
                             <strong>{{currentUser.userName}}</strong>
                         </a>
                         <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
@@ -81,26 +76,6 @@
                             </a>
                         </div>
                     </div>
-                </ng-container>
-
-                <!-- Shipper dropdown -->
-                <ng-container *ngIf="(currentUser$ | async) === null && (currentShipper$ | async) as currentShipper">
-                  <div class="dropdown ms-3 me-5 d-flex align-items-center" dropdown>
-                      <a class="dropdown-toggle no-underline text-dark me-2" style="cursor: pointer;" dropdownToggle>
-                          <strong>{{currentShipper.userName}}</strong>
-                      </a>
-                      <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
-
-                      <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
-                        <a class="dropdown-item d-flex align-items-center py-2" routerLink="/shipper/profile">
-                          <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item d-flex align-items-center py-2" (click)="logoutShipper()">
-                          <fa-icon [icon]="faSignOut" class="me-3"></fa-icon>Đăng xuất
-                        </a>
-                      </div>
-                  </div>
                 </ng-container>
             </div>
         </div>

@@ -69,37 +69,43 @@
                 [placeholder]="'Đường'">
             </app-text-input>
 
-            <div class="mb-3">
-                <label for="city" class="form-label">Thành phố</label>
+            <div class="form-floating mb-3">
                 <select formControlName="cityId" class="form-select" id="city">
-                    <option value="" disabled selected>Chọn thành phố</option>
                     <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
                 </select>
-                <div class="invalid-feedback d-block" *ngIf="registerForm.get('cityId')?.invalid && registerForm.get('cityId')?.touched">
+                <label for="city">Thành phố</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
                     Vui lòng chọn thành phố.
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="district" class="form-label">Quận</label>
+            <div class="form-floating mb-3">
                 <select formControlName="districtId" class="form-select" id="district" [disabled]="districts.length === 0">
-                    <option value="" disabled selected>Chọn quận</option>
                     <option *ngFor="let district of districts" [value]="district.id">{{ district.name }}</option>
                 </select>
-                <div class="invalid-feedback d-block" *ngIf="registerForm.get('districtId')?.invalid && registerForm.get('districtId')?.touched">
+                <label for="district">Quận</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('district')?.invalid && registerForm.get('district')?.touched">
                     Vui lòng chọn quận.
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="ward" class="form-label">Phường</label>
+            <div class="form-floating mb-3">
                 <select formControlName="wardId" class="form-select" id="ward" [disabled]="wards.length === 0">
-                    <option value="" disabled selected>Chọn phường</option>
                     <option *ngFor="let ward of wards" [value]="ward.id">{{ ward.name }}</option>
                 </select>
-                <div class="invalid-feedback d-block" *ngIf="registerForm.get('wardId')?.invalid && registerForm.get('wardId')?.touched">
+                <label for="ward">Phường</label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('ward')?.invalid && registerForm.get('ward')?.touched">
                     Vui lòng chọn phường.
                 </div>
+            </div>
+
+            <div class="form-floating mb-3" *ngIf="isAdmin">
+                <select formControlName="role" class="form-select">
+                    <option *ngFor="let r of roles" [value]="r.value">
+                    {{ r.label }}
+                    </option>
+                </select>
+                <label>Phân quyền</label>
             </div>
 
             <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" [disabled]="registerForm.invalid">
