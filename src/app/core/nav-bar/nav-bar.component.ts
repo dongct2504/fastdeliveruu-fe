@@ -49,6 +49,7 @@ export class NavBarComponent implements OnInit {
   logout() {
     this.authenticateService.logout();
     this.customerCartService.removeTotalQuantity();
+    this.wishListsService.removeTotalQuantity();
     this.toastr.success('Đăng xuất thành công!');
     this.router.navigate(['/']);
   }

@@ -3,7 +3,8 @@ export interface UpdateUserRequest {
     firstName: string | null;
     lastName: string | null;
     phoneNumber: string;
-    address: string | null;
+    houseNumber: string | null;
+    streetName: string | null;
     wardId: string | null;
     districtId: string | null;
     cityId: string | null;

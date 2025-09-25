@@ -90,6 +90,7 @@ export class CheckoutInfoComponent implements OnInit {
     this.authenticateService.currentUser$.pipe(take(1)).subscribe(appUser => {
       if (this.checkoutForm && appUser) {
         const infoFormValues = this.checkoutForm.get('infoForm')?.value;
+        console.log(infoFormValues);
 
         const updateUserRequest: UpdateUserRequest = {
           id: appUser.id,

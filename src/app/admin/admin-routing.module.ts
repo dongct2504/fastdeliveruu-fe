@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
+      {
+        path: 'restaurants',
+        loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule)
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

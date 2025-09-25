@@ -37,8 +37,11 @@ export class UsersService {
       formData.append('lastName', updateUserRequest.lastName);
     }
     formData.append('phoneNumber', updateUserRequest.phoneNumber);
-    if (updateUserRequest.address) {
-      formData.append('address', updateUserRequest.address);
+    if (updateUserRequest.houseNumber) {
+      formData.append('houseNumber', updateUserRequest.houseNumber);
+    }
+    if (updateUserRequest.streetName) {
+      formData.append('streetName', updateUserRequest.streetName);
     }
     if (updateUserRequest.wardId) {
       formData.append('wardId', updateUserRequest.wardId);

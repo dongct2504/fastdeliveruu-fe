@@ -1,21 +1,22 @@
 <div class="container-fluid mt-3">
     <div class="row">
         <!-- Sidebar -->
-        <aside class="col-md-3 col-lg-2 mb-4">
+        <aside class="col-md-3 col-lg-2 mb-4 sticky-sidebar">
             <div class="card shadow-sm h-100">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                        <a routerLink="/admin/dashboard" class="text-decoration-none d-block">
+                <ul class="list-group">
+                    <li class="list-group-item p-0 border-0">
+                        <a routerLink="/admin/dashboard" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
                             Dashboard
                         </a>
                     </li>
-                    <li class="list-group-item" routerLinkActive="active">
-                        <a routerLink="/admin/users" class="text-decoration-none d-block">
+                    <li class="list-group-item p-0 border-0">
+                        <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">
                             Quản lý người dùng
                         </a>
                     </li>
-                    <li class="list-group-item" routerLinkActive="active">
-                        <a routerLink="/admin/restaurants" class="text-decoration-none d-block">
+                    <li class="list-group-item p-0 border-0">
+                        <a routerLink="/admin/restaurants" routerLinkActive="active" class="nav-link">
                             Quản lý nhà hàng
                         </a>
                     </li>
