@@ -1,0 +1,38 @@
+<div class="container mt-3">
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Danh sách món ăn</h3>
+        <button class="btn btn-success" routerLink="/admin/menu-items/add">
+            <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm món ăn
+        </button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tên món</th>
+                <th>Mô tả</th>
+                <th>Giá</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of menuItems">
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.price | currency:'VND' }}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary me-2" (click)="editMenuItem(item.id)">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteMenuItem(item.id)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
+        (pagedChanged)="onPageChanged($event)">
+    </app-paging-footer>
+</div>

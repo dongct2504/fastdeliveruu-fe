@@ -7,11 +7,20 @@
     </div>
 
     <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()" novalidate>
-        <div class="mb-3">
-            <label class="form-label">Tên nhà hàng</label>
-            <input type="text" formControlName="name" class="form-control" />
-            <div *ngIf="restaurantForm.get('name')?.invalid && restaurantForm.get('name')?.touched" class="text-danger">
-                Tên nhà hàng là bắt buộc
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Tên nhà hàng</label>
+                <input type="text" formControlName="name" class="form-control" />
+                <div *ngIf="restaurantForm.get('name')?.invalid && restaurantForm.get('name')?.touched" class="text-danger">
+                    Tên nhà hàng là bắt buộc
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Số điện thoại</label>
+                <input type="text" formControlName="phoneNumber" class="form-control" />
+                <div *ngIf="restaurantForm.get('phoneNumber')?.invalid && restaurantForm.get('phoneNumber')?.touched" class="text-danger">
+                    Số điện thoại là bắt buộc
+                </div>
             </div>
         </div>
 
@@ -28,6 +37,36 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label">Tên đường</label>
                 <input type="text" formControlName="streetName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <select 
+                    class="form-control" formControlName="cityId" 
+                    (change)="onCityChange($event)"
+                >
+                    <option value="" disabled selected>Chọn thành phố</option>
+                    <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-4">
+                <select 
+                    class="form-control" 
+                    formControlName="districtId" 
+                    (change)="onDistrictChange($event)"
+                >
+                    <option value="" disabled selected>Chọn quận</option>
+                    <option *ngFor="let district of districts" [value]="district.id">{{ district.name }}</option>
+                </select>
+            </div>
+            
+            <div class="col-sm-4">
+                <select class="form-control" formControlName="wardId">
+                    <option value="" disabled selected>Chọn phường</option>
+                    <option *ngFor="let ward of wards" [value]="ward.id">{{ ward.name }}</option>
+                </select>
             </div>
         </div>
 

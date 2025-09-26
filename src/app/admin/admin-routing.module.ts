@@ -20,6 +20,14 @@ const routes: Routes = [
         path: 'restaurants',
         loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule)
       },
+      {
+        path: 'genres',
+        loadChildren: () => import('./genres/genres.module').then(m => m.GenresModule)
+      },
+      {
+        path: 'menu-items',
+        loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule)
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
