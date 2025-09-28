@@ -16,8 +16,6 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
-<<<<<<< HEAD
-=======
       {
         path: 'restaurants',
         loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule)
@@ -30,7 +28,6 @@ const routes: Routes = [
         path: 'menu-items',
         loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule)
       },
->>>>>>> develop
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
