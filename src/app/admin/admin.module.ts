@@ -6,8 +6,6 @@ import { AdminLayoutComponent } from './layout/admin-layout.component';
 import { UserListComponent } from './users/pages/user-list.component';
 import { UserEditComponent } from './users/pages/user-edit/user-edit.component';
 import { SharedModule } from "../shared/shared.module";
-import { RestaurantListComponent } from './restaurants/pages/restaurant-list.component';
-import { RestaurantEditComponent } from './restaurants/pages/restaurant-edit/restaurant-edit.component';
 import { GenreListComponent } from './genres/pages/genre-list.component';
 import { GenreEditComponent } from './genres/pages/genre-edit/genre-edit.component';
 import { MenuItemListComponent } from './menu-items/pages/menu-item-list.component';
@@ -20,8 +18,6 @@ import { FormsModule } from '@angular/forms';
         AdminLayoutComponent,
         UserListComponent,
         UserEditComponent,
-        RestaurantListComponent,
-        RestaurantEditComponent,
         GenreListComponent,
         GenreEditComponent,
         MenuItemListComponent,
