@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faBars, faCartShopping, faHeart, faHistory, faSearch, faSignOut, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCartShopping, faCogs, faHeart, faHistory, faSearch, faSignOut, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthenticateService } from 'src/app/authenticate/services/authenticate.service';
 import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service';
+import { RoleConstants } from 'src/app/shared/constants/role-constants';
 import { AppUserDto } from 'src/app/shared/models/authenticate/appUserDto';
 import { WishlistsService } from 'src/app/wishlists/services/wishlists.service';
 
@@ -22,6 +23,7 @@ export class NavBarComponent implements OnInit {
   faHistory = faHistory;
   faSignOut = faSignOut;
   faUser = faUser;
+  faCogs = faCogs
 
   cartTotalQuantity$?: Observable<number>;
   wishListTotalQuantity$?: Observable<number>;
@@ -33,6 +35,10 @@ export class NavBarComponent implements OnInit {
     private authenticateService: AuthenticateService,
     private router: Router,
     private toastr: ToastrService) {
+  }
+
+  get roleConstants() {
+    return RoleConstants;
   }
 
   ngOnInit(): void {
@@ -47,5 +53,10 @@ export class NavBarComponent implements OnInit {
     this.wishListsService.removeTotalQuantity();
     this.toastr.success('Đăng xuất thành công!');
     this.router.navigate(['/']);
+  }
+
+  isExistRole(roles: string[], user: AppUserDto | null): boolean {
+    if (!user || !user.roles) return false;
+    return roles.some(r => user.roles.includes(r));
   }
 }
