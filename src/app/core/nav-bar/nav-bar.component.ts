@@ -55,8 +55,8 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  isExistRole(role: string, user: AppUserDto | null): boolean {
+  isExistRole(roles: string[], user: AppUserDto | null): boolean {
     if (!user || !user.roles) return false;
-    return user.roles.includes(role);
+    return roles.some(r => user.roles.includes(r));
   }
 }
