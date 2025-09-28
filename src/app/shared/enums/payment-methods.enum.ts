@@ -1,6 +1,6 @@
 export enum PaymentMethodsEnum {
     Cash = 1,
-    Vnpay,
-    Paypal,
-    Momo
+    Vnpay = 2,
+    Paypal = 3,
+    Momo = 4
 }

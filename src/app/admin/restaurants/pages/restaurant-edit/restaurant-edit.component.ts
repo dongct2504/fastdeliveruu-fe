@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminRestaurantService } from '../../services/admin-restaurant.service';
 import { RestaurantDetailDto } from 'src/app/shared/models/restaurants/restaurantDetailDto';
 import { ToastrService } from 'ngx-toastr';
+import { AddressService } from 'src/app/shared/services/address.service';
+import { CityDto } from 'src/app/shared/models/addresses/cityDto';
+import { DistrictDto } from 'src/app/shared/models/addresses/districtDto';
+import { WardDto } from 'src/app/shared/models/addresses/wardDto';
 
 @Component({
   selector: 'app-restaurant-edit',
@@ -15,6 +19,10 @@ export class RestaurantEditComponent {
   isEditMode = false;
   restaurantId!: string;
 
+  cities: CityDto[] = [];
+  districts: DistrictDto[] = [];
+  wards: WardDto[] = [];
+
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
 
@@ -22,6 +30,7 @@ export class RestaurantEditComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private addressService: AddressService,
     private restaurantService: AdminRestaurantService,
     private toastr: ToastrService
   ) { }
@@ -31,18 +40,41 @@ export class RestaurantEditComponent {
     this.isEditMode = !!this.restaurantId;
 
     this.initForm();
+    this.loadCities();
 
     if (this.isEditMode) {
       this.loadRestaurant();
     }
   }
 
+  private loadCities() {
+    this.addressService.getAllCities().subscribe(pagedList => {
+      this.cities = pagedList.items;
+    });
+  }
+
+  private loadDistrictsByCityId(cityId: number) {
+    this.addressService.getDistrictsByCity(cityId).subscribe(pagedList => {
+      this.districts = pagedList.items;
+    });
+  }
+
+  private loadWardsByDistrictId(districtId: number) {
+    this.addressService.getWardsByDistrict(districtId).subscribe(pagedList => {
+      this.wards = pagedList.items;
+    });
+  }
+
   initForm() {
     this.restaurantForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
+      phoneNumber: ['', Validators.required],
       houseNumber: ['', Validators.required],
-      streetName: ['', Validators.required]
+      streetName: ['', Validators.required],
+      cityId: ['', Validators.required],
+      districtId: ['', Validators.required],
+      wardId: ['', Validators.required],
     });
   }
 
@@ -50,6 +82,8 @@ export class RestaurantEditComponent {
     this.restaurantService.getRestaurantById(this.restaurantId).subscribe({
       next: (res: RestaurantDetailDto) => {
         this.restaurantForm.patchValue(res);
+        this.loadDistrictsByCityId(res.cityId);
+        this.loadWardsByDistrictId(res.districtId);
         if (res.imageUrl) {
           this.previewUrl = res.imageUrl; // hiện ảnh cũ
         }
@@ -89,13 +123,34 @@ export class RestaurantEditComponent {
     if (this.isEditMode) {
       formData.append('id', this.restaurantId);
       this.restaurantService.updateRestaurant(this.restaurantId, formData).subscribe(() => {
-          this.toastr.success('Cập nhật nhà hàng thành công!');
-          this.router.navigate(['/admin/restaurants']);
+        this.toastr.success('Cập nhật nhà hàng thành công!');
+        this.router.navigate(['/admin/restaurants']);
       });
     } else {
       this.restaurantService.createRestaurant(formData).subscribe(() => {
-          this.toastr.success('Thêm nhà hàng thành công!');
-          this.router.navigate(['/admin/restaurants']);
+        this.toastr.success('Thêm nhà hàng thành công!');
+        this.router.navigate(['/admin/restaurants']);
+      });
+    }
+  }
+
+  onCityChange(event: Event) {
+    const cityId: number = Number.parseInt((event.target as HTMLSelectElement).value);
+    if (cityId) {
+      this.addressService.getDistrictsByCity(cityId).subscribe(districtList => {
+        this.districts = districtList.items;
+        this.restaurantForm?.patchValue({ districtId: '' });
+        this.wards = []; // clear wards if city changes
+      });
+    }
+  }
+
+  onDistrictChange(event: Event) {
+    const districtId: number = Number.parseInt((event.target as HTMLSelectElement).value);
+    if (districtId) {
+      this.addressService.getWardsByDistrict(districtId).subscribe(wardList => {
+        this.wards = wardList.items;
+        this.restaurantForm?.patchValue({ wardId: '' });
       });
     }
   }

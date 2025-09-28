@@ -15,12 +15,16 @@ export class AdminRestaurantService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllRestaurants(params: DefaultParams) {
-    let httpParams = new HttpParams()
-      .set('pageNumber', params.pageNumber)
-      .set('pageSize', params.pageSize)
-      .set('sort', params.sort || RestaurantConstant.LatestUpdateDesc)
-      .set('search', params.search || '');
+  getAllRestaurants(params?: DefaultParams) {
+    let httpParams = new HttpParams();
+
+    if (params) {
+      httpParams
+        .set('pageNumber', params.pageNumber)
+        .set('pageSize', params.pageSize)
+        .set('sort', params.sort || RestaurantConstant.LatestUpdateDesc)
+        .set('search', params.search || '');
+    }
 
     return this.httpClient.get<PagedList<RestaurantDto>>(
       `${this.apiUrl}/restaurants`,
