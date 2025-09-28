@@ -65,7 +65,7 @@
                                 <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
                             </a>
                             <ng-container *ngIf="isExistRole(roleConstants.Admin, currentUser)">
-                                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/users">
+                                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/admin">
                                     <fa-icon [icon]="faCogs" class="me-3"></fa-icon>Admin
                                 </a>
                             </ng-container>
