@@ -8,6 +8,8 @@ import { CustomerCartService } from 'src/app/customer-cart/customer-cart.service
 import { RoleConstants } from 'src/app/shared/constants/role-constants';
 import { AppUserDto } from 'src/app/shared/models/authenticate/appUserDto';
 import { WishlistsService } from 'src/app/wishlists/services/wishlists.service';
+import { ShipperAuthenticateService } from 'src/app/shipper-auth/services/shipper-authenticate.service';
+import { ShipperDto } from 'src/app/shared/models/shipper/shipperDto';
 
 @Component({
   selector: 'app-nav-bar',
@@ -28,11 +30,13 @@ export class NavBarComponent implements OnInit {
   cartTotalQuantity$?: Observable<number>;
   wishListTotalQuantity$?: Observable<number>;
   currentUser$?: Observable<AppUserDto | null>;
+  currentShipper$?: Observable<ShipperDto | null>;
 
   constructor(
     public customerCartService: CustomerCartService,
     public wishListsService: WishlistsService,
     private authenticateService: AuthenticateService,
+    private shipperAuthenticateService: ShipperAuthenticateService,
     private router: Router,
     private toastr: ToastrService) {
   }
@@ -45,6 +49,7 @@ export class NavBarComponent implements OnInit {
     this.cartTotalQuantity$ = this.customerCartService.totalQuantity$;
     this.wishListTotalQuantity$ = this.wishListsService.totalQuantity$;
     this.currentUser$ = this.authenticateService.currentUser$;
+    this.currentShipper$ = this.shipperAuthenticateService.currentShipper$;
   }
 
   logout() {
@@ -52,6 +57,12 @@ export class NavBarComponent implements OnInit {
     this.customerCartService.removeTotalQuantity();
     this.wishListsService.removeTotalQuantity();
     this.toastr.success('Đăng xuất thành công!');
+    this.router.navigate(['/']);
+  }
+
+  logoutShipper() {
+    this.shipperAuthenticateService.logout();
+    this.toastr.success('Đăng xuất Shipper thành công!');
     this.router.navigate(['/']);
   }
 
