@@ -1,20 +1,16 @@
 <div class="container mt-3">
     <div class="d-flex justify-content-between mb-3">
-        <h3>Danh sách thể loại</h3>
-        <!-- <button class="btn btn-success" routerLink="/admin/genres/add">
-            <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm thể loại
-        </button> -->
+        <h3>Danh sách thành phố</h3>
         <div class="d-flex">
             <div class="input-group me-3" style="width: 250px;">
-                <input type="text" class="form-control" placeholder="Tìm kiếm..." 
-                    [(ngModel)]="search" 
+                <input type="text" class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="params.search"
                     (keyup.enter)="onSearch()">
                 <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
                     <fa-icon [icon]="faSearch"></fa-icon>
                 </button>
             </div>
-            <button class="btn btn-success" routerLink="/admin/genres/add">
-                <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm thể loại
+            <button class="btn btn-success" routerLink="/admin/cities/add">
+                <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm thành phố
             </button>
         </div>
     </div>
@@ -22,26 +18,30 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Tên thể loại</th>
+                <th>Tên thành phố</th>
                 <th>Ngày tạo</th>
                 <th>Ngày cập nhật</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let genre of genres">
-                <td>{{ genre.name }}</td>
-                <td>{{ genre.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
-                <td>{{ genre.updatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
+            <tr *ngFor="let city of cities">
+                <td>{{ city.name }}</td>
+                <td>{{ city.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ city.updatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary me-2" (click)="editGenre(genre.id)">
+                    <button class="btn btn-sm btn-primary me-2" (click)="editCity(city.id)">
                         <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
-                    <button class="btn btn-sm btn-danger" (click)="deleteGenre(genre.id)">
+                    <button class="btn btn-sm btn-danger" (click)="deleteCity(city.id)">
                         <fa-icon [icon]="faTrash"></fa-icon>
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
+        (pagedChanged)="onPageChanged($event)">
+    </app-paging-footer>
 </div>

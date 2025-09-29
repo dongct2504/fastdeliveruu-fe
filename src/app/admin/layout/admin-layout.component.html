@@ -10,9 +10,26 @@
                             Dashboard
                         </a>
                     </li>
+                    <ng-container *ngIf="isExistRole([roleConstants.Admin], currentUser$ | async)">
+                        <li class="list-group-item p-0 border-0">
+                            <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">
+                                Quản lý người dùng
+                            </a>
+                        </li>
+                    </ng-container>
                     <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">
-                            Quản lý người dùng
+                        <a routerLink="/admin/cities" routerLinkActive="active" class="nav-link">
+                            Quản lý thành phố
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0 border-0">
+                        <a routerLink="/admin/districts" routerLinkActive="active" class="nav-link">
+                            Quản lý quận
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0 border-0">
+                        <a routerLink="/admin/wards" routerLinkActive="active" class="nav-link">
+                            Quản lý phường
                         </a>
                     </li>
                     <li class="list-group-item p-0 border-0">

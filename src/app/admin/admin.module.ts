@@ -13,6 +13,12 @@ import { GenreEditComponent } from './genres/pages/genre-edit/genre-edit.compone
 import { MenuItemListComponent } from './menu-items/pages/menu-item-list.component';
 import { MenuItemEditComponent } from './menu-items/pages/menu-item-edit/menu-item-edit.component';
 import { FormsModule } from '@angular/forms';
+import { CityListComponen } from './cities/pages/city-list.component';
+import { CityEditComponent } from './cities/pages/city-edit/city-edit.component';
+import { DistrictListComponent } from './districts/pages/district-list.component';
+import { DistrictEditComponent } from './districts/pages/district-edit/district-edit.component';
+import { WardListComponent } from './wards/pages/ward-list.component';
+import { WardEditComponent } from './wards/pages/ward-edit/ward-edit.component';
 
 
 @NgModule({
@@ -25,7 +31,13 @@ import { FormsModule } from '@angular/forms';
         GenreListComponent,
         GenreEditComponent,
         MenuItemListComponent,
-        MenuItemEditComponent
+        MenuItemEditComponent,
+        CityListComponen,
+        CityEditComponent,
+        DistrictListComponent,
+        DistrictEditComponent,
+        WardListComponent,
+        WardEditComponent
     ],
     imports: [
         CommonModule,
