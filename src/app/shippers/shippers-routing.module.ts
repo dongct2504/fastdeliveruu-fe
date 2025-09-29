@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShipperProfileComponent } from './pages/shipper-profile/shipper-profile.component';
+import { ShipperOrdersComponent } from './pages/orders/shipper-orders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
-  { path: 'profile', component: ShipperProfileComponent }
+  { path: 'profile', component: ShipperProfileComponent },
+  { path: 'orders', component: ShipperOrdersComponent },
 ];
 
 @NgModule({
