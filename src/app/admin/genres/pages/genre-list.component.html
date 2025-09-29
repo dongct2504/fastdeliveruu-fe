@@ -1,9 +1,22 @@
 <div class="container mt-3">
     <div class="d-flex justify-content-between mb-3">
         <h3>Danh sách thể loại</h3>
-        <button class="btn btn-success" routerLink="/admin/genres/add">
+        <!-- <button class="btn btn-success" routerLink="/admin/genres/add">
             <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm thể loại
-        </button>
+        </button> -->
+        <div class="d-flex">
+            <div class="input-group me-3" style="width: 250px;">
+                <input type="text" class="form-control" placeholder="Tìm kiếm..." 
+                    [(ngModel)]="search" 
+                    (keyup.enter)="onSearch()">
+                <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
+                    <fa-icon [icon]="faSearch"></fa-icon>
+                </button>
+            </div>
+            <button class="btn btn-success" routerLink="/admin/genres/add">
+                <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm thể loại
+            </button>
+        </div>
     </div>
 
     <table class="table table-bordered table-striped">

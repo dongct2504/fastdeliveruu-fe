@@ -2,27 +2,27 @@
     <!-- Summary cards -->
     <div class="row g-4 mb-4">
         <div class="col-md-3">
-            <div class="card text-white bg-primary h-100">
+            <div class="card text-white bg-primary h-100 shadow-sm">
                 <div class="card-body">
-                    <h6 class="card-title text-uppercase">Tổng đơn tháng</h6>
+                    <h6 class="card-title text-uppercase">Tổng đơn</h6>
                     <h2 class="card-text">{{ totalOrders }}</h2>
                 </div>
-                <div class="card-footer small text-white-50">Tất cả đơn trong tháng này</div>
+                <div class="card-footer small text-white-50">Số đơn trong khoảng đã chọn</div>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card text-white bg-success h-100">
+            <div class="card text-white bg-success h-100 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase">Doanh thu</h6>
                     <h2 class="card-text">{{ totalRevenue | currency:'VND' }}</h2>
                 </div>
-                <div class="card-footer small text-white-50">Tổng doanh thu trong tháng</div>
+                <div class="card-footer small text-white-50">Tổng doanh thu</div>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card text-white bg-info h-100">
+            <div class="card text-white bg-info h-100 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase">Đã thanh toán</h6>
                     <h2 class="card-text">{{ totalPaid | currency:'VND' }}</h2>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card text-white bg-danger h-100">
+            <div class="card text-white bg-danger h-100 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase">Chưa thanh toán</h6>
                     <h2 class="card-text">{{ totalUnpaid | currency:'VND' }}</h2>
@@ -45,9 +45,22 @@
     <!-- Orders table -->
     <div class="card shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Đơn hàng trong tháng</h5>
-            <button class="btn btn-sm btn-primary">Xem tất cả</button>
+            <h5 class="mb-0">Đơn hàng</h5>
+
+            <!-- Time range filter -->
+            <div class="d-flex align-items-center gap-2">
+                <label class="form-label mb-0 me-2">Khoảng thời gian:</label>
+                <select class="form-select form-select-sm" [(ngModel)]="orderParams.timeRange"
+                    (change)="onChangeRange(orderParams.timeRange)">
+                    <option [value]="TimeRangeEnum.Today">Hôm nay</option>
+                    <option [value]="TimeRangeEnum.ThisWeek">Tuần này</option>
+                    <option [value]="TimeRangeEnum.ThisMonth">Tháng này</option>
+                    <option [value]="TimeRangeEnum.ThisYear">Năm nay</option>
+                    <option [value]="TimeRangeEnum.All">Tất cả</option>
+                </select>
+            </div>
         </div>
+
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
@@ -68,19 +81,46 @@
                             <td class="text-center">
                                 <span class="badge" [ngClass]="{
                                     'bg-warning text-dark': order.orderStatus === OrderStatusEnum.Pending,
+                                    'bg-primary': order.orderStatus === OrderStatusEnum.Processing,
                                     'bg-success': order.orderStatus === OrderStatusEnum.Success,
-                                    'bg-danger': order.orderStatus === OrderStatusEnum.Cancelled
+                                    'bg-danger': order.orderStatus === OrderStatusEnum.Cancelled,
+                                    'bg-secondary': order.orderStatus === OrderStatusEnum.Failed,
+                                    'bg-info': order.orderStatus === OrderStatusEnum.Shipped,
+                                    'bg-light text-dark': order.orderStatus === OrderStatusEnum.Refunded
                                 }">
-                                    {{ order.orderStatus }}
+                                    {{ OrderStatusDescriptions[order.orderStatus ?? 1] }}
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span *ngIf="order.transactionId" class="badge bg-success">Paid</span>
-                                <span *ngIf="!order.transactionId" class="badge bg-danger">Unpaid</span>
+                                <span class="badge" [ngClass]="{
+                                    'bg-warning text-dark': getPaymentStatus(order) === PaymentStatusEnum.Pending,
+                                    'bg-primary': getPaymentStatus(order) === PaymentStatusEnum.Processing,
+                                    'bg-success': getPaymentStatus(order) === PaymentStatusEnum.Approved,
+                                    'bg-danger': getPaymentStatus(order) === PaymentStatusEnum.Cancelled,
+                                    'bg-secondary': getPaymentStatus(order) === PaymentStatusEnum.Failed,
+                                    'bg-info': getPaymentStatus(order) === PaymentStatusEnum.Shipped,
+                                    'bg-light text-dark': getPaymentStatus(order) === PaymentStatusEnum.Refunded,
+                                    'bg-dark text-white': getPaymentStatus(order) === PaymentStatusEnum.DelayedPayment
+                                }">
+                                    {{ PaymentStatusDescriptions[getPaymentStatus(order)] }}
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="orders.length === 0">
+                            <td colspan="5" class="text-center text-muted py-4">
+                                Không có đơn hàng nào trong khoảng thời gian đã chọn
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="p-3">
+                <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
+                    (pagedChanged)="onPageChanged($event)">
+                </app-paging-footer>
             </div>
         </div>
     </div>

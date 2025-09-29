@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { RestaurantDto } from 'src/app/shared/models/restaurants/restaurantDto';
 import { AdminRestaurantService } from '../services/admin-restaurant.service';
-import { faAdd, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faEdit, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { RestaurantParams } from 'src/app/shared/models/restaurants/restaurantParams';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -15,7 +16,7 @@ export class RestaurantListComponent implements OnInit {
   totalRecords = 0;
   itemsPerPage = 0;
 
-  defaultParams: DefaultParams = {
+  params: RestaurantParams = {
     pageNumber: 1,
     pageSize: 10,
     sort: '',
@@ -26,6 +27,7 @@ export class RestaurantListComponent implements OnInit {
   faAdd = faAdd;
   faEdit = faEdit;
   faTrash = faTrash;
+  faSearch = faSearch;
 
   constructor(private restaurantService: AdminRestaurantService, private router: Router) { }
 
@@ -34,7 +36,9 @@ export class RestaurantListComponent implements OnInit {
   }
 
   loadRestaurants(): void {
-    this.restaurantService.getAllRestaurants(this.defaultParams).subscribe(result => {
+    console.log(this.params);
+    
+    this.restaurantService.getAllRestaurants(this.params).subscribe(result => {
       this.restaurants = result.items;
       this.totalRecords = result.totalRecords;
       this.itemsPerPage = result.pageSize;
@@ -42,10 +46,15 @@ export class RestaurantListComponent implements OnInit {
   }
 
   onPageChanged(event: any) {
-    if (this.defaultParams.pageNumber !== event) {
-      this.defaultParams.pageNumber = event;
+    if (this.params.pageNumber !== event) {
+      this.params.pageNumber = event;
       this.loadRestaurants();
     }
+  }
+
+  onSearch() {
+    this.params.pageNumber = 1; // reset page
+    this.loadRestaurants();
   }
 
   editRestaurant(id: string) {

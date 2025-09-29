@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faAdd, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faEdit, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { MenuItemDto } from 'src/app/shared/models/menuItems/menuItemDto';
 import { AdminMenuItemService } from '../services/admin-menu-item.service';
 import { Router } from '@angular/router';
@@ -15,11 +15,21 @@ export class MenuItemListComponent implements OnInit {
   faAdd = faAdd;
   faEdit = faEdit;
   faTrash = faTrash;
+  faSearch = faSearch;
 
   menuItems: MenuItemDto[] = [];
   itemsPerPage = 10;
   totalRecords = 0;
   pageNumber = 1;
+
+  params: MenuItemParams = {
+    pageNumber: this.pageNumber,
+    pageSize: this.itemsPerPage,
+    genreId: null,
+    restaurantId: null,
+    sort: '',
+    search: ''
+  };
 
   constructor(
     private menuItemService: AdminMenuItemService,
@@ -31,16 +41,7 @@ export class MenuItemListComponent implements OnInit {
   }
 
   loadMenuItems() {
-    const params: MenuItemParams = {
-      pageNumber: this.pageNumber,
-      pageSize: this.itemsPerPage,
-      genreId: null,
-      restaurantId: null,
-      sort: '',
-      search: ''
-    };
-
-    this.menuItemService.getAll(params).subscribe({
+    this.menuItemService.getAll(this.params).subscribe({
       next: (response: PagedList<MenuItemDto>) => {
         this.menuItems = response.items;
         this.totalRecords = response.totalRecords;
@@ -48,8 +49,13 @@ export class MenuItemListComponent implements OnInit {
     });
   }
 
+  onSearch(): void {
+    this.params.pageNumber = 1;
+    this.loadMenuItems();
+  }
+
   onPageChanged(page: number) {
-    this.pageNumber = page;
+    this.params.pageNumber = page;
     this.loadMenuItems();
   }
 

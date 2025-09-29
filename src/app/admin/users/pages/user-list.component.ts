@@ -3,6 +3,7 @@ import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { AdminUserService } from '../services/admin-user.service';
 import { AppUserWithRolesDto } from 'src/app/shared/models/users/appUserWithRolesDto';
 import { RoleConstants } from 'src/app/shared/constants/role-constants';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-user-list',
@@ -14,7 +15,7 @@ export class UserListComponent {
   totalRecords = 0;
   itemsPerPage = 0;
 
-  defaultParams: DefaultParams = {
+  params: DefaultParams = {
     pageNumber: 1,
     pageSize: 10,
     sort: '',
@@ -28,6 +29,10 @@ export class UserListComponent {
     { value: RoleConstants.Shipper, label: 'Người giao hàng' }
   ];
 
+  // icons
+  faPlus = faPlus;
+  faSearch = faSearch;
+
   constructor(private adminUserService: AdminUserService) { }
 
   ngOnInit(): void {
@@ -35,7 +40,7 @@ export class UserListComponent {
   }
 
   loadUsers(): void {
-    this.adminUserService.getUsersWithRoles(this.defaultParams).subscribe(result => {
+    this.adminUserService.getUsersWithRoles(this.params).subscribe(result => {
       this.users = result.items;
       this.totalRecords = result.totalRecords;
       this.itemsPerPage = result.pageSize
@@ -43,20 +48,19 @@ export class UserListComponent {
   }
 
   onPageChanged(event: any) {
-    if (this.defaultParams.pageNumber !== event) {
-      this.defaultParams.pageNumber = event;
+    if (this.params.pageNumber !== event) {
+      this.params.pageNumber = event;
       this.loadUsers();
     }
   }
 
-  onSearch(value: string): void {
-    this.defaultParams.search = value;
-    this.defaultParams.pageNumber = 1;
+  onSearch(): void {
+    this.params.pageNumber = 1;
     this.loadUsers();
   }
 
   onSort(sort: string): void {
-    this.defaultParams.sort = sort;
+    this.params.sort = sort;
     this.loadUsers();
   }
 
