@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateGenreCommand } from 'src/app/shared/models/genres/createGenreCommand';
 import { GenreDetailDto } from 'src/app/shared/models/genres/genreDetailDto';
@@ -14,9 +14,13 @@ export class AdminGenresService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllGenres() {
+  getAllGenres(search?: string) {
+    let params = new HttpParams;
+    if (search) {
+      params = params.set('search', search);
+    }
     return this.httpClient.get<GenreDto[]>(
-      `${this.apiUrl}/genres`
+      `${this.apiUrl}/genres`, { params: params }
     );
   }
 

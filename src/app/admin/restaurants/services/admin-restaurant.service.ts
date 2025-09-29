@@ -19,7 +19,7 @@ export class AdminRestaurantService {
     let httpParams = new HttpParams();
 
     if (params) {
-      httpParams
+      httpParams = httpParams
         .set('pageNumber', params.pageNumber)
         .set('pageSize', params.pageSize)
         .set('sort', params.sort || RestaurantConstant.LatestUpdateDesc)

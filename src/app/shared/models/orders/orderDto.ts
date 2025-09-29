@@ -1,5 +1,6 @@
 import { OrderStatusEnum } from "../../enums/order-status.enum";
 import { PaymentMethodsEnum } from "../../enums/payment-methods.enum";
+import { PaymentDto } from "./paymentDto";
 
 export interface OrderDto {
     id: string;
@@ -20,4 +21,5 @@ export interface OrderDto {
     wardId: number;
     latitude: number;
     longitude: number;
+    paymentDtos: PaymentDto[]
 }

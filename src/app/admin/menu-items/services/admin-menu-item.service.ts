@@ -19,7 +19,7 @@ export class AdminMenuItemService {
     let httpParams = new HttpParams();
     if (params.pageNumber) httpParams = httpParams.append('pageNumber', params.pageNumber);
     if (params.pageSize) httpParams = httpParams.append('pageSize', params.pageSize);
-    if (params.search) httpParams = httpParams.append('searchTerm', params.search);
+    if (params.search) httpParams = httpParams.append('search', params.search);
     if (params.restaurantId) httpParams = httpParams.append('restaurantId', params.restaurantId);
     if (params.genreId) httpParams = httpParams.append('genreId', params.genreId);
 

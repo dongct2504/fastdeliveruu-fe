@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faAdd, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faEdit, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { GenreDto } from 'src/app/shared/models/genres/genreDto';
 import { AdminGenresService } from '../services/admin-genres.service';
 import { Router } from '@angular/router';
@@ -11,11 +11,13 @@ import { Router } from '@angular/router';
 })
 export class GenreListComponent implements OnInit {
   genres: GenreDto[] = [];
+  search: string = '';
 
   // icons
   faAdd = faAdd;
   faEdit = faEdit;
   faTrash = faTrash;
+  faSearch = faSearch;
 
   constructor(
     private genreService: AdminGenresService,
@@ -26,10 +28,14 @@ export class GenreListComponent implements OnInit {
     this.loadGenres();
   }
 
-  loadGenres(): void {
-    this.genreService.getAllGenres().subscribe(result => {
+  loadGenres(search?: string): void {
+    this.genreService.getAllGenres(search).subscribe(result => {
       this.genres = result;
     });
+  }
+
+  onSearch(): void {
+    this.loadGenres(this.search);
   }
 
   editGenre(id: string) {
