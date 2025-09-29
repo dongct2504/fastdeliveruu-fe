@@ -17,6 +17,18 @@ const routes: Routes = [
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
       {
+        path: 'cities',
+        loadChildren: () => import('./cities/cities.module').then(m => m.CitiesModule)
+      },
+      {
+        path: 'districts',
+        loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule)
+      },
+      {
+        path: 'wards',
+        loadChildren: () => import('./wards/wards.module').then(m => m.WardsModule)
+      },
+      {
         path: 'restaurants',
         loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule)
       },

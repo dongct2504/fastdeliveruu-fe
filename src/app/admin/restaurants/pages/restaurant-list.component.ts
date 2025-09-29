@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { RestaurantDto } from 'src/app/shared/models/restaurants/restaurantDto';
 import { AdminRestaurantService } from '../services/admin-restaurant.service';
 import { faAdd, faEdit, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
