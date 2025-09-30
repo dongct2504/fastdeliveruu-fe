@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>{{ isEditMode ? 'Chỉnh sửa quận/huyện' : 'Thêm mới quận/huyện' }}</h3>
+        <button class="btn btn-secondary" (click)="cancel()">
+            <i class="bi bi-arrow-left"></i> Quay lại
+        </button>
+    </div>
+
+    <form [formGroup]="districtForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+            <label class="form-label">Tên quận/huyện</label>
+            <input type="text" formControlName="name" class="form-control" />
+            <div *ngIf="districtForm.get('name')?.invalid && districtForm.get('name')?.touched" class="text-danger">
+                Tên quận/huyện là bắt buộc
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Thuộc thành phố</label>
+            <select formControlName="cityId" class="form-select">
+                <option [ngValue]="null">-- Chọn thành phố --</option>
+                <option *ngFor="let city of cities" [value]="city.id">
+                    {{ city.name }}
+                </option>
+            </select>
+            <div *ngIf="districtForm.get('cityId')?.invalid && districtForm.get('cityId')?.touched" class="text-danger">
+                Vui lòng chọn thành phố
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="districtForm.invalid">
+            <i class="bi bi-save"></i>
+            {{ isEditMode ? 'Cập nhật' : 'Thêm mới' }}
+        </button>
+    </form>
+</div>

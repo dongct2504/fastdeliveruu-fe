@@ -64,6 +64,11 @@
                             <a class="dropdown-item d-flex align-items-center py-2" routerLink="/users">
                                 <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
                             </a>
+                            <ng-container *ngIf="isExistRole([roleConstants.Admin, roleConstants.Staff], currentUser)">
+                                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/admin">
+                                    <fa-icon [icon]="faCogs" class="me-3"></fa-icon>Admin
+                                </a>
+                            </ng-container>
                             <a class="dropdown-item d-flex align-items-center py-2" routerLink="/carts">
                                 <fa-icon [icon]="faCartShopping" class="me-3"></fa-icon>Giỏ hàng
                             </a>
