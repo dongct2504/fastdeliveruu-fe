@@ -12,4 +12,5 @@ export interface AppUserDto {
     wardId: number;
     latitude: number;
     longitude: number;
+    roles: string[];
 }

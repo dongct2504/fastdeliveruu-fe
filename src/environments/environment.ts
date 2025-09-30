@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: ''
+    apiUrl: 'https://polecat-enabled-aphid.ngrok-free.app/api/v1'
 };

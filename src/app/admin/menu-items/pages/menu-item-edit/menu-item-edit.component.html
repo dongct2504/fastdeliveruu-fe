@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <form [formGroup]="menuItemForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label class="form-label">Nhà hàng</label>
+            <select formControlName="restaurantId" class="form-select">
+                <option *ngFor="let r of restaurants" [value]="r.id">{{ r.name }}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Thể loại</label>
+            <select formControlName="genreId" class="form-select">
+                <option *ngFor="let g of genres" [value]="g.id">{{ g.name }}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tên món</label>
+            <input formControlName="name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mô tả</label>
+            <textarea formControlName="description" class="form-control"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Giá</label>
+                <input type="number" formControlName="price" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Giảm giá (%)</label>
+                <input type="number" formControlName="discountPercent" class="form-control" />
+                <div *ngIf="menuItemForm.get('discountPercent')?.invalid && menuItemForm.get('discountPercent')?.touched" class="text-danger">
+                    Giá giảm giá không hợp lệ chỉ được từ 0 đến 1
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Số lượng khả dụng</label>
+                <input type="number" formControlName="quantityAvailable" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Số lượng đã đặt</label>
+                <input type="number" formControlName="quantityReserved" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ảnh</label>
+            <input type="file" (change)="onFileSelected($event)" class="form-control" />
+            <div *ngIf="previewUrl" class="mt-2">
+                <img [src]="previewUrl" alt="Preview" style="max-height: 150px;" />
+                <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFile()">X</button>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success me-2">Lưu</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Hủy</button>
+        </div>
+    </form>
+</div>
