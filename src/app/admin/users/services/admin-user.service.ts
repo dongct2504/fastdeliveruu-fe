@@ -27,7 +27,9 @@ export class AdminUserService {
     return this.httpClient.post(`${this.apiUrl}/admin/toggle-lock`, { userName: username, action: action });
   }
 
-  updateUserRoles() {
-
+  updateUserRoles(id: string, roles: string) {
+    return this.httpClient.post(`${this.apiUrl}/admin/edit-user-roles/${id}`, JSON.stringify(roles), {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }

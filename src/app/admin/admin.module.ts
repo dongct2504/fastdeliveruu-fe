@@ -19,6 +19,7 @@ import { DistrictListComponent } from './districts/pages/district-list.component
 import { DistrictEditComponent } from './districts/pages/district-edit/district-edit.component';
 import { WardListComponent } from './wards/pages/ward-list.component';
 import { WardEditComponent } from './wards/pages/ward-edit/ward-edit.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { WardEditComponent } from './wards/pages/ward-edit/ward-edit.component';
         CommonModule,
         AdminRoutingModule,
         SharedModule,
-        FormsModule
+        FormsModule,
+        ModalModule
     ]
 })
 export class AdminModule { }
