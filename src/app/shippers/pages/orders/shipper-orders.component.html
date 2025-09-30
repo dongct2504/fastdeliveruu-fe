@@ -1,0 +1,39 @@
+<div class="container mt-4" *ngIf="shipper">
+  <h3 class="mb-3">Đơn hàng gần bạn</h3>
+  <div class="card shadow-sm">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Đơn hàng</th>
+            <th>Ngày tạo đơn</th>
+            <th>Thanh toán</th>
+            <th>Tổng</th>
+            <th>Trạng thái</th>
+            <th>Khoảng cách</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of orders">
+            <td>{{ o.id }}</td>
+            <td>{{ o.orderDate | date: 'short' }}</td>
+            <td>{{ o.paymentMethodText }}</td>
+            <td>{{ o.totalAmount | number:'1.0-0' }} VND</td>
+            <td>{{ o.orderStatusText }}</td>
+            <td>{{ o.distanceKm | number:'1.2-2' }} km</td>
+            <td>
+              <button class="btn btn-sm btn-secondary" disabled>
+                Chấp nhận đơn
+              </button>
+
+            </td>
+          </tr>
+          <tr *ngIf="orders.length === 0">
+            <td colspan="7" class="text-center py-4">Không có đơn hàng phù hợp.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

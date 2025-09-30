@@ -1,88 +1,118 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" routerLink="/">
-            <img src="/assets/images/logo.png" alt="logo" class="logo me-2">
-            <span class="blog-header-logo">FastDeliveruu</span>
-        </a>
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img src="/assets/images/logo.png" alt="logo" class="logo me-2">
+      <span class="blog-header-logo">FastDeliveruu</span>
+    </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-            <fa-icon [icon]="faBars"></fa-icon>
-        </button>
+      <fa-icon [icon]="faBars"></fa-icon>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Add a spacer div to push the search form to the center -->
-            <div class="d-flex flex-grow-1">
-                <ul class="navbar-nav mx-auto navbar-middle-content">
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }">
-                            Trang chủ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/menu-items" routerLinkActive="active">Món ăn</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/restaurants" routerLinkActive="active">Nhà hàng</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/contact" routerLinkActive="active">Liên hệ</a>
-                    </li>
-                </ul>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Add a spacer div to push the search form to the center -->
+      <div class="d-flex flex-grow-1">
+        <ul class="navbar-nav mx-auto navbar-middle-content">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
+              Trang chủ
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/menu-items" routerLinkActive="active">Món ăn</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/restaurants" routerLinkActive="active">Nhà hàng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact" routerLinkActive="active">Liên hệ</a>
+          </li>
+          <li class="nav-item" *ngIf="(currentShipper$ | async)">
+            <a class="nav-link" routerLink="/shipper/orders" routerLinkActive="active">Đơn hàng</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Buttons on the right -->
+      <div class="d-flex ms-auto">
+        <!-- Show wishlist and cart ONLY when a regular user is logged in -->
+        <ng-container *ngIf="(currentUser$ | async) as currentUser">
+          <a class="btn text-dark position-relative" routerLink="/wishlists">
+            <fa-icon [icon]="faHeart" [size]="'2x'"></fa-icon>
+            <div class="cart-no" *ngIf="(wishListTotalQuantity$ | async) as totalQuantity">
+              {{totalQuantity}}
             </div>
-
-            <!-- Buttons on the right -->
-            <div class="d-flex ms-auto">
-                <a class="btn text-dark position-relative" routerLink="/wishlists">
-                    <fa-icon [icon]="faHeart" [size]="'2x'"></fa-icon>
-                    <div class="cart-no" *ngIf="(wishListTotalQuantity$ | async) as totalQuantity">
-                        {{totalQuantity}}
-                    </div>
-                </a>
-                <a class="btn me-4 text-dark position-relative" routerLink="/carts">
-                    <fa-icon [icon]="faCartShopping" [size]="'2x'"></fa-icon>
-                    <div class="cart-no" *ngIf="(cartTotalQuantity$ | async) as totalQuantity">
-                        {{totalQuantity}}
-                    </div>
-                </a>
-
-                <ng-container *ngIf="(currentUser$ | async) === null">
-                    <button class="btn btn-warning me-2" routerLink="/authen/register">Đăng ký</button>
-                    <button class="btn btn-dark me-2" routerLink="/authen/login">Đăng nhập</button>
-                </ng-container>
-
-                <ng-container *ngIf="(currentUser$ | async) as currentUser">
-                    <div class="dropdown ms-3 me-5 d-flex align-items-center" dropdown>
-                        <a class="dropdown-toggle no-underline text-dark me-2"
-                            style="cursor: pointer;" dropdownToggle>
-                            <strong>{{currentUser.userName}}</strong>
-                        </a>
-                        <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
-
-                        <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
-                            <a class="dropdown-item d-flex align-items-center py-2" routerLink="/users">
-                                <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
-                            </a>
-                            <ng-container *ngIf="isExistRole([roleConstants.Admin, roleConstants.Staff], currentUser)">
-                                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/admin">
-                                    <fa-icon [icon]="faCogs" class="me-3"></fa-icon>Admin
-                                </a>
-                            </ng-container>
-                            <a class="dropdown-item d-flex align-items-center py-2" routerLink="/carts">
-                                <fa-icon [icon]="faCartShopping" class="me-3"></fa-icon>Giỏ hàng
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center py-2" routerLink="/orders">
-                                <fa-icon [icon]="faHistory" class="me-3"></fa-icon>Các đơn đã đặt
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item d-flex align-items-center py-2" (click)="logout()">
-                                <fa-icon [icon]="faSignOut" class="me-3"></fa-icon>Đăng xuất
-                            </a>
-                        </div>
-                    </div>
-                </ng-container>
+          </a>
+          <a class="btn me-4 text-dark position-relative" routerLink="/carts">
+            <fa-icon [icon]="faCartShopping" [size]="'2x'"></fa-icon>
+            <div class="cart-no" *ngIf="(cartTotalQuantity$ | async) as totalQuantity">
+              {{totalQuantity}}
             </div>
-        </div>
+          </a>
+        </ng-container>
+
+        <!-- If neither user nor shipper logged in -->
+        <ng-container *ngIf="(currentUser$ | async) === null && (currentShipper$ | async) === null">
+          <button class="btn btn-dark me-2" routerLink="/shipper-auth/login">Shipper</button>
+          <button class="btn btn-warning me-2" routerLink="/authen/register">Đăng ký</button>
+          <button class="btn btn-dark me-2" routerLink="/authen/login">Đăng nhập</button>
+        </ng-container>
+
+        <!-- User dropdown -->
+        <ng-container *ngIf="(currentUser$ | async) as currentUser">
+          <div class="dropdown ms-3 me-5 d-flex align-items-center" dropdown>
+            <a class="dropdown-toggle no-underline text-dark me-2"
+               style="cursor: pointer;" dropdownToggle>
+              <strong>{{currentUser.userName}}</strong>
+
+            </a>
+            <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
+
+            <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+              <a class="dropdown-item d-flex align-items-center py-2" routerLink="/users">
+                <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
+              </a>
+              <ng-container *ngIf="isExistRole([roleConstants.Admin, roleConstants.Staff], currentUser)">
+                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/admin">
+                  <fa-icon [icon]="faCogs" class="me-3"></fa-icon>Admin
+                </a>
+              </ng-container>
+              <a class="dropdown-item d-flex align-items-center py-2" routerLink="/carts">
+                <fa-icon [icon]="faCartShopping" class="me-3"></fa-icon>Giỏ hàng
+              </a>
+              <a class="dropdown-item d-flex align-items-center py-2" routerLink="/orders">
+                <fa-icon [icon]="faHistory" class="me-3"></fa-icon>Các đơn đã đặt
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item d-flex align-items-center py-2" (click)="logout()">
+                <fa-icon [icon]="faSignOut" class="me-3"></fa-icon>Đăng xuất
+              </a>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Shipper dropdown -->
+        <ng-container *ngIf="(currentUser$ | async) === null && (currentShipper$ | async) as currentShipper">
+          <div class="dropdown ms-3 me-5 d-flex align-items-center" dropdown>
+            <a class="dropdown-toggle no-underline text-dark me-2" style="cursor: pointer;" dropdownToggle>
+              <strong>{{currentShipper.userName}}</strong>
+            </a>
+            <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
+
+            <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+              <a class="dropdown-item d-flex align-items-center py-2" routerLink="/shipper/profile">
+                <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item d-flex align-items-center py-2" (click)="logoutShipper()">
+                <fa-icon [icon]="faSignOut" class="me-3"></fa-icon>Đăng xuất
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </div>
+  </div>
 </nav>
