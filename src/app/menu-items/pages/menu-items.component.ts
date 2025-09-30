@@ -62,7 +62,7 @@ export class MenuItemsComponent implements OnInit {
 
   private getGenres() {
     this.menuItemsService.getGenres().subscribe(genres => {
-      this.genres = [{ id: '', name: 'Tất cả', createdAt: '', updatedAt: '' }, ...genres]
+      this.genres = [{ id: '', name: 'Tất cả' }, ...genres]
     });
   }
 

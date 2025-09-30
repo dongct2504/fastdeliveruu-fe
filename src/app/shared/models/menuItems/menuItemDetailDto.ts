@@ -10,8 +10,6 @@ export interface MenuItemDetailDto {
     discountPercent: number;
     discountAmount: number;
     discountPrice: number;
-    quantityAvailable: number;   // flatten
-    quantityReserved: number;
     imageUrl: string;
     genreDto: GenreDto | null;
     restaurantDto: RestaurantDto | null;

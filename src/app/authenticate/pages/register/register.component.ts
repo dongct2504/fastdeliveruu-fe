@@ -7,7 +7,6 @@ import { CityDto } from 'src/app/shared/models/addresses/cityDto';
 import { DistrictDto } from 'src/app/shared/models/addresses/districtDto';
 import { WardDto } from 'src/app/shared/models/addresses/wardDto';
 import { AuthenticateService } from '../../services/authenticate.service';
-import { RoleConstants } from 'src/app/shared/constants/role-constants';
 
 @Component({
   selector: 'app-register',
@@ -22,14 +21,6 @@ export class RegisterComponent implements OnInit {
   cities: CityDto[] = [];
   districts: DistrictDto[] = [];
   wards: WardDto[] = [];
-
-  isAdmin: boolean = false;
-  roles = [
-    { value: RoleConstants.Admin, label: 'Quản trị viên' },
-    { value: RoleConstants.Staff, label: 'Nhân viên' },
-    { value: RoleConstants.Customer, label: 'Người mua' },
-    { value: RoleConstants.Shipper, label: 'Người giao hàng' }
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -50,8 +41,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm.get('districtId')?.valueChanges.subscribe(districtId => {
       this.onDistrictChange(districtId);
     });
-
-    this.isAdmin = this.authenticateService.isInRole(RoleConstants.Admin);
   }
 
   private onCityChange(cityId: number) {
@@ -127,8 +116,7 @@ export class RegisterComponent implements OnInit {
       ]],
       cityId: ['', [
         Validators.required
-      ]],
-      role: []
+      ]]
     }, {
       validators: this.passwordsMatchValidator
     });
@@ -136,7 +124,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.authenticateService.register(this.registerForm.value).subscribe(res => {
-      // console.log(res.token);
+      console.log(res.token);
       this.toastr.success('Đăng ký thành công, vui lòng xác nhận email trước khi đăng nhập!');
       this.router.navigate(['/authen/confirm-email']);
     }, err => {

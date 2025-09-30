@@ -99,15 +99,6 @@
                 </div>
             </div>
 
-            <div class="form-floating mb-3" *ngIf="isAdmin">
-                <select formControlName="role" class="form-select">
-                    <option *ngFor="let r of roles" [value]="r.value">
-                    {{ r.label }}
-                    </option>
-                </select>
-                <label>Phân quyền</label>
-            </div>
-
             <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" [disabled]="registerForm.invalid">
                 Đăng ký
             </button>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PaymentMethodsEnum } from 'src/app/shared/enums/payment-methods.enum';
 import { PaymentResponse } from 'src/app/shared/models/orders/paymentResponse';
 
 @Component({
@@ -20,9 +19,5 @@ export class CheckoutSuccessComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  getPaymentMethodName(method: number): string {
-    return PaymentMethodsEnum[method] === "Cash" ? "Tiền mặt" : method.toString();
   }
 }

@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-between flex-row mt-3 mb-5" *ngIf="formName !== 'review'">
-    <button *ngIf="formName === 'infoForm'" class="btn btn-outline-primary" routerLink="/carts">
+    <button *ngIf="formName === 'addressForm'" class="btn btn-outline-primary" routerLink="/carts">
         <fa-icon [icon]="faAngleLeft"></fa-icon> {{leftText}}
     </button>
 
-    <button *ngIf="formName !== 'infoForm'" class="btn btn-outline-primary" cdkStepperPrevious>
+    <button *ngIf="formName !== 'addressForm'" class="btn btn-outline-primary" cdkStepperPrevious>
         <fa-icon [icon]="faAngleLeft"></fa-icon> {{leftText}}
     </button>
 

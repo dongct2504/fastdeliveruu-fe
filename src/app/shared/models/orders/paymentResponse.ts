@@ -3,7 +3,7 @@ export interface PaymentResponse {
     orderId: string
     totalAmount: number
     transactionId: string
-    paymentMethod: number
+    paymentMethod: string
     orderDescription: string
 
     vnpayResponseCode: string

@@ -18,7 +18,7 @@ export class OrdersService {
     params = params.append('pageNumber', pageNumber.toString());
     params = params.append('pageSize', pageSize.toString());
 
-    return this.httpClient.get<PagedList<OrderDto>>(`${this.apiUrl}/orders/get-orders-by-user`, { params });
+    return this.httpClient.get<PagedList<OrderDto>>(`${this.apiUrl}/orders`, { params });
   }
 
   public getOrder(id: string) {
