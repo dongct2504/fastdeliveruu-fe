@@ -6,25 +6,39 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationResponse } from 'src/app/shared/models/authenticate/authenticationResponse';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor() {
-  }
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const authenJson = localStorage.getItem('fastdeliveruu-authen');
+    const isShipperApi = request.url.includes('/shipper-') || request.url.includes('/shipper/');
 
-    if (authenJson) {
-      const authen: AuthenticationResponse = JSON.parse(authenJson);
-
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${authen.token}`
-        }
-      })
+    if (isShipperApi) {
+      const shipperAuthJson = localStorage.getItem('fastdeliveruu-shipper-authen');
+      if (shipperAuthJson) {
+        try {
+          const shipperAuth = JSON.parse(shipperAuthJson) as { token?: string };
+          if (shipperAuth?.token) {
+            request = request.clone({
+              setHeaders: { Authorization: `Bearer ${shipperAuth.token}` }
+            });
+          }
+        } catch {}
+      }
+    } else {
+      const authenJson = localStorage.getItem('fastdeliveruu-authen');
+      if (authenJson) {
+        try {
+          const authen = JSON.parse(authenJson) as { token?: string };
+          if (authen?.token) {
+            request = request.clone({
+              setHeaders: { Authorization: `Bearer ${authen.token}` }
+            });
+          }
+        } catch {}
+      }
     }
 
     return next.handle(request);
