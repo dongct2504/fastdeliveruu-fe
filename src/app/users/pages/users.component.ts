@@ -115,4 +115,12 @@ export class UsersComponent implements OnInit {
       );
     }
   }
+
+  formatPhone(phone: string): string {
+    if (!phone) return '';
+    if (phone.startsWith('+84')) {
+      return '0' + phone.substring(3);
+    }
+    return phone;
+  }
 }

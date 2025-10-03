@@ -18,7 +18,7 @@
                     <h4 class="mb-3">Hồ sơ người dùng</h4>
                     <p><strong>Email:</strong> {{userProfile.email}}</p>
                     <div>
-                        <strong>Số điện thoại:</strong> {{userProfile.phoneNumber}}
+                        <strong>Số điện thoại:</strong> {{formatPhone(userProfile.phoneNumber)}}
                         <span *ngIf="userProfile.phoneNumberConfirmed" class="small">
                             (Đã xác thực)
                         </span>
@@ -52,11 +52,11 @@
                     </p>
                 </div>
 
-                <div *ngIf="userProfile.latitude && userProfile.longitude" class="mb-4">
+                <!-- <div *ngIf="userProfile.latitude && userProfile.longitude" class="mb-4">
                     <h4 class="mb-3"><i class="fas fa-location-arrow"></i> Location</h4>
                     <p><strong>Latitude:</strong> {{userProfile.latitude}}</p>
                     <p><strong>Longitude:</strong> {{userProfile.longitude}}</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
