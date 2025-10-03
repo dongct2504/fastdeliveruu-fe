@@ -10,6 +10,8 @@ import { CoreModule } from './core/core.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgrokHeaderInterceptor } from './core/interceptors/ngrok-header.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ModalModule.forRoot(),
     HttpClientModule,
     CoreModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: NgrokHeaderInterceptor, multi: true }
   ],
   bootstrap: [
     AppComponent
