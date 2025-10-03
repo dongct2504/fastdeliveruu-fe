@@ -13,4 +13,8 @@ export class ShipperOrdersService {
     // NOTE: Replace with actual API when available
     return this.http.get<any[]>(`${this.apiUrl}/shipper-orders/available?lat=${lat}&lng=${lng}`);
   }
+
+  getDeliveryHistory() {
+    return this.http.get<any[]>(`${this.apiUrl}/shipper-orders/history`);
+  }
 }

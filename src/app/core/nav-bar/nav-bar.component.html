@@ -66,7 +66,6 @@
             <a class="dropdown-toggle no-underline text-dark me-2"
                style="cursor: pointer;" dropdownToggle>
               <strong>{{currentUser.userName}}</strong>
-
             </a>
             <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
 
@@ -104,6 +103,9 @@
             <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
               <a class="dropdown-item d-flex align-items-center py-2" routerLink="/shipper/profile">
                 <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
+              </a>
+              <a class="dropdown-item d-flex align-items-center py-2" routerLink="/shipper/deliveries">
+                <fa-icon [icon]="faHistory" class="me-3"></fa-icon>Lịch sử đã giao hàng
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item d-flex align-items-center py-2" (click)="logoutShipper()">
