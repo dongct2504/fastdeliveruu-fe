@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { TimeRangeEnum } from 'src/app/shared/enums/time-range.enum';
 import { OrderDto } from 'src/app/shared/models/orders/orderDto';
 import { OrderParams } from 'src/app/shared/models/orders/orderParams';
-import { OrderSummaryDto } from 'src/app/shared/models/orders/OrderSummaryDto';
+import { OrderSummaryDto } from 'src/app/shared/models/orders/orderSummaryDto';
 import { PagedList } from 'src/app/shared/models/PagedList';
 import { environment } from 'src/environments/environment.development';
 
