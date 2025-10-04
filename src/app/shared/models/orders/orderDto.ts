@@ -10,7 +10,8 @@ export interface OrderDto {
     phoneNumber: string;
     totalAmount: number;
     deliveryMethodShortName: string;
-    shippingPrice: string;
+    shippingPrice: string | number;
+    deliveryMethodId?: number | null;
     orderStatus: OrderStatusEnum | null;
     paymentMethod: PaymentMethodsEnum | null;
     transactionId: string | null;
@@ -19,7 +20,7 @@ export interface OrderDto {
     cityId: number;
     districtId: number;
     wardId: number;
-    latitude: number;
-    longitude: number;
+    latitude: number | null;
+    longitude: number | null;
     paymentDtos: PaymentDto[]
 }

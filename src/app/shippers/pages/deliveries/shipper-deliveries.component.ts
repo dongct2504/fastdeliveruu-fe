@@ -13,6 +13,12 @@ import { ShipperOrdersService } from '../../services/shipper-orders.service';
 export class ShipperDeliveriesComponent implements OnInit {
   shipper?: ShipperDto | null;
   deliveries: any[] = [];
+  pagedDeliveries: any[] = [];
+
+  // paging state
+  pageNumber = 1;
+  pageSize = 10;
+  totalRecords = 0;
 
   constructor(
     private shipperAuthService: ShipperAuthenticateService,
@@ -32,6 +38,13 @@ export class ShipperDeliveriesComponent implements OnInit {
     });
   }
 
+  private applyPaging() {
+    this.totalRecords = this.deliveries.length;
+    const start = (this.pageNumber - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedDeliveries = this.deliveries.slice(start, end);
+  }
+
   public mapDeliveryStatus(os: number | null | undefined): string {
     if (os == null) return '';
     switch (os) {
@@ -43,8 +56,37 @@ export class ShipperDeliveriesComponent implements OnInit {
 
   loadHistory() {
     this.shipperOrdersService.getDeliveryHistory().subscribe({
-      next: (res: any[]) => this.deliveries = res,
+      next: (res: any[]) => {
+        this.deliveries = res;
+        this.pageNumber = 1;
+        this.applyPaging();
+      },
       error: (_err: unknown) => {}
+    });
+  }
+
+  onPageChanged(page: number) {
+    if (this.pageNumber !== page) {
+      this.pageNumber = page;
+      this.applyPaging();
+    }
+  }
+
+  onCancel(d: any) {
+    const ok = confirm('Bạn có chắc muốn hủy đơn ?');
+    if (!ok) return;
+    this.shipperOrdersService.cancelDelivery(d.id).subscribe({
+      next: () => this.loadHistory(),
+      error: _ => {}
+    });
+  }
+
+  onDelivered(d: any) {
+    const ok = confirm('Bạn chắn chắn là đã giao đơn hàng ?');
+    if (!ok) return;
+    this.shipperOrdersService.markDelivered(d.id).subscribe({
+      next: () => this.loadHistory(),
+      error: _ => {}
     });
   }
 }

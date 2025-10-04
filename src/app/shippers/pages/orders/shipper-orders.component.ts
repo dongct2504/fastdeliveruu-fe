@@ -14,6 +14,13 @@ import { ToastrService } from 'ngx-toastr';
 export class ShipperOrdersComponent implements OnInit {
   shipper?: ShipperDto | null;
   orders: any[] = [];
+  pagedOrders: any[] = [];
+  hasActiveDelivery = false;
+
+  // paging (10 rows per page)
+  pageNumber = 1;
+  pageSize = 10;
+  totalRecords = 0;
 
   constructor(
     private shipperAuthService: ShipperAuthenticateService,
@@ -31,6 +38,7 @@ export class ShipperOrdersComponent implements OnInit {
         return;
       }
       this.loadOrders();
+      this.checkActiveDelivery();
     });
   }
 
@@ -74,13 +82,19 @@ export class ShipperOrdersComponent implements OnInit {
     return isNaN(n) ? null : n;
   }
 
+  private applyPaging() {
+    this.totalRecords = this.orders.length;
+    const start = (this.pageNumber - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedOrders = this.orders.slice(start, end);
+  }
+
   loadOrders() {
     if (!this.shipper) return;
     const s = this.shipper;
     const sLat = this.tryParseNumber(s.latitude);
     const sLng = this.tryParseNumber(s.longitude);
 
-    // Call API using parsed coordinates
     this.shipperOrdersService.getAvailableOrders(sLat ?? 0, sLng ?? 0)
       .subscribe({
         next: res => {
@@ -100,6 +114,8 @@ export class ShipperOrdersComponent implements OnInit {
               distanceKm
             };
           });
+          this.pageNumber = 1; // reset page
+          this.applyPaging();
         },
         error: _ => {
           // TODO: handle error
@@ -107,12 +123,34 @@ export class ShipperOrdersComponent implements OnInit {
       });
   }
 
+  onPageChanged(page: number) {
+    if (this.pageNumber !== page) {
+      this.pageNumber = page;
+      this.applyPaging();
+    }
+  }
+
+  checkActiveDelivery() {
+    // reuse history api then check any DeliveryStatus === 1
+    this.shipperOrdersService.getDeliveryHistory().subscribe({
+      next: (items: any[]) => {
+        this.hasActiveDelivery = items?.some(x => x.deliveryStatus === 1) ?? false;
+      },
+      error: _ => this.hasActiveDelivery = false
+    });
+  }
+
   // Accept an available order
   public accept(o: any) {
+    if (this.hasActiveDelivery) {
+      this.toastr.error('Bạn đang có đơn hàng đang giao, không thể nhận đơn mới.');
+      return; // block when active
+    }
     if (!o || !o.id) { return; }
     this.shipperOrdersService.acceptOrder(String(o.id)).subscribe({
       next: _ => {
         this.toastr.success('Đã nhận đơn hàng!');
+        this.checkActiveDelivery();
         // Remove accepted order from the list or reload
         this.orders = this.orders.filter(x => x.id !== o.id);
       },

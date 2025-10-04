@@ -17,13 +17,16 @@
                     <div class="py-2">Ngày</div>
                 </th>
                 <th class="border-0 bg-light" scope="col">
-                    <div class="py-2">Thanh toán</div>
+                    <div class="py-2">Loại thanh toán</div>
                 </th>
                 <th class="border-0 bg-light" scope="col">
                     <div class="py-2">Tổng</div>
                 </th>
                 <th class="border-0 bg-light" scope="col">
-                    <div class="py-2">Trạng thái</div>
+                    <div class="py-2">Thanh toán</div>
+                </th>
+                <th class="border-0 bg-light" scope="col">
+                    <div class="py-2">Giao hàng</div>
                 </th>
             </tr>
         </thead>
@@ -56,6 +59,11 @@
                     <strong *ngIf="order.orderStatus === orderStatus.Pending">Chưa thanh toán</strong>
                     <strong *ngIf="order.orderStatus === orderStatus.Success">Đã thanh toán</strong>
                     <strong *ngIf="order.orderStatus === orderStatus.Cancelled">Đã hủy</strong>
+                </td>
+                <td class="align-middle">
+                    <strong *ngIf="order.deliveryMethodId === 1">Đang giao hàng</strong>
+                    <strong *ngIf="order.deliveryMethodId === 2">Đã giao</strong>
+                    <strong *ngIf="order.deliveryMethodId !== 1 && order.deliveryMethodId !== 2">Không rõ</strong>
                 </td>
             </tr>
         </tbody>

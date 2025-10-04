@@ -1,4 +1,7 @@
 <div class="container mt-4" *ngIf="shipper">
+  <div class="d-flex align-items-center mb-3">
+    <app-paging-header [pageNumber]="pageNumber" [pageSize]="pageSize" [totalRecords]="totalRecords"></app-paging-header>
+  </div>
   <h3 class="mb-3">Đơn hàng gần bạn</h3>
   <div class="card shadow-sm">
     <div class="table-responsive">
@@ -15,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let o of orders">
+          <tr *ngFor="let o of pagedOrders">
             <td>{{ o.id }}</td>
             <td>{{ o.orderDate | date: 'short' }}</td>
             <td>{{ o.paymentMethodText }}</td>
@@ -28,11 +31,14 @@
               </button>
             </td>
           </tr>
-          <tr *ngIf="orders.length === 0">
+          <tr *ngIf="totalRecords === 0">
             <td colspan="7" class="text-center py-4">Không có đơn hàng phù hợp.</td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="p-3">
+      <app-paging-footer [itemsPerPage]="pageSize" [totalRecords]="totalRecords" (pagedChanged)="onPageChanged($event)"></app-paging-footer>
     </div>
   </div>
 </div>
