@@ -34,7 +34,7 @@ export class ContactComponent {
 
   onSubmit(): void {
     console.log('Form Submitted', this.contactForm.value);
-    this.toastr.success('Message sent successfully!');
+    this.toastr.success('Tin nhắn đã gửi thành công!');
     this.contactForm.reset();
   }
 }

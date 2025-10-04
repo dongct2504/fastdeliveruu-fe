@@ -3,33 +3,33 @@
         <h2 class="text-center mb-4">Contact Us</h2>
 
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <app-text-input
-                formControlName="lastName"
-                [label]="'Họ'">
-            </app-text-input>
+          <a>Điền Họ của bạn</a>
+          <app-text-input formControlName="lastName"
+                          [label]="'Họ'">
+          </app-text-input>
 
-            <app-text-input
-                formControlName="firstName"
-                [label]="'Tên'">
-            </app-text-input>
+          <a>Điền Tên của bạn</a>
+          <app-text-input formControlName="firstName"
+                          [label]="'Tên'">
+          </app-text-input>
 
-            <app-text-input
-                formControlName="email"
-                [type]="'email'"
-                [label]="'Email'">
-            </app-text-input>
+          <a>Điền Email của bạn</a>
+          <app-text-input formControlName="email"
+                          [type]="'email'"
+                          [label]="'Email'">
+          </app-text-input>
 
-            <app-text-input
-                formControlName="subject"
-                [label]="'Subject'">
-            </app-text-input>
+          <a>Điền Chủ đề</a>
+          <app-text-input formControlName="subject"
+                          [label]="'Subject'">
+          </app-text-input>
 
-            <app-text-input
-                formControlName="message"
-                [label]="'Message'">
-            </app-text-input>
+          <a>Điền Tin nhắn</a>
+          <app-text-input formControlName="message"
+                          [label]="'Message'">
+          </app-text-input>
 
-            <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
+          <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
         </form>
     </div>
 </div>
