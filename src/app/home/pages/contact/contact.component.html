@@ -1,35 +1,67 @@
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <h2 class="text-center mb-4">Contact Us</h2>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+          <h2 class="text-center mb-4">Giới thiệu FastDeliveruu</h2>
 
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-          <a>Điền Họ của bạn</a>
-          <app-text-input formControlName="lastName"
-                          [label]="'Họ'">
-          </app-text-input>
+          <p class="lead mb-4">
+            FastDeliveruu là nền tảng đặt đồ ăn trực tuyến được thiết kế để mang lại trải nghiệm nhanh chóng, minh bạch và tiện lợi cho cả người dùng, nhà hàng và shipper.
+          </p>
 
-          <a>Điền Tên của bạn</a>
-          <app-text-input formControlName="firstName"
-                          [label]="'Tên'">
-          </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Dành cho từng đối tượng</h5>
+            <ul class="feature-list">
+              <li>
+                <strong>Khách hàng:</strong>
+                có thể duyệt menu, đặt món và theo dõi đơn hàng theo thời gian thực.
+              </li>
+              <li>
+                <strong>Nhà hàng:</strong>
+                quản lý menu, đơn và báo cáo bán hàng một cách hiệu quả.
+              </li>
+              <li>
+                <strong>Shipper:</strong>
+                nhận đơn và tối ưu lộ trình giao nhận dễ dàng.
+              </li>
+            </ul>
+          </div>
 
-          <a>Điền Email của bạn</a>
-          <app-text-input formControlName="email"
-                          [type]="'email'"
-                          [label]="'Email'">
-          </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Sứ mệnh</h5>
+            <p>
+              Sứ mệnh của chúng tôi là kết nối nhu cầu ăn uống hàng ngày với dịch vụ giao nhận chuyên nghiệp, giúp nhà hàng tăng doanh thu và tạo thêm cơ hội thu nhập cho shipper địa phương.
+            </p>
+          </div>
 
-          <a>Điền Chủ đề</a>
-          <app-text-input formControlName="subject"
-                          [label]="'Subject'">
-          </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Công nghệ và tích hợp</h5>
+            <p>
+              Ứng dụng được xây dựng trên bộ công nghệ hiện đại (Frontend: Angular; Backend: .NET + EF Core; DB: SQL Server; lưu trữ ảnh: Cloudinary) và tích hợp các tiện ích như thanh toán (PayPal sandbox cho môi trường thử nghiệm), theo dõi thời gian thực và hệ thống phân quyền rõ ràng.
+            </p>
+          </div>
 
-          <a>Điền Tin nhắn</a>
-          <app-text-input formControlName="message"
-                          [label]="'Message'">
-          </app-text-input>
-
-          <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
-        </form>
+          <div class="mb-2">
+            <h5 class="section-title">Đội ngũ & quy trình</h5>
+            <p class="mb-2">
+              Dự án do nhóm bốn thành viên thực hiện
+              <br />Nguyễn Tấn Dũng	Phụ trách phần API Shipper, Front-end.
+              <br />Cấy Triều Đông — Phụ trách phần cấu hình hệ thống, Back-end, Customer.
+              <br />Hồ Đức Dương	Phụ trách phần khảo sát, thiết kế hệ thống.
+              <br />Nguyễn Đình Phát	Phụ trách phần Database, Staff & Admin.
+              <br />Hoạt động theo quy trình phát triển phần mềm chuẩn (SDLC) với các giai đoạn rõ ràng từ khởi động, lập kế hoạch, triển khai, theo dõi đến kết thúc.
+            </p>
+            <p class="mb-0">
+              Chúng tôi khuyến khích đóng góp mã nguồn mở — bạn có thể xem repo, góp ý hoặc tạo pull request trên GitHub để cùng phát triển.
+            </p>
+            <p class="mb-0">
+              Số điện thoại liên hệ: 012 345 6789
+              Email liên hệ: dongct2504@gmail.com
+              Github: https://github.com/dongct2504
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

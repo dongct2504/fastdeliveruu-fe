@@ -17,4 +17,16 @@ export class ShipperOrdersService {
   getDeliveryHistory() {
     return this.http.get<any[]>(`${this.apiUrl}/shipper-orders/history`);
   }
+
+  acceptOrder(orderId: string) {
+    return this.http.post<any>(`${this.apiUrl}/shipper-orders/accept`, { orderId });
+  }
+
+  markDelivered(deliveryId: string) {
+    return this.http.post<any>(`${this.apiUrl}/shipper-orders/${deliveryId}/deliver`, {});
+  }
+
+  cancelDelivery(deliveryId: string) {
+    return this.http.delete<void>(`${this.apiUrl}/shipper-orders/${deliveryId}`);
+  }
 }
