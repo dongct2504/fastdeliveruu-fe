@@ -68,6 +68,7 @@
                         <tr>
                             <th>Khách hàng</th>
                             <th>Ngày đặt</th>
+                            <th>Phương thức</th>
                             <th class="text-end">Tổng tiền</th>
                             <th class="text-center">Trạng thái</th>
                             <th class="text-center">Thanh toán</th>
@@ -77,6 +78,11 @@
                         <tr *ngFor="let order of orders">
                             <td>{{ order.firstName }} {{ order.lastName }}</td>
                             <td>{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</td>
+                            <td>
+                                <p *ngIf="order.paymentMethod === paymentMethod.Cash">Tiền mặt</p>
+                                <p *ngIf="order.paymentMethod === paymentMethod.Vnpay">VNPAY</p>
+                                <p *ngIf="order.paymentMethod === paymentMethod.Paypal">PayPal</p>
+                            </td>
                             <td class="text-end">{{ order.totalAmount | currency:'VND' }}</td>
                             <td class="text-center">
                                 <span class="badge" [ngClass]="{

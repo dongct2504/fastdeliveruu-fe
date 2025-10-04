@@ -7,6 +7,8 @@ import { WardDto } from '../../shared/models/addresses/wardDto';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from '../services/users.service';
 import { AuthenticateService } from 'src/app/authenticate/services/authenticate.service';
+import { UpdateUserRequest } from 'src/app/shared/models/authenticate/updateUserRequest';
+import { UpdateProfilePictureCommand } from 'src/app/shared/models/authenticate/updateProfilePictureRequest';
 
 @Component({
   selector: 'app-users',
@@ -20,15 +22,15 @@ export class UsersComponent implements OnInit {
   district?: DistrictDto;
   ward?: WardDto;
 
-  otpCode: string = '';
-  phoneNumber: string = '';
+  selectedImageFile?: File;
+  previewUrl: string | ArrayBuffer | null = null;
 
   constructor(
     private usersService: UsersService,
     private authService: AuthenticateService,
     private addressService: AddressService,
-    private toastr: ToastrService) {
-  }
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -37,6 +39,10 @@ export class UsersComponent implements OnInit {
   private getCurrentUser() {
     this.usersService.getCurrentUser().subscribe(appUserDetailDto => {
       this.userProfile = appUserDetailDto;
+
+      if (appUserDetailDto.imageUrl) {
+        this.previewUrl = appUserDetailDto.imageUrl;
+      }
 
       if (appUserDetailDto.cityId) {
         this.getCityById(appUserDetailDto.cityId);
@@ -68,51 +74,63 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  private sendOtp(phoneNumber: string) {
-    this.authService.sendConfirmPhoneNumber(phoneNumber).subscribe(
-      response => {
-        this.toastr.info('Đã gửi mã OTP đến điện thoại!');
-        this.confirmPhoneNumber();
-      }
-    );
+  onFileSelected(event: any) {
+    this.selectedImageFile = event.target.files[0];
+    if (this.selectedImageFile) {
+      const reader = new FileReader();
+      reader.onload = e => this.previewUrl = reader.result;
+      reader.readAsDataURL(this.selectedImageFile);
+    }
+  }
+
+  updateAvatar() {
+    if (!this.selectedImageFile) {
+      this.toastr.warning('Vui lòng chọn ảnh trước!');
+      return;
+    }
+
+    const payload: UpdateProfilePictureCommand = {
+      id: this.userProfile.id,
+      imageFile: this.selectedImageFile
+    };
+
+    this.usersService.updateProfilePicture(this.userProfile.id, payload)
+      .subscribe(() => {
+        this.toastr.success('Cập nhật ảnh đại diện thành công');
+        this.getCurrentUser();
+      });
   }
 
   initiatePhoneNumberConfirmation() {
     const phoneNumber = this.userProfile.phoneNumber;
+    if (!phoneNumber) return;
 
-    const confirmMessage = `Bạn có chắc chắn muốn gửi mã OTP đến số điện thoại ${phoneNumber}? (Nhập 'yes' để xác nhận)`;
-    const userResponse = prompt(confirmMessage);
-
-    if (userResponse && userResponse.toLowerCase() === 'yes') {
-      this.sendOtp(phoneNumber);
-    } else {
-      this.toastr.info('Gửi mã OTP đã bị hủy.');
+    if (confirm(`Bạn có chắc chắn muốn gửi mã OTP đến số điện thoại ${phoneNumber}?`)) {
+      this.authService.sendConfirmPhoneNumber(phoneNumber).subscribe(() => {
+        this.toastr.info('Đã gửi mã OTP đến điện thoại!');
+        this.confirmPhoneNumber();
+      });
     }
   }
 
   confirmPhoneNumber() {
-    const otpCode = prompt('Đã gửi mã OTP đến số điện thoại của bạn. Vui lòng nhập mã OTP để xác thực:');
-
+    const otpCode = prompt('Nhập mã OTP:');
     if (otpCode) {
-      this.authService.confirmPhoneNumber(otpCode).subscribe(
-        response => {
-          this.toastr.success('Xác thực số điện thoại thành công!');
-          this.userProfile.phoneNumberConfirmed = true;
-        }
-      );
+      this.authService.confirmPhoneNumber(otpCode).subscribe(() => {
+        this.toastr.success('Xác thực số điện thoại thành công!');
+        this.userProfile.phoneNumberConfirmed = true;
+      });
     }
   }
 
-  public updatePhoneNumber() {
+  updatePhoneNumber() {
     const updatePhone = prompt('Vui lòng nhập số điện thoại mới:');
-
     if (updatePhone) {
-      this.usersService.updatePhoneNumber(updatePhone).subscribe(
-        (response) => {
-          this.toastr.info('Cập nhật số điện thoại thành công.');
-          this.userProfile.phoneNumber = updatePhone;
-        }
-      );
+      this.usersService.updatePhoneNumber(updatePhone).subscribe(() => {
+        this.toastr.info('Cập nhật số điện thoại thành công.');
+        this.userProfile.phoneNumber = updatePhone;
+        this.userProfile.phoneNumberConfirmed = false;
+      });
     }
   }
 
