@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MenuItemInventoryDto } from 'src/app/shared/models/menuItems/menuItemInventoryDto';
 import { UpdateMenuItemInventoryCommand } from 'src/app/shared/models/menuItems/updateMenuItemInventoryCommand';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

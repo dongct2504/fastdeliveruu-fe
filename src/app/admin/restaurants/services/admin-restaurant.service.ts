@@ -5,7 +5,7 @@ import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { PagedList } from 'src/app/shared/models/PagedList';
 import { RestaurantDetailDto } from 'src/app/shared/models/restaurants/restaurantDetailDto';
 import { RestaurantDto } from 'src/app/shared/models/restaurants/restaurantDto';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

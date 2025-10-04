@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { BehaviorSubject, map, of } from 'rxjs';
 import { WishListDto } from 'src/app/shared/models/wishLists/wishListDto';
 import { PagedList } from 'src/app/shared/models/PagedList';

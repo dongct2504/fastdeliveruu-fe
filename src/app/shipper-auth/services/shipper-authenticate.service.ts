@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { ShipperDto } from 'src/app/shared/models/shipper/shipperDto';
 import { ShipperLoginRequest } from 'src/app/shared/models/shipper/shipperLoginRequest';
 import { ShipperRegisterRequest } from 'src/app/shared/models/shipper/shipperRegisterRequest';

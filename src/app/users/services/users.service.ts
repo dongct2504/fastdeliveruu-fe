@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AppUserDetailDto } from 'src/app/shared/models/authenticate/appUserDetailDto';
 import { UpdateProfilePictureCommand } from 'src/app/shared/models/authenticate/updateProfilePictureRequest';
 import { UpdateUserRequest } from 'src/app/shared/models/authenticate/updateUserRequest';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

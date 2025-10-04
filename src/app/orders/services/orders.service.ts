@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { OrderDto } from '../../shared/models/orders/orderDto';
 import { PagedList } from '../../shared/models/PagedList';
 import { OrderHeaderDetailDto } from '../../shared/models/orders/orderHeaderDto';

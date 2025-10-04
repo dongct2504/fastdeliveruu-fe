@@ -5,7 +5,7 @@ import { DistrictDetailDto } from 'src/app/shared/models/addresses/districtDetai
 import { DistrictDto } from 'src/app/shared/models/addresses/districtDto';
 import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { PagedList } from 'src/app/shared/models/PagedList';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

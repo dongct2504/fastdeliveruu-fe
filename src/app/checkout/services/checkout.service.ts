@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { DeliveryMethodDto } from '../../shared/models/orders/deliveryMethodDto';
 import { CreateOrderRequest } from '../../shared/models/orders/createOrderRequest';
 import { PaymentResponse } from '../../shared/models/orders/paymentResponse';

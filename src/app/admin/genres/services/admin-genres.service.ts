@@ -4,7 +4,7 @@ import { CreateGenreCommand } from 'src/app/shared/models/genres/createGenreComm
 import { GenreDetailDto } from 'src/app/shared/models/genres/genreDetailDto';
 import { GenreDto } from 'src/app/shared/models/genres/genreDto';
 import { UpdateGenreCommand } from 'src/app/shared/models/genres/updateGenreCommand';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

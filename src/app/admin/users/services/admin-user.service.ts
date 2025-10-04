@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { PagedList } from 'src/app/shared/models/PagedList';
 import { AppUserWithRolesDto } from 'src/app/shared/models/users/appUserWithRolesDto';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

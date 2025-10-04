@@ -5,7 +5,7 @@ import { MenuItemDetailDto } from 'src/app/shared/models/menuItems/menuItemDetai
 import { MenuItemDto } from 'src/app/shared/models/menuItems/menuItemDto';
 import { MenuItemParams } from 'src/app/shared/models/menuItems/menuItemParams';
 import { PagedList } from 'src/app/shared/models/PagedList';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
