@@ -42,32 +42,35 @@
             </app-text-input>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-6 form-floating mb-3">
             <select 
-                class="form-control" formControlName="cityId" 
+                class="form-select" formControlName="cityId" id="city"
                 (change)="onCityChange($event)"
             >
                 <option value="" disabled selected>Chọn thành phố</option>
                 <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
             </select>
+            <label for="city">Thành phố</label>
         </div>
         
-        <div class="col-sm-4">
+        <div class="col-sm-6 form-floating mb-3">
             <select 
-                class="form-control" 
-                formControlName="districtId" 
+                class="form-select" 
+                formControlName="districtId" id="district"
                 (change)="onDistrictChange($event)"
             >
                 <option value="" disabled selected>Chọn quận</option>
                 <option *ngFor="let district of districts" [value]="district.id">{{ district.name }}</option>
             </select>
+            <label for="district">Quận</label>
         </div>
         
-        <div class="col-sm-4">
-            <select class="form-control" formControlName="wardId">
+        <div class="col-sm-6 form-floating mb-3">
+            <select class="form-select" formControlName="wardId" id="ward">
                 <option value="" disabled selected>Chọn phường</option>
                 <option *ngFor="let ward of wards" [value]="ward.id">{{ ward.name }}</option>
             </select>
+            <label for="ward">Phường</label>
         </div>
     </div>
 </div>
