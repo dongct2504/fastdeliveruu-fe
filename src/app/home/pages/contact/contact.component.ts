@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { faCode, faServer, faSitemap, faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactComponent {
   contactForm = {} as FormGroup;
+
+  // Icons for team section
+  faCode = faCode;
+  faServer = faServer;
+  faSitemap = faSitemap;
+  faDatabase = faDatabase;
 
   constructor(
     private fb: FormBuilder,
