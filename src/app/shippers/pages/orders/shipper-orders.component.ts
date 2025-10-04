@@ -4,6 +4,7 @@ import { take } from 'rxjs';
 import { ShipperAuthenticateService } from 'src/app/shipper-auth/services/shipper-authenticate.service';
 import { ShipperDto } from 'src/app/shared/models/shipper/shipperDto';
 import { ShipperOrdersService } from '../../services/shipper-orders.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shipper-orders',
@@ -17,7 +18,8 @@ export class ShipperOrdersComponent implements OnInit {
   constructor(
     private shipperAuthService: ShipperAuthenticateService,
     private shipperOrdersService: ShipperOrdersService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -103,5 +105,20 @@ export class ShipperOrdersComponent implements OnInit {
           // TODO: handle error
         }
       });
+  }
+
+  // Accept an available order
+  public accept(o: any) {
+    if (!o || !o.id) { return; }
+    this.shipperOrdersService.acceptOrder(String(o.id)).subscribe({
+      next: _ => {
+        this.toastr.success('Đã nhận đơn hàng!');
+        // Remove accepted order from the list or reload
+        this.orders = this.orders.filter(x => x.id !== o.id);
+      },
+      error: _ => {
+        this.toastr.error('Không thể nhận đơn hàng, vui lòng thử lại.');
+      }
+    });
   }
 }
