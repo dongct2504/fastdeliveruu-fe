@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { PagedList } from '../models/PagedList';
 import { CityDto } from '../models/addresses/cityDto';
 import { DistrictDto } from '../models/addresses/districtDto';

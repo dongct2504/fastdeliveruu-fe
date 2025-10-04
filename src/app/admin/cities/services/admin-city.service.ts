@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CityDto } from 'src/app/shared/models/addresses/cityDto';
 import { DefaultParams } from 'src/app/shared/models/DefaultParams';
 import { PagedList } from 'src/app/shared/models/PagedList';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

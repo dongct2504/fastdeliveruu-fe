@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { ShoppingCartDto } from '../shared/models/shoppingCarts/shoppingCartDto';
 import { SetCartItemRequest } from '../shared/models/shoppingCarts/setCartItemRequest';
 import { BehaviorSubject, map } from 'rxjs';
