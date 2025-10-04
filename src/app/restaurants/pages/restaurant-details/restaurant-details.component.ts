@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AddressService } from 'src/app/shared/services/address.service';
 import { RestaurantHourDto } from 'src/app/shared/models/restaurants/restaurantHourDto';
 import { RestaurantService } from '../../services/restaurant.service';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-restaurant-details',
@@ -18,6 +19,18 @@ export class RestaurantDetailsComponent implements OnInit {
   district?: string;
   city?: string;
 
+  faClock = faClock;
+
+  private dayOrder: { [key: string]: number } = {
+    'Thứ 2': 1,
+    'Thứ 3': 2,
+    'Thứ 4': 3,
+    'Thứ 5': 4,
+    'Thứ 6': 5,
+    'Thứ 7': 6,
+    'Chủ Nhật': 7
+  };
+
   constructor(
     private restaurantService: RestaurantService,
     private addressService: AddressService,
@@ -29,7 +42,10 @@ export class RestaurantDetailsComponent implements OnInit {
     const id: string = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.restaurantService.getRestaurant(id).subscribe(restaurant => {
       this.restaurant = restaurant;
-      this.operatingHours = restaurant.restaurantHourDtos;
+      // this.operatingHours = restaurant.restaurantHourDtos;
+      this.operatingHours = restaurant.restaurantHourDtos.sort((a, b) =>
+        (this.dayOrder[a.weekenDay ?? ''] || 99) - (this.dayOrder[b.weekenDay ?? ''] || 99)
+      );
 
       this.getCityById(restaurant.cityId);
       this.getDistrictById(restaurant.districtId);
