@@ -27,7 +27,8 @@ export class MenuItemsComponent implements OnInit {
     { name: 'Mới cập nhật', value: MenuItemSortConstants.latestUpdateDesc },
     { name: 'Giá từ thấp đến cao', value: MenuItemSortConstants.priceAsc },
     { name: 'Giá từ cao đến thấp', value: MenuItemSortConstants.priceDesc },
-    { name: 'Tên (a-z)', value: MenuItemSortConstants.name }
+    { name: 'Tên (a-z)', value: MenuItemSortConstants.nameAsc },
+    { name: 'Tên (z-a)', value: MenuItemSortConstants.nameDesc }
   ];
 
   constructor(

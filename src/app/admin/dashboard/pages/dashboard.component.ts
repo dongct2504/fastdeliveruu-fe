@@ -7,6 +7,7 @@ import { OrderParams } from 'src/app/shared/models/orders/orderParams';
 import { OrderStatusDescriptions } from 'src/app/shared/constants/order-status-description';
 import { PaymentStatusDescriptions } from 'src/app/shared/constants/payment-status-description';
 import { PaymentStatusEnum } from 'src/app/shared/enums/payment-status.enum';
+import { PaymentMethodsEnum } from 'src/app/shared/enums/payment-methods.enum';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { PaymentStatusEnum } from 'src/app/shared/enums/payment-status.enum';
 export class DashboardComponent {
   OrderStatusEnum = OrderStatusEnum;
   PaymentStatusEnum = PaymentStatusEnum;
+  paymentMethod = PaymentMethodsEnum;
   TimeRangeEnum = TimeRangeEnum;
 
   OrderStatusDescriptions = OrderStatusDescriptions;

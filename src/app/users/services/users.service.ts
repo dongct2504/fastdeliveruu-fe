@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppUserDetailDto } from 'src/app/shared/models/authenticate/appUserDetailDto';
+import { UpdateProfilePictureCommand } from 'src/app/shared/models/authenticate/updateProfilePictureRequest';
 import { UpdateUserRequest } from 'src/app/shared/models/authenticate/updateUserRequest';
 import { environment } from 'src/environments/environment.development';
 
@@ -20,6 +21,13 @@ export class UsersService {
   public updateUser(id: string, updateUserRequest: UpdateUserRequest) {
     const formData = this.buildFormUpdateUser(updateUserRequest);
     return this.httpClient.put(`${this.apiUrl}/users/${id}`, formData);
+  }
+
+  public updateProfilePicture(id: string, request: UpdateProfilePictureCommand) {
+    const formData = new FormData();
+    formData.append('id', request.id);
+    formData.append('imageFile', request.imageFile);
+    return this.httpClient.put(`${this.apiUrl}/users/update-profile-picture/${id}`, formData);
   }
 
   public updatePhoneNumber(phoneNumber: string) {

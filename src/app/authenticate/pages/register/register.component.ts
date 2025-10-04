@@ -101,9 +101,6 @@ export class RegisterComponent implements OnInit {
       userName: ['', [
         Validators.required
       ]],
-      phoneNumber: ['', [
-        Validators.required
-      ]],
       email: ['', [
         Validators.required, Validators.email
       ]],
@@ -113,22 +110,13 @@ export class RegisterComponent implements OnInit {
       confirmPassword: ['', [
         Validators.required
       ]],
-      houseNumber: ['', [
-        Validators.required
-      ]],
-      streetName: ['', [
-        Validators.required
-      ]],
-      wardId: ['', [
-        Validators.required
-      ]],
-      districtId: ['', [
-        Validators.required
-      ]],
-      cityId: ['', [
-        Validators.required
-      ]],
-      role: []
+      phoneNumber: [null],
+      houseNumber: [null],
+      streetName: [null],
+      wardId: [null],
+      districtId: [null],
+      cityId: [null],
+      role: [null]
     }, {
       validators: this.passwordsMatchValidator
     });

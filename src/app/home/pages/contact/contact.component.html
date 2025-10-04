@@ -1,35 +1,110 @@
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <h2 class="text-center mb-4">Contact Us</h2>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+          <h2 class="text-center mb-4">Giới thiệu FastDeliveruu</h2>
 
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <app-text-input
-                formControlName="lastName"
-                [label]="'Họ'">
-            </app-text-input>
+          <p class="lead mb-4">
+            FastDeliveruu là nền tảng đặt đồ ăn trực tuyến được thiết kế để mang lại trải nghiệm nhanh chóng, minh bạch và tiện lợi cho cả người dùng, nhà hàng và shipper.
+          </p>
 
-            <app-text-input
-                formControlName="firstName"
-                [label]="'Tên'">
-            </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Dành cho từng đối tượng</h5>
+            <ul class="feature-list">
+              <li>
+                <strong>Khách hàng:</strong>
+                có thể duyệt menu, đặt món và theo dõi đơn hàng theo thời gian thực.
+              </li>
+              <li>
+                <strong>Nhà hàng:</strong>
+                quản lý menu, đơn và báo cáo bán hàng một cách hiệu quả.
+              </li>
+              <li>
+                <strong>Shipper:</strong>
+                nhận đơn và tối ưu lộ trình giao nhận dễ dàng.
+              </li>
+            </ul>
+          </div>
 
-            <app-text-input
-                formControlName="email"
-                [type]="'email'"
-                [label]="'Email'">
-            </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Sứ mệnh</h5>
+            <p>
+              Sứ mệnh của chúng tôi là kết nối nhu cầu ăn uống hàng ngày với dịch vụ giao nhận chuyên nghiệp, giúp nhà hàng tăng doanh thu và tạo thêm cơ hội thu nhập cho shipper địa phương.
+            </p>
+          </div>
 
-            <app-text-input
-                formControlName="subject"
-                [label]="'Subject'">
-            </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Công nghệ và tích hợp</h5>
+            <p>
+              Ứng dụng được xây dựng trên bộ công nghệ hiện đại (Frontend: Angular; Backend: .NET + EF Core; DB: SQL Server; lưu trữ ảnh: Cloudinary) và tích hợp các tiện ích như thanh toán (PayPal sandbox cho môi trường thử nghiệm), theo dõi thời gian thực và hệ thống phân quyền rõ ràng.
+            </p>
+          </div>
 
-            <app-text-input
-                formControlName="message"
-                [label]="'Message'">
-            </app-text-input>
+          <div class="mb-4">
+            <h5 class="section-title">Đội ngũ & quy trình</h5>
 
-            <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
-        </form>
+            <div class="team-list">
+              <div class="team-item">
+                <div class="icon-wrap bg-primary-subtle text-primary">
+                  <fa-icon [icon]="faCode"></fa-icon>
+                </div>
+                <div class="team-text">
+                  <div class="team-name">Nguyễn Tấn Dũng</div>
+                  <div class="team-role">Phụ trách phần API Shipper, Front-end.</div>
+                </div>
+              </div>
+
+              <div class="team-item">
+                <div class="icon-wrap bg-success-subtle text-success">
+                  <fa-icon [icon]="faServer"></fa-icon>
+                </div>
+                <div class="team-text">
+                  <div class="team-name">Cấy Triều Đông</div>
+                  <div class="team-role">Phụ trách phần cấu hình hệ thống, Back-end, Customer.</div>
+                </div>
+              </div>
+
+              <div class="team-item">
+                <div class="icon-wrap bg-warning-subtle text-warning">
+                  <fa-icon [icon]="faSitemap"></fa-icon>
+                </div>
+                <div class="team-text">
+                  <div class="team-name">Hồ Đức Dương</div>
+                  <div class="team-role">Phụ trách phần khảo sát, thiết kế hệ thống.</div>
+                </div>
+              </div>
+
+              <div class="team-item">
+                <div class="icon-wrap bg-danger-subtle text-danger">
+                  <fa-icon [icon]="faDatabase"></fa-icon>
+                </div>
+                <div class="team-text">
+                  <div class="team-name">Nguyễn Đình Phát</div>
+                  <div class="team-role">Phụ trách phần Database, Staff & Admin.</div>
+                </div>
+              </div>
+            </div>
+
+            <p class="mt-3 mb-2">
+              Hoạt động theo quy trình phát triển phần mềm chuẩn (SDLC) với các giai đoạn rõ ràng từ khởi động, lập kế hoạch, triển khai, theo dõi đến kết thúc.
+            </p>
+
+            <p class="mb-0">
+              Chúng tôi khuyến khích đóng góp mã nguồn mở — bạn có thể xem repo, góp ý hoặc tạo pull request trên GitHub để cùng phát triển.
+            </p>
+          </div>
+
+          <div class="mb-2">
+            <h5 class="section-title">Liên hệ</h5>
+            <ul class="contact-list">
+              <li><strong>Số điện thoại:</strong> 012 345 6789</li>
+              <li><strong>Email:</strong> dongct2504@gmail.com</li>
+              <li><strong>GitHub:</strong> <a href="https://github.com/dongct2504" target="_blank" rel="noopener">github.com/dongct2504</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

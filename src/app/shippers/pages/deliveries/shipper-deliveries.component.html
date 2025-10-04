@@ -1,0 +1,32 @@
+<div class="container mt-4" *ngIf="shipper">
+  <h3 class="mb-3">Lịch sử đã giao hàng</h3>
+  <div class="card shadow-sm">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Đơn hàng</th>
+            <th>Trạng thái giao</th>
+            <th>Thời gian dự kiến</th>
+            <th>Thời gian thực tế</th>
+            <th>Tạo lúc</th>
+            <th>Cập nhật lúc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of deliveries">
+            <td>{{ d.orderId }}</td>
+            <td>{{ mapDeliveryStatus(d.deliveryStatus) }}</td>
+            <td>{{ d.estimatedDeliveryTime | date:'short' }}</td>
+            <td>{{ d.actualDeliveryTime | date:'short' }}</td>
+            <td>{{ d.createdAt | date:'short' }}</td>
+            <td>{{ d.updatedAt | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="deliveries.length === 0">
+            <td colspan="6" class="text-center py-4">Không có dữ liệu.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
