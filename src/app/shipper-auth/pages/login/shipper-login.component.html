@@ -11,8 +11,16 @@
         </ul>
       </div>
 
-      <app-text-input formControlName="userName" [label]="'Tên đăng nhập*'"></app-text-input>
-      <app-text-input formControlName="password" [label]="'Mật khẩu*'" [type]="'password'"></app-text-input>
+      <app-text-input 
+        formControlName="userName" 
+        [label]="'Tên đăng nhập*'"
+        [placeholder]="'Tên đăng nhập*'">
+      </app-text-input>
+      <app-text-input formControlName="password" 
+        [label]="'Mật khẩu*'" 
+        [placeholder]="'Mật khẩu*'"
+        [type]="'password'">
+      </app-text-input>
 
       <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" [disabled]="loginForm.invalid">
         Đăng nhập
