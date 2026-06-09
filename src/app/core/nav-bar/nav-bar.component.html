@@ -67,7 +67,16 @@
                style="cursor: pointer;" dropdownToggle>
               <strong>{{currentUser.userName}}</strong>
             </a>
-            <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
+
+            <!-- <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon> -->
+            <img *ngIf="currentUser?.imageUrl; else defaultAvatar"
+              [src]="currentUser.imageUrl" 
+              alt="user-avatar"
+            >
+            <ng-template #defaultAvatar>
+              <fa-icon [icon]="faUserCircle" [size]="'2x'"></fa-icon>
+            </ng-template>
+
             <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
               <a class="dropdown-item d-flex align-items-center py-2" routerLink="/users">
                 <fa-icon [icon]="faUser" class="me-3"></fa-icon>Hồ sơ
