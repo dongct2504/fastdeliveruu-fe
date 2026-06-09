@@ -1,4 +1,14 @@
 <ng-container *ngIf="restaurants">
+    <div class="row">
+        <section class="col-lg-3">
+            <div class="mb-3">
+                <h4>Lọc theo</h4>
+                <select id="filter" class="form-select" (change)="onSortSelected($any($event.target).value)">
+                    <option *ngFor="let sort of sortOptions" [value]="sort.value">{{sort.name}}</option>
+                </select>
+            </div>
+        </section>
+    </div>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <app-paging-header
             [pageNumber]="restaurantParams.pageNumber"
