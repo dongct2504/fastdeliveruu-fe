@@ -1,28 +1,35 @@
 .nav-link {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 10px 15px;
-    border-radius: 6px;
-    color: #212529;
+    border-radius: 8px;
+    color: #495057;
     text-decoration: none;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
 }
 
 .nav-link:hover {
-    background-color: #f1f1f1;
+    background-color: #f8f9fa;
+    color: #212529;
 }
 
 .nav-link.active {
-    background-color: #0d6efd;
-    /* xanh bootstrap */
-    color: #fff !important;
+    background-color: #f3e8ff;
+    color: #7e22ce !important;
     font-weight: 500;
 }
 
-.sticky-sidebar {
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    overflow-y: auto;
     position: sticky;
-    top: 20px;
-    /* khoảng cách với top */
-    /* height: calc(80vh - 40px); */
-    height: 650px
-    /* full chiều cao trừ margin/padding */
+    top: 0;
 }

@@ -1,0 +1,84 @@
+/* General Styles */
+:host {
+    display: block;
+    background-color: #f8f9fa; /* Light gray background for the whole page */
+}
+
+/* Header */
+.text-primary {
+    color: #4a5568 !important; /* A more modern, muted primary text color */
+}
+
+.btn-add-new {
+    background-color: #4f46e5; /* Dark purple */
+    color: white;
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-add-new:hover {
+    background-color: #4338ca; /* Slightly darker purple on hover */
+}
+
+/* Search Bar */
+.input-group .form-control {
+    border-right: 0;
+}
+
+.input-group .btn {
+    border-left: 0;
+    background-color: white;
+}
+
+/* Card and Table */
+.card {
+    border: none !important;
+}
+
+.table thead {
+    border-bottom: 1px solid #dee2e6; /* Light border for the header */
+}
+
+.table th {
+    font-weight: 600;
+    color: #6c757d;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f5f9; /* Subtle hover effect for rows */
+}
+
+/* Action Buttons */
+.btn-outline-primary {
+    color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.btn-outline-danger:hover {
+    color: white;
+}
+
+.text-end {
+    text-align: right;
+}
+
+/* Paging Footer */
+app-paging-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}

@@ -1,47 +1,58 @@
-<div class="container mt-3">
-    <div class="d-flex justify-content-between mb-3">
-        <h3>Danh sách nhà hàng</h3>
-        <div class="d-flex">
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-primary mb-0">Danh sách nhà hàng</h3>
+        <div class="d-flex align-items-center">
+            <!-- Search bar -->
             <div class="input-group me-3" style="width: 250px;">
                 <input type="text" class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="params.search"
                     (keyup.enter)="onSearch()">
                 <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
-                    <fa-icon [icon]="faSearch"></fa-icon>
+                    <i class="bi bi-search"></i>
                 </button>
             </div>
-            <button class="btn btn-success" routerLink="/admin/restaurants/add">
-                <fa-icon [icon]="faAdd" class="me-2"></fa-icon> Thêm nhà hàng
+            <!-- Add button -->
+            <button class="btn btn-add-new" routerLink="/admin/restaurants/add">
+                <i class="bi bi-plus-circle me-2"></i> Thêm nhà hàng
             </button>
         </div>
     </div>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Tên nhà hàng</th>
-                <th>Mô tả</th>
-                <th>Địa chỉ</th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let restaurant of restaurants">
-                <td>{{ restaurant.name }}</td>
-                <td>{{ restaurant.description }}</td>
-                <td>{{ restaurant.houseNumber }} {{ restaurant.streetName }}</td>
-                <td>
-                    <button class="btn btn-sm btn-primary me-2" (click)="editRestaurant(restaurant.id)">
-                        <fa-icon [icon]="faEdit"></fa-icon>
-                    </button>
-                    <button class="btn btn-sm btn-danger" (click)="deleteRestaurant(restaurant.id)">
-                        <fa-icon [icon]="faTrash"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Table -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-0">
+            <table class="table table-hover table-borderless align-middle mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Tên nhà hàng</th>
+                        <th>Mô tả</th>
+                        <th>Địa chỉ</th>
+                        <th class="text-end">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let restaurant of restaurants">
+                        <td>{{ restaurant.name }}</td>
+                        <td>{{ restaurant.description }}</td>
+                        <td>{{ restaurant.houseNumber }} {{ restaurant.streetName }}</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" (click)="editRestaurant(restaurant.id)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="deleteRestaurant(restaurant.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
-        (pagedChanged)="onPageChanged($event)">
-    </app-paging-footer>
+    <!-- Footer -->
+    <div class="mt-4">
+        <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
+            (pagedChanged)="onPageChanged($event)">
+        </app-paging-footer>
+    </div>
 </div>

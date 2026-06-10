@@ -1,59 +1,60 @@
-<div class="container-fluid mt-3">
-    <div class="row">
-        <!-- Sidebar -->
-        <aside class="col-md-3 col-lg-2 mb-4 sticky-sidebar">
-            <div class="card shadow-sm h-100">
-                <ul class="list-group">
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/dashboard" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
-                            Dashboard
+<div class="container-fluid p-0 d-flex">
+    <!-- Sidebar -->
+    <aside class="sidebar flex-shrink-0">
+        <div class="h-100 p-3">
+            <h5 class="mb-4 ps-2 fw-bold text-dark">Admin Panel</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/dashboard" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+                <ng-container *ngIf="isExistRole([roleConstants.Admin], currentUser$ | async)">
+                    <li class="list-group-item p-0 border-0 bg-transparent">
+                        <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">
+                            <i class="bi bi-people me-2"></i> Quản lý người dùng
                         </a>
                     </li>
-                    <ng-container *ngIf="isExistRole([roleConstants.Admin], currentUser$ | async)">
-                        <li class="list-group-item p-0 border-0">
-                            <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">
-                                Quản lý người dùng
-                            </a>
-                        </li>
-                    </ng-container>
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/cities" routerLinkActive="active" class="nav-link">
-                            Quản lý thành phố
-                        </a>
-                    </li>
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/districts" routerLinkActive="active" class="nav-link">
-                            Quản lý quận
-                        </a>
-                    </li>
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/wards" routerLinkActive="active" class="nav-link">
-                            Quản lý phường
-                        </a>
-                    </li>
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/restaurants" routerLinkActive="active" class="nav-link">
-                            Quản lý nhà hàng
-                        </a>
-                    </li>
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/genres" routerLinkActive="active" class="nav-link">
-                            Quản lý thể loại
-                        </a>
-                    </li>
-                    <li class="list-group-item p-0 border-0">
-                        <a routerLink="/admin/menu-items" routerLinkActive="active" class="nav-link">
-                            Quản lý món ăn
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+                </ng-container>
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/cities" routerLinkActive="active" class="nav-link">
+                        <i class="bi bi-building me-2"></i> Quản lý thành phố
+                    </a>
+                </li>
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/districts" routerLinkActive="active" class="nav-link">
+                        <i class="bi bi-geo-alt me-2"></i> Quản lý quận
+                    </a>
+                </li>
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/wards" routerLinkActive="active" class="nav-link">
+                        <i class="bi bi-map me-2"></i> Quản lý phường
+                    </a>
+                </li>
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/restaurants" routerLinkActive="active" class="nav-link">
+                        <i class="bi bi-shop me-2"></i> Quản lý nhà hàng
+                    </a>
+                </li>
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/genres" routerLinkActive="active" class="nav-link">
+                        <i class="bi bi-tags me-2"></i> Quản lý thể loại
+                    </a>
+                </li>
+                <li class="list-group-item p-0 border-0 bg-transparent">
+                    <a routerLink="/admin/menu-items" routerLinkActive="active" class="nav-link">
+                        <i class="bi bi-egg-fried me-2"></i> Quản lý món ăn
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
-        <!-- Main content -->
-        <main class="col-md-9 col-lg-10">
+    <!-- Main content -->
+    <main class="flex-grow-1 bg-light" style="height: 100vh; overflow-y: auto;">
+        <div class="p-4">
             <router-outlet></router-outlet>
-        </main>
-    </div>
+        </div>
+    </main>
 </div>
