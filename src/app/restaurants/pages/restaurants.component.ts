@@ -3,6 +3,7 @@ import { RestaurantDto } from 'src/app/shared/models/restaurants/restaurantDto';
 import { RestaurantParams } from 'src/app/shared/models/restaurants/restaurantParams';
 import { RestaurantService } from '../services/restaurant.service';
 import { PageSizeConstants } from 'src/app/shared/common/pageSizeConstants';
+import { RestaurantSortConstants } from 'src/app/shared/common/restaurantSortConstants';
 
 @Component({
   selector: 'app-restaurants',
@@ -14,6 +15,13 @@ export class RestaurantsComponent implements OnInit {
 
   restaurantParams = new RestaurantParams();
   totalRecords = 0;
+
+  sortOptions = [
+    { name: 'Mới cập nhật', value: RestaurantSortConstants.latestUpdateDesc },
+    { name: 'Gần nhất', value: RestaurantSortConstants.nearest },
+    { name: 'Tên (a-z)', value: RestaurantSortConstants.nameAsc },
+    { name: 'Tên (z-a)', value: RestaurantSortConstants.nameDesc }
+  ];
 
   constructor(private restaurantService: RestaurantService) {
     this.restaurantParams.pageSize = PageSizeConstants.pageSize12;
@@ -42,6 +50,11 @@ export class RestaurantsComponent implements OnInit {
   onSearchSubmit(event: string) {
     this.restaurantParams.search = event;
     this.restaurantParams.pageNumber = 1;
+    this.getRestaurants();
+  }
+
+  onSortSelected(sort: string) {
+    this.restaurantParams.sort = sort;
     this.getRestaurants();
   }
 }

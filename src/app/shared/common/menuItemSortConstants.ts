@@ -3,5 +3,6 @@ export const MenuItemSortConstants = {
     priceAsc: 'priceAsc',
     priceDesc: 'priceDesc',
     nameAsc: 'nameAsc',
-    nameDesc: 'nameDesc'
+    nameDesc: 'nameDesc',
+    nearest: 'nearest'
 };
