@@ -1,0 +1,75 @@
+/* General Styles */
+:host {
+    display: block;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+/* Summary Cards */
+.summary-card {
+    border-radius: 0.75rem; /* More rounded corners */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.summary-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.summary-card .card-footer {
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    border-top: none;
+}
+
+/* Main Card for Table */
+.card {
+    border-radius: 0.75rem;
+}
+
+.card-header {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.thead-light {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    font-weight: 600;
+    color: #6c757d;
+    padding: 1rem 1.5rem;
+    vertical-align: middle;
+}
+
+.table td {
+    padding: 1rem 1.5rem;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Status Badges */
+.badge.rounded-pill {
+    padding: 0.4em 0.8em;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Empty state */
+.text-muted i {
+    color: #adb5bd;
+}
+
+/* Paging Footer */
+app-paging-footer {
+    display: flex;
+    justify-content: flex-end;
+}

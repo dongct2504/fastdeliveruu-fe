@@ -1,80 +1,90 @@
-<div class="container mt-3">
-    <div class="d-flex justify-content-between mb-3">
-        <h3>Danh sách người dùng</h3>
-        <div class="d-flex">
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-primary mb-0">Danh sách người dùng</h3>
+        <div class="d-flex align-items-center">
+            <!-- Search bar -->
             <div class="input-group me-3" style="width: 250px;">
                 <input type="text" class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="params.search"
                     (keyup.enter)="onSearch()">
                 <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
-                    <fa-icon [icon]="faSearch"></fa-icon>
+                    <i class="bi bi-search"></i>
                 </button>
             </div>
-            <button class="btn btn-success" routerLink="/authen/register">
-                <fa-icon [icon]="faPlus" class="me-2"></fa-icon> Thêm người dùng
+            <!-- Add button -->
+            <button class="btn btn-add-new" routerLink="/authen/register">
+                <i class="bi bi-plus-circle me-2"></i> Thêm người dùng
             </button>
         </div>
     </div>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Tên đăng nhập</th>
-                <th>Email</th>
-                <th>Quyền</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-                <th>Phân quyền</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td>{{ user.userName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ getRoleLabels(user.roles) }}</td>
-                <td>
-                    <span [ngClass]="user.isLocked ? 'text-danger' : 'text-success'">
-                        {{ user.isLocked ? 'Đã khóa' : 'Hoạt động' }}
-                    </span>
-                </td>
-                <td>
-                    <button class="btn btn-sm" [ngClass]="user.isLocked ? 'btn-success' : 'btn-warning'"
-                        (click)="toggleLock(user)">
-                        <i class="fa" [ngClass]="user.isLocked ? 'fa-unlock' : 'fa-lock'">
-                        </i>
-                        {{ user.isLocked ? 'Mở khóa' : 'Khóa' }}
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-primary" (click)="openRoleModal(user, roleModalTemplate)">
-                        <fa-icon [icon]="faUserShield" class="me-1"></fa-icon> Phân quyền
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Table -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-0">
+            <table class="table table-hover table-borderless align-middle mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Tên đăng nhập</th>
+                        <th>Email</th>
+                        <th>Quyền</th>
+                        <th class="text-center">Trạng thái</th>
+                        <th class="text-center">Hành động</th>
+                        <th class="text-center">Phân quyền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.userName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ getRoleLabels(user.roles) }}</td>
+                        <td class="text-center">
+                            <span class="badge rounded-pill" [ngClass]="user.isLocked ? 'bg-danger' : 'bg-success'">
+                                {{ user.isLocked ? 'Đã khóa' : 'Hoạt động' }}
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm" [ngClass]="user.isLocked ? 'btn-outline-success' : 'btn-outline-warning'"
+                                (click)="toggleLock(user)">
+                                <i class="bi" [ngClass]="user.isLocked ? 'bi-unlock-fill' : 'bi-lock-fill'"></i>
+                                {{ user.isLocked ? ' Mở khóa' : ' Khóa' }}
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-primary" (click)="openRoleModal(user, roleModalTemplate)">
+                                <i class="bi bi-person-rolodex me-1"></i> Phân quyền
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
-        (pagedChanged)="onPageChanged($event)">
-    </app-paging-footer>
+    <!-- Footer -->
+    <div class="mt-4">
+        <app-paging-footer [itemsPerPage]="itemsPerPage" [totalRecords]="totalRecords"
+            (pagedChanged)="onPageChanged($event)">
+        </app-paging-footer>
+    </div>
 </div>
 
 <ng-template #roleModalTemplate>
-    <div class="modal-header">
-        <h5 class="modal-title">Phân quyền người dùng</h5>
+    <div class="modal-header border-0">
+        <h5 class="modal-title">Phân quyền cho: <strong>{{ selectedUser?.userName }}</strong></h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
     </div>
     <div class="modal-body">
-        <p><strong>Tên đăng nhập:</strong> {{ selectedUser?.userName }}</p>
-        <div *ngFor="let role of roles" class="form-check">
-            <input class="form-check-input" type="checkbox" [value]="role.value"
+        <p>Chọn các quyền bạn muốn gán cho người dùng này:</p>
+        <div *ngFor="let role of roles" class="form-check form-switch mb-2">
+            <input class="form-check-input" type="checkbox" role="switch" [id]="'role-' + role.value" [value]="role.value"
                 [checked]="selectedRoles.includes(role.value)" (change)="toggleRole(role.value)">
-            <label class="form-check-label">
+            <label class="form-check-label" [for]="'role-' + role.value">
                 {{ role.label }}
             </label>
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer border-0">
         <button type="button" class="btn btn-secondary" (click)="modalRef?.hide()">Hủy</button>
-        <button type="button" class="btn btn-primary" (click)="saveRoles()">Lưu</button>
+        <button type="button" class="btn btn-primary" (click)="saveRoles()">Lưu thay đổi</button>
     </div>
 </ng-template>

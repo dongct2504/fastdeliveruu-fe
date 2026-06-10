@@ -1,0 +1,90 @@
+/* General Styles */
+:host {
+    display: block;
+    background-color: #f8f9fa; /* Light gray background for the whole page */
+}
+
+/* Header */
+.text-primary {
+    color: #4a5568 !important; /* A more modern, muted primary text color */
+}
+
+.btn-add-new {
+    background-color: #4f46e5; /* Dark purple */
+    color: white;
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-add-new:hover {
+    background-color: #4338ca; /* Slightly darker purple on hover */
+}
+
+/* Search Bar */
+.input-group .form-control {
+    border-right: 0;
+}
+
+.input-group .btn {
+    border-left: 0;
+    background-color: white;
+}
+
+/* Card and Table */
+.card {
+    border: none !important;
+}
+
+.table thead {
+    border-bottom: 1px solid #dee2e6; /* Light border for the header */
+}
+
+.table th {
+    font-weight: 600;
+    color: #6c757d;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f5f9; /* Subtle hover effect for rows */
+}
+
+/* Action & Status */
+.badge.rounded-pill {
+    padding: 0.4em 0.8em;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.btn-sm i {
+    vertical-align: middle;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Paging Footer */
+app-paging-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+/* Modal Styles */
+.modal-header, .modal-footer {
+    border: none;
+}
+
+.form-switch .form-check-input {
+    width: 2.5em;
+    height: 1.25em;
+}
